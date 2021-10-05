@@ -57,6 +57,7 @@
     <Compile Include="gen2.cs" />
     <Compile Include="GeneratedClass - first.cs" />
     <Compile Include="GeneratedClass.cs" />
+    <Compile Include="Help.cs" />
     <Compile Include="NewGen\custom_one_pic.cs" />
     <Compile Include="NewGen\one_pic_format.cs" />
     <Compile Include="NewGen\one_pic_format_size.cs" />

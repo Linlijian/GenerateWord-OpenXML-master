@@ -11,8 +11,8 @@ namespace Generate_Word_Report
     {
         static void Main(string[] args)
         {
-            one_pic_format_size Empty = new one_pic_format_size();
-            Empty.CreatePackage("one_pic_format_size.docx");
+            custom_one_pic Empty = new custom_one_pic();
+            Empty.CreatePackage("custom_one_pic.docx");
             
 
         }
