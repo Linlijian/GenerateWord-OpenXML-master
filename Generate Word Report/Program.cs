@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Generate_Word_Report.NewGen;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using mw=Microsoft.Office.Interop.Word;
+using mw = Microsoft.Office.Interop.Word;
 
 namespace Generate_Word_Report
 {
@@ -10,8 +11,8 @@ namespace Generate_Word_Report
     {
         static void Main(string[] args)
         {
-            Empty Empty = new Empty();
-            Empty.CreatePackage("Empty_word.docx");
+            one_pic_format_size Empty = new one_pic_format_size();
+            Empty.CreatePackage("one_pic_format_size.docx");
             
 
         }
