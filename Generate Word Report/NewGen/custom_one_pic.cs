@@ -12,6 +12,7 @@ using Ovml = DocumentFormat.OpenXml.Vml.Office;
 using V = DocumentFormat.OpenXml.Vml;
 using W15 = DocumentFormat.OpenXml.Office2013.Word;
 using Thm15 = DocumentFormat.OpenXml.Office2013.Theme;
+using System;
 
 namespace Generate_Word_Report.NewGen
 {
@@ -171,6 +172,8 @@ namespace Generate_Word_Report.NewGen
             Paragraph paragraph9 = newLine("00000001", "00000001", "mmCGチャンネル animetic", Help.paragraphItalic);
             Paragraph paragraph10 = newLine("00000001", "00000001", "mmCGチャンネル animetic", Help.paragraphUnderline);
 
+            Paragraph paragraph11 = newLine("00000001", "00000001", "mmCGチャンネル animetic สำนักงานคณะกรรมการกำกับและส่งเสริมการประกอบธุรกิจประกันภัย (สำนักงาน คปภ.)", "ส่งเสริม", Help.paragraphBold);
+
 
             SectionProperties sectionProperties1 = new SectionProperties() { RsidR = "003F2413" };
             PageSize pageSize1 = new PageSize() { Width = (UInt32Value)12240U, Height = (UInt32Value)15840U };
@@ -193,6 +196,7 @@ namespace Generate_Word_Report.NewGen
             body1.Append(paragraph8);
             body1.Append(paragraph9);
             body1.Append(paragraph10);
+            body1.Append(paragraph11);
             body1.Append(sectionProperties1);
 
             document1.Append(body1);
@@ -2429,6 +2433,87 @@ namespace Generate_Word_Report.NewGen
 
             return paragraph1;
         }
+        private Paragraph newLine(string paragraphId, string textId, string srtText, string srtText_prop, string text_prop)
+        {
+            Paragraph paragraph1 = new Paragraph() { RsidParagraphMarkRevision = "00B55F5A", RsidParagraphAddition = "00F56D5B", RsidParagraphProperties = "00F56D5B", RsidRunAdditionDefault = "00B55F5A", ParagraphId = paragraphId, TextId = textId };
+
+            ParagraphProperties paragraphProperties1 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties1 = new ParagraphMarkRunProperties();
+            RunProperties runProperties1 = new RunProperties();
+
+            if (text_prop == "B")
+            {
+                Bold bold1 = new Bold();
+                BoldComplexScript boldComplexScript1 = new BoldComplexScript();
+
+                paragraphMarkRunProperties1.Append(bold1);
+                paragraphMarkRunProperties1.Append(boldComplexScript1);
+
+                paragraphProperties1.Append(paragraphMarkRunProperties1);
+
+                Bold bold2 = new Bold();
+                BoldComplexScript boldComplexScript2 = new BoldComplexScript();
+
+                runProperties1.Append(bold2);
+                runProperties1.Append(boldComplexScript2);
+            }
+            else if (text_prop == "I")
+            {
+                Italic italic1 = new Italic();
+                ItalicComplexScript italicComplexScript1 = new ItalicComplexScript();
+
+                paragraphMarkRunProperties1.Append(italic1);
+                paragraphMarkRunProperties1.Append(italicComplexScript1);
+
+                paragraphProperties1.Append(paragraphMarkRunProperties1);
+
+                Italic italic2 = new Italic();
+                ItalicComplexScript italicComplexScript2 = new ItalicComplexScript();
+
+                runProperties1.Append(italic2);
+                runProperties1.Append(italicComplexScript2);
+            }
+            else if (text_prop == "U")
+            {
+                Underline underline1 = new Underline() { Val = UnderlineValues.Single };
+                paragraphMarkRunProperties1.Append(underline1);
+
+                Underline underline2 = new Underline() { Val = UnderlineValues.Single };
+                runProperties1.Append(underline2);
+            }           
+
+            ProofError proofError1 = new ProofError() { Type = ProofingErrorValues.SpellStart };
+
+            var temp = srtText.Split(new string[] { srtText_prop }, StringSplitOptions.None);
+
+            Run run1 = new Run() { RsidRunProperties = "00702081" };
+            Text text1 = new Text() { Space = SpaceProcessingModeValues.Preserve };
+            text1.Text = temp[0];            
+            run1.Append(text1);
+
+            Run run2 = new Run() { RsidRunProperties = "00702081" };
+            Text text2 = new Text();
+            text2.Text = srtText_prop;
+            run2.Append(runProperties1);
+            run2.Append(text2);
+
+            Run run3 = new Run() { RsidRunProperties = "00702081" };
+            Text text3 = new Text() { Space = SpaceProcessingModeValues.Preserve };
+            text3.Text = temp[1];
+            run3.Append(text3);
+
+            ProofError proofError2 = new ProofError() { Type = ProofingErrorValues.SpellEnd };
+
+            paragraph1.Append(paragraphProperties1);
+            paragraph1.Append(proofError1);
+            paragraph1.Append(run1);
+            paragraph1.Append(run2);
+            paragraph1.Append(run3);
+            paragraph1.Append(proofError2);
+
+            return paragraph1;
+        }
         private Paragraph newLineImage(string paragraphId, string textId, string rId)
         {
             Paragraph paragraph = newLine(paragraphId, textId);
@@ -2484,6 +2569,40 @@ namespace Generate_Word_Report.NewGen
             return paragraph;
         }
 
+        public void aaa()
+        {
+            Paragraph paragraph6 = new Paragraph() { RsidParagraphMarkRevision = "00702081", RsidParagraphAddition = "00702081", RsidParagraphProperties = "00F56D5B", RsidRunAdditionDefault = "00702081", ParagraphId = "066DAA1B", TextId = "76E4C2FC" };
+
+            Run run4 = new Run() { RsidRunProperties = "00702081" };
+            Text text4 = new Text() { Space = SpaceProcessingModeValues.Preserve };
+            text4.Text = "Add a ";
+
+            run4.Append(text4);
+
+            Run run5 = new Run() { RsidRunProperties = "00702081" };
+
+            RunProperties runProperties4 = new RunProperties();
+            Bold bold3 = new Bold();
+            BoldComplexScript boldComplexScript3 = new BoldComplexScript();
+
+            runProperties4.Append(bold3);
+            runProperties4.Append(boldComplexScript3);
+            Text text5 = new Text();
+            text5.Text = "README";
+
+            run5.Append(runProperties4);
+            run5.Append(text5);
+
+            Run run6 = new Run() { RsidRunProperties = "00702081" };
+            Text text6 = new Text() { Space = SpaceProcessingModeValues.Preserve };
+            text6.Text = " with an overview of your project.";
+
+            run6.Append(text6);
+
+            paragraph6.Append(run4);
+            paragraph6.Append(run5);
+            paragraph6.Append(run6);
+        }
 
 
 

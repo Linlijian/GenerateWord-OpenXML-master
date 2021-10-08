@@ -214,7 +214,7 @@ namespace Generate_Word_Report.NewGen
             paragraph2.Append(run2);
             paragraph2.Append(proofError4);
 
-            Paragraph paragraph3 = new Paragraph() { RsidParagraphMarkRevision = "00B55F5A", RsidParagraphAddition = "00B55F5A", RsidParagraphProperties = "00F56D5B", RsidRunAdditionDefault = "00B55F5A", ParagraphId = "7A8A142C", TextId = "300C95FC" };
+            Paragraph paragraph3 = new Paragraph() { RsidParagraphAddition = "00B55F5A", RsidParagraphProperties = "00F56D5B", RsidRunAdditionDefault = "00B55F5A", ParagraphId = "7A8A142C", TextId = "6083A96A" };
 
             ParagraphProperties paragraphProperties3 = new ParagraphProperties();
 
@@ -244,7 +244,65 @@ namespace Generate_Word_Report.NewGen
             paragraph3.Append(run3);
             paragraph3.Append(proofError6);
 
-            SectionProperties sectionProperties1 = new SectionProperties() { RsidRPr = "00B55F5A", RsidR = "00B55F5A" };
+            Paragraph paragraph4 = new Paragraph() { RsidParagraphAddition = "00702081", RsidParagraphProperties = "00F56D5B", RsidRunAdditionDefault = "00702081", ParagraphId = "36073D85", TextId = "4ECFF460" };
+
+            ParagraphProperties paragraphProperties4 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties4 = new ParagraphMarkRunProperties();
+            Underline underline3 = new Underline() { Val = UnderlineValues.Single };
+
+            paragraphMarkRunProperties4.Append(underline3);
+
+            paragraphProperties4.Append(paragraphMarkRunProperties4);
+
+            paragraph4.Append(paragraphProperties4);
+
+            Paragraph paragraph5 = new Paragraph() { RsidParagraphAddition = "00702081", RsidParagraphProperties = "00F56D5B", RsidRunAdditionDefault = "00702081", ParagraphId = "1ADEF7A5", TextId = "76CF3693" };
+
+            ParagraphProperties paragraphProperties5 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties5 = new ParagraphMarkRunProperties();
+            Underline underline4 = new Underline() { Val = UnderlineValues.Single };
+
+            paragraphMarkRunProperties5.Append(underline4);
+
+            paragraphProperties5.Append(paragraphMarkRunProperties5);
+
+            paragraph5.Append(paragraphProperties5);
+
+            Paragraph paragraph6 = new Paragraph() { RsidParagraphMarkRevision = "00702081", RsidParagraphAddition = "00702081", RsidParagraphProperties = "00F56D5B", RsidRunAdditionDefault = "00702081", ParagraphId = "066DAA1B", TextId = "76E4C2FC" };
+
+            Run run4 = new Run() { RsidRunProperties = "00702081" };
+            Text text4 = new Text() { Space = SpaceProcessingModeValues.Preserve };
+            text4.Text = "Add a ";
+
+            run4.Append(text4);
+
+            Run run5 = new Run() { RsidRunProperties = "00702081" };
+
+            RunProperties runProperties4 = new RunProperties();
+            Bold bold3 = new Bold();
+            BoldComplexScript boldComplexScript3 = new BoldComplexScript();
+
+            runProperties4.Append(bold3);
+            runProperties4.Append(boldComplexScript3);
+            Text text5 = new Text();
+            text5.Text = "README";
+
+            run5.Append(runProperties4);
+            run5.Append(text5);
+
+            Run run6 = new Run() { RsidRunProperties = "00702081" };
+            Text text6 = new Text() { Space = SpaceProcessingModeValues.Preserve };
+            text6.Text = " with an overview of your project.";
+
+            run6.Append(text6);
+
+            paragraph6.Append(run4);
+            paragraph6.Append(run5);
+            paragraph6.Append(run6);
+
+            SectionProperties sectionProperties1 = new SectionProperties() { RsidRPr = "00702081", RsidR = "00702081" };
             PageSize pageSize1 = new PageSize() { Width = (UInt32Value)12240U, Height = (UInt32Value)15840U };
             PageMargin pageMargin1 = new PageMargin() { Top = 1440, Right = (UInt32Value)1440U, Bottom = 1440, Left = (UInt32Value)1440U, Header = (UInt32Value)720U, Footer = (UInt32Value)720U, Gutter = (UInt32Value)0U };
             Columns columns1 = new Columns() { Space = "720" };
@@ -258,11 +316,15 @@ namespace Generate_Word_Report.NewGen
             body1.Append(paragraph1);
             body1.Append(paragraph2);
             body1.Append(paragraph3);
+            body1.Append(paragraph4);
+            body1.Append(paragraph5);
+            body1.Append(paragraph6);
             body1.Append(sectionProperties1);
 
             document1.Append(body1);
 
             mainDocumentPart1.Document = document1;
+
         }
 
         // Generates content of webSettingsPart1.
