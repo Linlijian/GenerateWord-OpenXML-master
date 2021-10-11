@@ -158,7 +158,7 @@ namespace Generate_Word_Report.NewGen
 
             Body body1 = new Body();
 
-            Paragraph paragraph1 = newLineImage("00000001", "00000002", "rId4", imagePart2Data, 200, 200);            
+            Paragraph paragraph1 = newLineImage("00000001", "00000002", "rId4", imagePart1Data);            
 
             Paragraph paragraph2 = newLine("00000001", "00000002");
             Paragraph paragraph5 = newLine("00000001", "00000002");
@@ -166,7 +166,7 @@ namespace Generate_Word_Report.NewGen
             Paragraph paragraph3 = newLine("00000001", "00000001", "mmCGチャンネル animetic");
             Paragraph paragraph4 = newLine("00000001", "00000001", "สำนักงานคณะกรรมการกำกับและส่งเสริมการประกอบธุรกิจประกันภัย (สำนักงาน คปภ.) มีบทบาทหน้าที่ในการส่งเสริมสนับสนุนให้ธุรกิจประกันภัยมีบทบาทสร้างเสริมความแข็งแกร่งให้ระบบเศรษฐกิจ สังคมของประเทศและคุณภาพชีวิตที่ดีของประชาชน รวมทั้งผลักดันให้ธุรกิจประกันภัยก้าวหน้า"); //ซ้ำได้มีเพื่อ??????
 
-            Paragraph paragraph7 = newLineImage("00000001", "00000002", "rId7", imagePart2Data);
+            Paragraph paragraph7 = newLineImage("00000001", "00000002", "rId7", imagePart1Data, Help.horizontalAlignmentRight);
 
             Paragraph paragraph8 = newLine("00000001", "00000001", "mmCGチャンネル animetic", Help.paragraphBold);
             Paragraph paragraph9 = newLine("00000001", "00000001", "mmCGチャンネル animetic", Help.paragraphItalic);
@@ -1928,7 +1928,7 @@ namespace Generate_Word_Report.NewGen
         // Generates content of imagePart1.
         private void GenerateImagePart1Content(ImagePart imagePart1)
         {
-            System.IO.Stream data = GetBinaryDataStream(imagePart2Data);
+            System.IO.Stream data = GetBinaryDataStream(imagePart1Data);
             imagePart1.FeedData(data);
             data.Close();
         }
@@ -1939,42 +1939,15 @@ namespace Generate_Word_Report.NewGen
             data.Close();
         }
 
-        private Drawing addPicFormat(string rId, string horizontalAlignment, int sizeX, int sizeY)
+        private Drawing addPicFormat(string rId, string base64image, string horizontalAlignment = null, int sizeX = 0, int sizeY = 0)
         {
             Drawing drawing1 = new Drawing();
-            Wp.Anchor anchor1 = new Wp.Anchor() { DistanceFromTop = (UInt32Value)0U, DistanceFromBottom = (UInt32Value)0U, DistanceFromLeft = (UInt32Value)114300U, DistanceFromRight = (UInt32Value)114300U, SimplePos = false, RelativeHeight = (UInt32Value)251658240U, BehindDoc = true, Locked = false, LayoutInCell = true, AllowOverlap = true, EditId = "7DCF8D92", AnchorId = "4502AFD8" };
-            Wp.SimplePosition simplePosition1 = new Wp.SimplePosition() { X = 0L, Y = 0L };
 
-            Wp.HorizontalPosition horizontalPosition1 = new Wp.HorizontalPosition() { RelativeFrom = Wp.HorizontalRelativePositionValues.Margin };
-            Wp.HorizontalAlignment horizontalAlignment1 = new Wp.HorizontalAlignment();
-            horizontalAlignment1.Text = horizontalAlignment;
+            var size = Getlong(base64image, sizeX, sizeY);
 
-            horizontalPosition1.Append(horizontalAlignment1);
-
-            Wp.VerticalPosition verticalPosition1 = new Wp.VerticalPosition() { RelativeFrom = Wp.VerticalRelativePositionValues.Paragraph };
-            Wp.PositionOffset positionOffset1 = new Wp.PositionOffset();
-            positionOffset1.Text = "503";
-
-            verticalPosition1.Append(positionOffset1);
-            Wp.Extent extent1 = new Wp.Extent() { Cx = (Int64Value)sizeX, Cy = (Int64Value)sizeY }; //size of pic
+            Wp.Inline inline1 = new Wp.Inline() { DistanceFromTop = (UInt32Value)0U, DistanceFromBottom = (UInt32Value)0U, DistanceFromLeft = (UInt32Value)0U, DistanceFromRight = (UInt32Value)0U, AnchorId = "4502AFD8", EditId = "4308B63C" };
+            Wp.Extent extent1 = new Wp.Extent() { Cx = size[0], Cy = size[1] };
             Wp.EffectExtent effectExtent1 = new Wp.EffectExtent() { LeftEdge = 0L, TopEdge = 0L, RightEdge = 0L, BottomEdge = 0L };
-
-            Wp.WrapTight wrapTight1 = new Wp.WrapTight() { WrapText = Wp.WrapTextValues.BothSides };
-
-            Wp.WrapPolygon wrapPolygon1 = new Wp.WrapPolygon() { Edited = false };
-            Wp.StartPoint startPoint1 = new Wp.StartPoint() { X = 0L, Y = 0L };
-            Wp.LineTo lineTo1 = new Wp.LineTo() { X = 0L, Y = 21499L };
-            Wp.LineTo lineTo2 = new Wp.LineTo() { X = 21433L, Y = 21499L };
-            Wp.LineTo lineTo3 = new Wp.LineTo() { X = 21433L, Y = 0L };
-            Wp.LineTo lineTo4 = new Wp.LineTo() { X = 0L, Y = 0L };
-
-            wrapPolygon1.Append(startPoint1);
-            wrapPolygon1.Append(lineTo1);
-            wrapPolygon1.Append(lineTo2);
-            wrapPolygon1.Append(lineTo3);
-            wrapPolygon1.Append(lineTo4);
-
-            wrapTight1.Append(wrapPolygon1);
             Wp.DocProperties docProperties1 = new Wp.DocProperties() { Id = (UInt32Value)1U, Name = "Picture 1" };
 
             Wp.NonVisualGraphicFrameDrawingProperties nonVisualGraphicFrameDrawingProperties1 = new Wp.NonVisualGraphicFrameDrawingProperties();
@@ -2005,7 +1978,7 @@ namespace Generate_Word_Report.NewGen
 
             Pic.BlipFill blipFill1 = new Pic.BlipFill();
 
-            A.Blip blip1 = new A.Blip() { Embed = rId, CompressionState = A.BlipCompressionValues.Print };
+            A.Blip blip1 = new A.Blip() { Embed = "rId4" };
 
             A.BlipExtensionList blipExtensionList1 = new A.BlipExtensionList();
 
@@ -2034,7 +2007,7 @@ namespace Generate_Word_Report.NewGen
 
             A.Transform2D transform2D1 = new A.Transform2D();
             A.Offset offset1 = new A.Offset() { X = 0L, Y = 0L };
-            A.Extents extents1 = new A.Extents() { Cx = (Int64Value)sizeX, Cy = (Int64Value)sizeY }; //size of pic
+            A.Extents extents1 = new A.Extents() { Cx = size[0], Cy = size[1] };
 
             transform2D1.Append(offset1);
             transform2D1.Append(extents1);
@@ -2063,31 +2036,13 @@ namespace Generate_Word_Report.NewGen
 
             graphic1.Append(graphicData1);
 
-            Wp14.RelativeWidth relativeWidth1 = new Wp14.RelativeWidth() { ObjectId = Wp14.SizeRelativeHorizontallyValues.Margin };
-            Wp14.PercentageWidth percentageWidth1 = new Wp14.PercentageWidth();
-            percentageWidth1.Text = "0";
+            inline1.Append(extent1);
+            inline1.Append(effectExtent1);
+            inline1.Append(docProperties1);
+            inline1.Append(nonVisualGraphicFrameDrawingProperties1);
+            inline1.Append(graphic1);
 
-            relativeWidth1.Append(percentageWidth1);
-
-            Wp14.RelativeHeight relativeHeight1 = new Wp14.RelativeHeight() { RelativeFrom = Wp14.SizeRelativeVerticallyValues.Margin };
-            Wp14.PercentageHeight percentageHeight1 = new Wp14.PercentageHeight();
-            percentageHeight1.Text = "0";
-
-            relativeHeight1.Append(percentageHeight1);
-
-            anchor1.Append(simplePosition1);
-            anchor1.Append(horizontalPosition1);
-            anchor1.Append(verticalPosition1);
-            anchor1.Append(extent1);
-            anchor1.Append(effectExtent1);
-            anchor1.Append(wrapTight1);
-            anchor1.Append(docProperties1);
-            anchor1.Append(nonVisualGraphicFrameDrawingProperties1);
-            anchor1.Append(graphic1);
-            anchor1.Append(relativeWidth1);
-            anchor1.Append(relativeHeight1);
-
-            drawing1.Append(anchor1);
+            drawing1.Append(inline1);
             return drawing1;
         }
         private Drawing addPicFormat(string rId, int horizontalPosition, int verticalPosition, int sizeX, int sizeY)
@@ -2552,20 +2507,39 @@ namespace Generate_Word_Report.NewGen
 
             return paragraph;
         }
-        private Paragraph newLineImage(string paragraphId, string textId, string rId, string base64image, string horizontalAlignment, int sizeX, int sizeY)
+        private Paragraph newLineImage(string paragraphId, string textId, string rId, string base64image, string horizontalAlignment, int sizeX = 0, int sizeY = 0)
         {
             Paragraph paragraph = newLine(paragraphId, textId);
+
+            ParagraphProperties paragraphProperties = new ParagraphProperties();
+            if(horizontalAlignment == Help.horizontalAlignmentCenter)
+            {
+                Justification justification = new Justification() { Val = JustificationValues.Center };
+                paragraphProperties.Append(justification);
+            }
+            else if (horizontalAlignment == Help.horizontalAlignmentLeft)
+            {
+                Justification justification = new Justification() { Val = JustificationValues.Left };
+                paragraphProperties.Append(justification);
+            }
+            else if (horizontalAlignment == Help.horizontalAlignmentRight)
+            {
+                Justification justification = new Justification() { Val = JustificationValues.Right };
+                paragraphProperties.Append(justification);
+            }
+
             Run run = new Run();
 
             RunProperties runProperties = new RunProperties();
             NoProof noProof = new NoProof();
 
-            Drawing drawing = addPicFormat(rId, horizontalAlignment, sizeX, sizeY);
+            Drawing drawing = addPicFormat(rId, base64image, horizontalAlignment, sizeX, sizeY);
 
             runProperties.Append(noProof);
             run.Append(runProperties);
             run.Append(drawing);
 
+            paragraph.Append(paragraphProperties);
             paragraph.Append(run);
 
             return paragraph;
