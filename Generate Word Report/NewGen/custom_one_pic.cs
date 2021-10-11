@@ -158,7 +158,7 @@ namespace Generate_Word_Report.NewGen
 
             Body body1 = new Body();
 
-            Paragraph paragraph1 = newLineImage("00000001", "00000002", "rId4", Help.horizontalAlignmentCenter, 6000000, 4000000);            
+            Paragraph paragraph1 = newLineImage("00000001", "00000002", "rId4", imagePart2Data, 200, 200);            
 
             Paragraph paragraph2 = newLine("00000001", "00000002");
             Paragraph paragraph5 = newLine("00000001", "00000002");
@@ -2534,7 +2534,25 @@ namespace Generate_Word_Report.NewGen
 
             return paragraph;
         }
-        private Paragraph newLineImage(string paragraphId, string textId, string rId, string horizontalAlignment, int sizeX, int sizeY)
+        private Paragraph newLineImage(string paragraphId, string textId, string rId, string base64image, int sizeX, int sizeY)
+        {
+            Paragraph paragraph = newLine(paragraphId, textId);
+            Run run = new Run();
+
+            RunProperties runProperties = new RunProperties();
+            NoProof noProof = new NoProof();
+
+            Drawing drawing = addPicNoFormat(rId, base64image, sizeX, sizeY);
+
+            runProperties.Append(noProof);
+            run.Append(runProperties);
+            run.Append(drawing);
+
+            paragraph.Append(run);
+
+            return paragraph;
+        }
+        private Paragraph newLineImage(string paragraphId, string textId, string rId, string base64image, string horizontalAlignment, int sizeX, int sizeY)
         {
             Paragraph paragraph = newLine(paragraphId, textId);
             Run run = new Run();
