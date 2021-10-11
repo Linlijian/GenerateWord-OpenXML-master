@@ -56,9 +56,6 @@ namespace Generate_Word_Report.NewGen
 
             ImagePart imagePart2 = mainDocumentPart1.AddNewPart<ImagePart>("image/jpeg", "rId7");
             GenerateImagePart2Content(imagePart2);
-
-            ImagePart imagePart3 = mainDocumentPart1.AddNewPart<ImagePart>("image/jpeg", "rId8");
-            GenerateImagePart1Content(imagePart3);
         }
 
         // Generates content of extendedFilePropertiesPart1.
@@ -166,7 +163,7 @@ namespace Generate_Word_Report.NewGen
             Paragraph paragraph3 = newLine("00000001", "00000001", "mmCGチャンネル animetic");
             Paragraph paragraph4 = newLine("00000001", "00000001", "สำนักงานคณะกรรมการกำกับและส่งเสริมการประกอบธุรกิจประกันภัย (สำนักงาน คปภ.) มีบทบาทหน้าที่ในการส่งเสริมสนับสนุนให้ธุรกิจประกันภัยมีบทบาทสร้างเสริมความแข็งแกร่งให้ระบบเศรษฐกิจ สังคมของประเทศและคุณภาพชีวิตที่ดีของประชาชน รวมทั้งผลักดันให้ธุรกิจประกันภัยก้าวหน้า"); //ซ้ำได้มีเพื่อ??????
 
-            Paragraph paragraph7 = newLineImage("00000001", "00000002", "rId7", imagePart1Data, Help.horizontalAlignmentRight);
+            Paragraph paragraph7 = newLineImage("00000001", "00000002", "rId7", imagePart2Data, Help.horizontalAlignmentRight);
 
             Paragraph paragraph8 = newLine("00000001", "00000001", "mmCGチャンネル animetic", Help.paragraphBold);
             Paragraph paragraph9 = newLine("00000001", "00000001", "mmCGチャンネル animetic", Help.paragraphItalic);
@@ -1939,7 +1936,7 @@ namespace Generate_Word_Report.NewGen
             data.Close();
         }
 
-        private Drawing addPicFormat(string rId, string base64image, string horizontalAlignment = null, int sizeX = 0, int sizeY = 0)
+        private Drawing addPicFormat(string rId, string base64image, int sizeX = 0, int sizeY = 0)
         {
             Drawing drawing1 = new Drawing();
 
@@ -1978,7 +1975,7 @@ namespace Generate_Word_Report.NewGen
 
             Pic.BlipFill blipFill1 = new Pic.BlipFill();
 
-            A.Blip blip1 = new A.Blip() { Embed = "rId4" };
+            A.Blip blip1 = new A.Blip() { Embed = rId };
 
             A.BlipExtensionList blipExtensionList1 = new A.BlipExtensionList();
 
@@ -2533,7 +2530,7 @@ namespace Generate_Word_Report.NewGen
             RunProperties runProperties = new RunProperties();
             NoProof noProof = new NoProof();
 
-            Drawing drawing = addPicFormat(rId, base64image, horizontalAlignment, sizeX, sizeY);
+            Drawing drawing = addPicFormat(rId, base64image, sizeX, sizeY);
 
             runProperties.Append(noProof);
             run.Append(runProperties);
