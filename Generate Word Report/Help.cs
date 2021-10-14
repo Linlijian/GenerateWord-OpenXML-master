@@ -13,6 +13,7 @@ namespace Generate_Word_Report
         public static string paragraphUnderline = "U";
         public static string paragraphItalic = "I";
         public static string paragraphBold = "B";
+        public static string paragraphNormal = "N";
 
         public static string wrapSquare = "WrapSquare";
         public static string wrapTopBottom = "WrapTopBottom";

@@ -169,7 +169,16 @@ namespace Generate_Word_Report.NewGen
             Paragraph paragraph9 = newLine("00000001", "00000001", "mmCGチャンネル animetic", Help.paragraphItalic);
             Paragraph paragraph10 = newLine("00000001", "00000001", "mmCGチャンネル animetic", Help.paragraphUnderline);
 
-            Paragraph paragraph11 = newLine("00000001", "00000001", "mmCGチャンネル animetic สำนักงานคณะกรรมการกำกับและส่งเสริมการประกอบธุรกิจประกันภัย (สำนักงาน คปภ.)", "ส่งเสริม", Help.paragraphBold);
+            //ใส่ txt_prop อย่างเดียวใน 1 paragraph
+            Paragraph paragraph11 = newLine("00000001", "00000001", "mmCGチャンネル animetic สำนักงานคณะกรรมการกำกับและส่งเสริมการประกอบธุรกิจประกันภัย (สำนักงาน คปภ.)", "animetic", Help.paragraphBold);
+
+            //ใส่ txt_prop หลายๆ อย่างในครั้งเดียว
+            System.Collections.Generic.List<string[]> txt_prop = new System.Collections.Generic.List<string[]>();
+            txt_prop.Add(new string[] { "การประเมินความเสี่ยง Internal Rating ประกอบด้วย", Help.paragraphNormal });
+            txt_prop.Add(new string[] { " การประเมินเชิงปริมาณ 80%", Help.paragraphBold });
+            txt_prop.Add(new string[] { " และ ", Help.paragraphNormal });
+            txt_prop.Add(new string[] { "การประเมินเชิงคุณภาพ 20%", Help.paragraphUnderline });
+            Paragraph paragraph12 = newLine("00000001", "00000001", txt_prop);
 
 
             SectionProperties sectionProperties1 = new SectionProperties() { RsidR = "003F2413" };
@@ -195,6 +204,7 @@ namespace Generate_Word_Report.NewGen
             body1.Append(paragraph9);
             body1.Append(paragraph10);
             body1.Append(paragraph11);
+            body1.Append(paragraph12);
             body1.Append(sectionProperties1);
 
             document1.Append(body1);
@@ -2378,6 +2388,99 @@ namespace Generate_Word_Report.NewGen
             paragraph1.Append(proofError2);
 
             return paragraph1;
+        }
+        private Paragraph newLine(string paragraphId, string textId, System.Collections.Generic.List<string[]> text_prop)
+        {
+            Paragraph paragraph = new Paragraph() { RsidParagraphMarkRevision = "00B55F5A", RsidParagraphAddition = "00F56D5B", RsidParagraphProperties = "00F56D5B", RsidRunAdditionDefault = "00B55F5A", ParagraphId = paragraphId, TextId = textId };
+            
+            //มี 2 แบบคือสร้าง run ไว้ก่อนแล้วเพิ่ม runProperties ลงไป
+
+            int i = 0;
+            foreach (var txt in text_prop)
+            {
+                ParagraphProperties paragraphProperties = new ParagraphProperties();
+                ParagraphMarkRunProperties paragraphMarkRunProperties = new ParagraphMarkRunProperties();
+                RunProperties runProperties = new RunProperties();
+
+                if (txt[1] == Help.paragraphBold)
+                {
+                    Bold bold = new Bold();
+                    BoldComplexScript boldComplexScript = new BoldComplexScript();
+
+                    paragraphMarkRunProperties.Append(bold);
+                    paragraphMarkRunProperties.Append(boldComplexScript);
+
+                    paragraphProperties.Append(paragraphMarkRunProperties);
+
+                    Bold bold2 = new Bold();
+                    BoldComplexScript boldComplexScript2 = new BoldComplexScript();
+
+                    runProperties.Append(bold2);
+                    runProperties.Append(boldComplexScript2);
+                }
+                else if (txt[1] == Help.paragraphItalic)
+                {
+                    Italic italic = new Italic();
+                    ItalicComplexScript italicComplexScript = new ItalicComplexScript();
+
+                    paragraphMarkRunProperties.Append(italic);
+                    paragraphMarkRunProperties.Append(italicComplexScript);
+
+                    paragraphProperties.Append(paragraphMarkRunProperties);
+
+                    Italic italic2 = new Italic();
+                    ItalicComplexScript italicComplexScript2 = new ItalicComplexScript();
+
+                    runProperties.Append(italic2);
+                    runProperties.Append(italicComplexScript2);
+                }
+                else if (txt[1] == Help.paragraphUnderline)
+                {
+                    Underline underline = new Underline() { Val = UnderlineValues.Single };
+                    paragraphMarkRunProperties.Append(underline);
+
+                    Underline underline2 = new Underline() { Val = UnderlineValues.Single };
+                    runProperties.Append(underline2);
+                }
+
+                Run run = new Run() { RsidRunProperties = "00702081" };
+
+                Text text;
+                if (i == 0)
+                {                    
+                    text = new Text();
+                }
+                else
+                {
+                    text = new Text() { Space = SpaceProcessingModeValues.Preserve };
+                }
+
+                text.Text = txt[0];               
+
+                if (txt[1] != Help.paragraphNormal)
+                {
+                    run.Append(runProperties);
+                }
+
+                run.Append(text);
+
+                ProofError proofError1 = new ProofError() { Type = ProofingErrorValues.SpellStart };
+
+                if(i == 0)
+                {
+                    paragraph.Append(paragraphProperties);
+                    paragraph.Append(proofError1);
+                }
+
+                paragraph.Append(run);
+
+                i++;
+            }
+
+            ProofError proofError2 = new ProofError() { Type = ProofingErrorValues.SpellEnd };
+            paragraph.Append(proofError2);
+
+            return paragraph;
         }
         private Paragraph newLineImage(string paragraphId, string textId, string rId, string base64image)
         {
