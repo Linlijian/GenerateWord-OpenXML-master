@@ -73,6 +73,7 @@
     <Compile Include="NewGen\one_pic_format_size.cs" />
     <Compile Include="NewGen\one_pic_not_format.cs" />
     <Compile Include="NewGen\text_prop.cs" />
+    <Compile Include="NewGen\text_prop_multi.cs" />
     <Compile Include="Picture.cs" />
     <Compile Include="PicturePart2.cs" />
     <Compile Include="Program.cs" />
