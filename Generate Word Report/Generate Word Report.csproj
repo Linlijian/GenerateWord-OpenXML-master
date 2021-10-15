@@ -61,6 +61,11 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="ColunmChart.cs" />
+    <Compile Include="dll\base_dto.cs" />
+    <Compile Include="dll\pikunword.cs" />
+    <Compile Include="dll\pikunword_model.cs" />
+    <Compile Include="dll\pikunword_dto.cs" />
+    <Compile Include="dll\testuse.cs" />
     <Compile Include="Empty.cs" />
     <Compile Include="gen2.cs" />
     <Compile Include="GeneratedClass - first.cs" />
