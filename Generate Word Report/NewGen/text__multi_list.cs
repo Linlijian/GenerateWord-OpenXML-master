@@ -62,13 +62,13 @@ namespace Generate_Word_Report.NewGen
                 Ap.Template template1 = new Ap.Template();
                 template1.Text = "Normal";
                 Ap.TotalTime totalTime1 = new Ap.TotalTime();
-                totalTime1.Text = "6";
+                totalTime1.Text = "8";
                 Ap.Pages pages1 = new Ap.Pages();
                 pages1.Text = "1";
                 Ap.Words words1 = new Ap.Words();
-                words1.Text = "6";
+                words1.Text = "7";
                 Ap.Characters characters1 = new Ap.Characters();
-                characters1.Text = "36";
+                characters1.Text = "40";
                 Ap.Application application1 = new Ap.Application();
                 application1.Text = "Microsoft Office Word";
                 Ap.DocumentSecurity documentSecurity1 = new Ap.DocumentSecurity();
@@ -84,7 +84,7 @@ namespace Generate_Word_Report.NewGen
                 Ap.LinksUpToDate linksUpToDate1 = new Ap.LinksUpToDate();
                 linksUpToDate1.Text = "false";
                 Ap.CharactersWithSpaces charactersWithSpaces1 = new Ap.CharactersWithSpaces();
-                charactersWithSpaces1.Text = "41";
+                charactersWithSpaces1.Text = "46";
                 Ap.SharedDocument sharedDocument1 = new Ap.SharedDocument();
                 sharedDocument1.Text = "false";
                 Ap.HyperlinksChanged hyperlinksChanged1 = new Ap.HyperlinksChanged();
@@ -233,7 +233,7 @@ namespace Generate_Word_Report.NewGen
                 paragraph4.Append(paragraphProperties3);
                 paragraph4.Append(run4);
 
-                Paragraph paragraph5 = new Paragraph() { RsidParagraphAddition = "00534E3C", RsidParagraphProperties = "00534E3C", RsidRunAdditionDefault = "00534E3C", ParagraphId = "1642E0E1", TextId = "49ADB160" };
+                Paragraph paragraph5 = new Paragraph() { RsidParagraphAddition = "00534E3C", RsidParagraphProperties = "00534E3C", RsidRunAdditionDefault = "00534E3C", ParagraphId = "1642E0E1", TextId = "64F58245" };
 
                 ParagraphProperties paragraphProperties4 = new ParagraphProperties();
                 ParagraphStyleId paragraphStyleId4 = new ParagraphStyleId() { Val = "ListParagraph" };
@@ -257,13 +257,13 @@ namespace Generate_Word_Report.NewGen
                 paragraph5.Append(paragraphProperties4);
                 paragraph5.Append(run5);
 
-                Paragraph paragraph6 = new Paragraph() { RsidParagraphMarkRevision = "00702081", RsidParagraphAddition = "00534E3C", RsidParagraphProperties = "00534E3C", RsidRunAdditionDefault = "00534E3C", ParagraphId = "277A8332", TextId = "7A22BDAB" };
+                Paragraph paragraph6 = new Paragraph() { RsidParagraphAddition = "00D31B3A", RsidParagraphProperties = "00D31B3A", RsidRunAdditionDefault = "00D31B3A", ParagraphId = "39938654", TextId = "37BDD349" };
 
                 ParagraphProperties paragraphProperties5 = new ParagraphProperties();
                 ParagraphStyleId paragraphStyleId5 = new ParagraphStyleId() { Val = "ListParagraph" };
 
                 NumberingProperties numberingProperties5 = new NumberingProperties();
-                NumberingLevelReference numberingLevelReference5 = new NumberingLevelReference() { Val = 0 };
+                NumberingLevelReference numberingLevelReference5 = new NumberingLevelReference() { Val = 2 };
                 NumberingId numberingId5 = new NumberingId() { Val = 1 };
 
                 numberingProperties5.Append(numberingLevelReference5);
@@ -273,13 +273,37 @@ namespace Generate_Word_Report.NewGen
                 paragraphProperties5.Append(numberingProperties5);
 
                 Run run6 = new Run();
-                Text text6 = new Text();
-                text6.Text = "333333333";
+                Text text6 = new Text() { Space = SpaceProcessingModeValues.Preserve };
+                text6.Text = " 221";
 
                 run6.Append(text6);
 
                 paragraph6.Append(paragraphProperties5);
                 paragraph6.Append(run6);
+
+                Paragraph paragraph7 = new Paragraph() { RsidParagraphMarkRevision = "00702081", RsidParagraphAddition = "00534E3C", RsidParagraphProperties = "00534E3C", RsidRunAdditionDefault = "00534E3C", ParagraphId = "277A8332", TextId = "7A22BDAB" };
+
+                ParagraphProperties paragraphProperties6 = new ParagraphProperties();
+                ParagraphStyleId paragraphStyleId6 = new ParagraphStyleId() { Val = "ListParagraph" };
+
+                NumberingProperties numberingProperties6 = new NumberingProperties();
+                NumberingLevelReference numberingLevelReference6 = new NumberingLevelReference() { Val = 0 };
+                NumberingId numberingId6 = new NumberingId() { Val = 1 };
+
+                numberingProperties6.Append(numberingLevelReference6);
+                numberingProperties6.Append(numberingId6);
+
+                paragraphProperties6.Append(paragraphStyleId6);
+                paragraphProperties6.Append(numberingProperties6);
+
+                Run run7 = new Run();
+                Text text7 = new Text();
+                text7.Text = "333333333";
+
+                run7.Append(text7);
+
+                paragraph7.Append(paragraphProperties6);
+                paragraph7.Append(run7);
 
                 SectionProperties sectionProperties1 = new SectionProperties() { RsidRPr = "00702081", RsidR = "00534E3C" };
                 PageSize pageSize1 = new PageSize() { Width = (UInt32Value)12240U, Height = (UInt32Value)15840U };
@@ -298,6 +322,7 @@ namespace Generate_Word_Report.NewGen
                 body1.Append(paragraph4);
                 body1.Append(paragraph5);
                 body1.Append(paragraph6);
+                body1.Append(paragraph7);
                 body1.Append(sectionProperties1);
 
                 document1.Append(body1);
@@ -325,6 +350,7 @@ namespace Generate_Word_Report.NewGen
                 settings1.AddNamespaceDeclaration("w16se", "http://schemas.microsoft.com/office/word/2015/wordml/symex");
                 settings1.AddNamespaceDeclaration("sl", "http://schemas.openxmlformats.org/schemaLibrary/2006/main");
                 Zoom zoom1 = new Zoom() { Percent = "130" };
+                ProofState proofState1 = new ProofState() { Spelling = ProofingStateValues.Clean, Grammar = ProofingStateValues.Clean };
                 DefaultTabStop defaultTabStop1 = new DefaultTabStop() { Val = 720 };
                 CharacterSpacingControl characterSpacingControl1 = new CharacterSpacingControl() { Val = CharacterSpacingValues.DoNotCompress };
 
@@ -350,18 +376,23 @@ namespace Generate_Word_Report.NewGen
                 Rsids rsids1 = new Rsids();
                 RsidRoot rsidRoot1 = new RsidRoot() { Val = "00745E8C" };
                 Rsid rsid1 = new Rsid() { Val = "000A0595" };
-                Rsid rsid2 = new Rsid() { Val = "00126807" };
-                Rsid rsid3 = new Rsid() { Val = "003D450F" };
-                Rsid rsid4 = new Rsid() { Val = "003E1962" };
-                Rsid rsid5 = new Rsid() { Val = "003F2413" };
-                Rsid rsid6 = new Rsid() { Val = "00534E3C" };
-                Rsid rsid7 = new Rsid() { Val = "00671749" };
-                Rsid rsid8 = new Rsid() { Val = "00702081" };
-                Rsid rsid9 = new Rsid() { Val = "00745E8C" };
-                Rsid rsid10 = new Rsid() { Val = "009C4315" };
-                Rsid rsid11 = new Rsid() { Val = "00AD54DD" };
-                Rsid rsid12 = new Rsid() { Val = "00B55F5A" };
-                Rsid rsid13 = new Rsid() { Val = "00F56D5B" };
+                Rsid rsid2 = new Rsid() { Val = "001167DE" };
+                Rsid rsid3 = new Rsid() { Val = "00126807" };
+                Rsid rsid4 = new Rsid() { Val = "003D450F" };
+                Rsid rsid5 = new Rsid() { Val = "003E1962" };
+                Rsid rsid6 = new Rsid() { Val = "003F2413" };
+                Rsid rsid7 = new Rsid() { Val = "00534E3C" };
+                Rsid rsid8 = new Rsid() { Val = "00671749" };
+                Rsid rsid9 = new Rsid() { Val = "00702081" };
+                Rsid rsid10 = new Rsid() { Val = "00745E8C" };
+                Rsid rsid11 = new Rsid() { Val = "009C4315" };
+                Rsid rsid12 = new Rsid() { Val = "00AD54DD" };
+                Rsid rsid13 = new Rsid() { Val = "00B55F5A" };
+                Rsid rsid14 = new Rsid() { Val = "00C45ACD" };
+                Rsid rsid15 = new Rsid() { Val = "00CD7555" };
+                Rsid rsid16 = new Rsid() { Val = "00D31B3A" };
+                Rsid rsid17 = new Rsid() { Val = "00D41BA3" };
+                Rsid rsid18 = new Rsid() { Val = "00F56D5B" };
 
                 rsids1.Append(rsidRoot1);
                 rsids1.Append(rsid1);
@@ -377,6 +408,11 @@ namespace Generate_Word_Report.NewGen
                 rsids1.Append(rsid11);
                 rsids1.Append(rsid12);
                 rsids1.Append(rsid13);
+                rsids1.Append(rsid14);
+                rsids1.Append(rsid15);
+                rsids1.Append(rsid16);
+                rsids1.Append(rsid17);
+                rsids1.Append(rsid18);
 
                 M.MathProperties mathProperties1 = new M.MathProperties();
                 M.MathFont mathFont1 = new M.MathFont() { Val = "Cambria Math" };
@@ -422,6 +458,7 @@ namespace Generate_Word_Report.NewGen
                 W15.PersistentDocumentId persistentDocumentId1 = new W15.PersistentDocumentId() { Val = "{D3BA8806-B836-4991-B6CF-F04671E03FA6}" };
 
                 settings1.Append(zoom1);
+                settings1.Append(proofState1);
                 settings1.Append(defaultTabStop1);
                 settings1.Append(characterSpacingControl1);
                 settings1.Append(compatibility1);
@@ -1301,7 +1338,7 @@ namespace Generate_Word_Report.NewGen
                 BasedOn basedOn1 = new BasedOn() { Val = "Normal" };
                 UIPriority uIPriority4 = new UIPriority() { Val = 34 };
                 PrimaryStyle primaryStyle2 = new PrimaryStyle();
-                Rsid rsid14 = new Rsid() { Val = "00534E3C" };
+                Rsid rsid19 = new Rsid() { Val = "00534E3C" };
 
                 StyleParagraphProperties styleParagraphProperties1 = new StyleParagraphProperties();
                 Indentation indentation1 = new Indentation() { Start = "720" };
@@ -1314,7 +1351,7 @@ namespace Generate_Word_Report.NewGen
                 style5.Append(basedOn1);
                 style5.Append(uIPriority4);
                 style5.Append(primaryStyle2);
-                style5.Append(rsid14);
+                style5.Append(rsid19);
                 style5.Append(styleParagraphProperties1);
 
                 styles1.Append(docDefaults1);
@@ -1369,12 +1406,12 @@ namespace Generate_Word_Report.NewGen
                 abstractNum1.SetAttribute(new OpenXmlAttribute("w15", "restartNumberingAfterBreak", "http://schemas.microsoft.com/office/word/2012/wordml", "0"));
                 Nsid nsid1 = new Nsid() { Val = "159C2ACB" };
                 MultiLevelType multiLevelType1 = new MultiLevelType() { Val = MultiLevelValues.Multilevel };
-                TemplateCode templateCode1 = new TemplateCode() { Val = "0409001F" };
+                TemplateCode templateCode1 = new TemplateCode() { Val = "0409001D" };
 
                 Level level1 = new Level() { LevelIndex = 0 };
                 StartNumberingValue startNumberingValue1 = new StartNumberingValue() { Val = 1 };
                 NumberingFormat numberingFormat1 = new NumberingFormat() { Val = NumberFormatValues.Decimal };
-                LevelText levelText1 = new LevelText() { Val = "%1." };
+                LevelText levelText1 = new LevelText() { Val = "%1)" };
                 LevelJustification levelJustification1 = new LevelJustification() { Val = LevelJustificationValues.Left };
 
                 PreviousParagraphProperties previousParagraphProperties1 = new PreviousParagraphProperties();
@@ -1382,147 +1419,201 @@ namespace Generate_Word_Report.NewGen
 
                 previousParagraphProperties1.Append(indentation2);
 
+                NumberingSymbolRunProperties numberingSymbolRunProperties1 = new NumberingSymbolRunProperties();
+                RunFonts runFonts2 = new RunFonts() { Hint = FontTypeHintValues.Default };
+
+                numberingSymbolRunProperties1.Append(runFonts2);
+
                 level1.Append(startNumberingValue1);
                 level1.Append(numberingFormat1);
                 level1.Append(levelText1);
                 level1.Append(levelJustification1);
                 level1.Append(previousParagraphProperties1);
+                level1.Append(numberingSymbolRunProperties1);
 
                 Level level2 = new Level() { LevelIndex = 1 };
                 StartNumberingValue startNumberingValue2 = new StartNumberingValue() { Val = 1 };
-                NumberingFormat numberingFormat2 = new NumberingFormat() { Val = NumberFormatValues.Decimal };
-                LevelText levelText2 = new LevelText() { Val = "%1.%2." };
+                NumberingFormat numberingFormat2 = new NumberingFormat() { Val = NumberFormatValues.LowerLetter };
+                LevelText levelText2 = new LevelText() { Val = "%2)" };
                 LevelJustification levelJustification2 = new LevelJustification() { Val = LevelJustificationValues.Left };
 
                 PreviousParagraphProperties previousParagraphProperties2 = new PreviousParagraphProperties();
-                Indentation indentation3 = new Indentation() { Start = "792", Hanging = "432" };
+                Indentation indentation3 = new Indentation() { Start = "720", Hanging = "360" };
 
                 previousParagraphProperties2.Append(indentation3);
+
+                NumberingSymbolRunProperties numberingSymbolRunProperties2 = new NumberingSymbolRunProperties();
+                RunFonts runFonts3 = new RunFonts() { Hint = FontTypeHintValues.Default };
+
+                numberingSymbolRunProperties2.Append(runFonts3);
 
                 level2.Append(startNumberingValue2);
                 level2.Append(numberingFormat2);
                 level2.Append(levelText2);
                 level2.Append(levelJustification2);
                 level2.Append(previousParagraphProperties2);
+                level2.Append(numberingSymbolRunProperties2);
 
                 Level level3 = new Level() { LevelIndex = 2 };
                 StartNumberingValue startNumberingValue3 = new StartNumberingValue() { Val = 1 };
-                NumberingFormat numberingFormat3 = new NumberingFormat() { Val = NumberFormatValues.Decimal };
-                LevelText levelText3 = new LevelText() { Val = "%1.%2.%3." };
+                NumberingFormat numberingFormat3 = new NumberingFormat() { Val = NumberFormatValues.LowerRoman };
+                LevelText levelText3 = new LevelText() { Val = "%3)" };
                 LevelJustification levelJustification3 = new LevelJustification() { Val = LevelJustificationValues.Left };
 
                 PreviousParagraphProperties previousParagraphProperties3 = new PreviousParagraphProperties();
-                Indentation indentation4 = new Indentation() { Start = "1224", Hanging = "504" };
+                Indentation indentation4 = new Indentation() { Start = "1080", Hanging = "360" };
 
                 previousParagraphProperties3.Append(indentation4);
+
+                NumberingSymbolRunProperties numberingSymbolRunProperties3 = new NumberingSymbolRunProperties();
+                RunFonts runFonts4 = new RunFonts() { Hint = FontTypeHintValues.Default };
+
+                numberingSymbolRunProperties3.Append(runFonts4);
 
                 level3.Append(startNumberingValue3);
                 level3.Append(numberingFormat3);
                 level3.Append(levelText3);
                 level3.Append(levelJustification3);
                 level3.Append(previousParagraphProperties3);
+                level3.Append(numberingSymbolRunProperties3);
 
                 Level level4 = new Level() { LevelIndex = 3 };
                 StartNumberingValue startNumberingValue4 = new StartNumberingValue() { Val = 1 };
                 NumberingFormat numberingFormat4 = new NumberingFormat() { Val = NumberFormatValues.Decimal };
-                LevelText levelText4 = new LevelText() { Val = "%1.%2.%3.%4." };
+                LevelText levelText4 = new LevelText() { Val = "(%4)" };
                 LevelJustification levelJustification4 = new LevelJustification() { Val = LevelJustificationValues.Left };
 
                 PreviousParagraphProperties previousParagraphProperties4 = new PreviousParagraphProperties();
-                Indentation indentation5 = new Indentation() { Start = "1728", Hanging = "648" };
+                Indentation indentation5 = new Indentation() { Start = "1440", Hanging = "360" };
 
                 previousParagraphProperties4.Append(indentation5);
+
+                NumberingSymbolRunProperties numberingSymbolRunProperties4 = new NumberingSymbolRunProperties();
+                RunFonts runFonts5 = new RunFonts() { Hint = FontTypeHintValues.Default };
+
+                numberingSymbolRunProperties4.Append(runFonts5);
 
                 level4.Append(startNumberingValue4);
                 level4.Append(numberingFormat4);
                 level4.Append(levelText4);
                 level4.Append(levelJustification4);
                 level4.Append(previousParagraphProperties4);
+                level4.Append(numberingSymbolRunProperties4);
 
                 Level level5 = new Level() { LevelIndex = 4 };
                 StartNumberingValue startNumberingValue5 = new StartNumberingValue() { Val = 1 };
-                NumberingFormat numberingFormat5 = new NumberingFormat() { Val = NumberFormatValues.Decimal };
-                LevelText levelText5 = new LevelText() { Val = "%1.%2.%3.%4.%5." };
+                NumberingFormat numberingFormat5 = new NumberingFormat() { Val = NumberFormatValues.LowerLetter };
+                LevelText levelText5 = new LevelText() { Val = "(%5)" };
                 LevelJustification levelJustification5 = new LevelJustification() { Val = LevelJustificationValues.Left };
 
                 PreviousParagraphProperties previousParagraphProperties5 = new PreviousParagraphProperties();
-                Indentation indentation6 = new Indentation() { Start = "2232", Hanging = "792" };
+                Indentation indentation6 = new Indentation() { Start = "1800", Hanging = "360" };
 
                 previousParagraphProperties5.Append(indentation6);
+
+                NumberingSymbolRunProperties numberingSymbolRunProperties5 = new NumberingSymbolRunProperties();
+                RunFonts runFonts6 = new RunFonts() { Hint = FontTypeHintValues.Default };
+
+                numberingSymbolRunProperties5.Append(runFonts6);
 
                 level5.Append(startNumberingValue5);
                 level5.Append(numberingFormat5);
                 level5.Append(levelText5);
                 level5.Append(levelJustification5);
                 level5.Append(previousParagraphProperties5);
+                level5.Append(numberingSymbolRunProperties5);
 
                 Level level6 = new Level() { LevelIndex = 5 };
                 StartNumberingValue startNumberingValue6 = new StartNumberingValue() { Val = 1 };
-                NumberingFormat numberingFormat6 = new NumberingFormat() { Val = NumberFormatValues.Decimal };
-                LevelText levelText6 = new LevelText() { Val = "%1.%2.%3.%4.%5.%6." };
+                NumberingFormat numberingFormat6 = new NumberingFormat() { Val = NumberFormatValues.LowerRoman };
+                LevelText levelText6 = new LevelText() { Val = "(%6)" };
                 LevelJustification levelJustification6 = new LevelJustification() { Val = LevelJustificationValues.Left };
 
                 PreviousParagraphProperties previousParagraphProperties6 = new PreviousParagraphProperties();
-                Indentation indentation7 = new Indentation() { Start = "2736", Hanging = "936" };
+                Indentation indentation7 = new Indentation() { Start = "2160", Hanging = "360" };
 
                 previousParagraphProperties6.Append(indentation7);
+
+                NumberingSymbolRunProperties numberingSymbolRunProperties6 = new NumberingSymbolRunProperties();
+                RunFonts runFonts7 = new RunFonts() { Hint = FontTypeHintValues.Default };
+
+                numberingSymbolRunProperties6.Append(runFonts7);
 
                 level6.Append(startNumberingValue6);
                 level6.Append(numberingFormat6);
                 level6.Append(levelText6);
                 level6.Append(levelJustification6);
                 level6.Append(previousParagraphProperties6);
+                level6.Append(numberingSymbolRunProperties6);
 
                 Level level7 = new Level() { LevelIndex = 6 };
                 StartNumberingValue startNumberingValue7 = new StartNumberingValue() { Val = 1 };
                 NumberingFormat numberingFormat7 = new NumberingFormat() { Val = NumberFormatValues.Decimal };
-                LevelText levelText7 = new LevelText() { Val = "%1.%2.%3.%4.%5.%6.%7." };
+                LevelText levelText7 = new LevelText() { Val = "%7." };
                 LevelJustification levelJustification7 = new LevelJustification() { Val = LevelJustificationValues.Left };
 
                 PreviousParagraphProperties previousParagraphProperties7 = new PreviousParagraphProperties();
-                Indentation indentation8 = new Indentation() { Start = "3240", Hanging = "1080" };
+                Indentation indentation8 = new Indentation() { Start = "2520", Hanging = "360" };
 
                 previousParagraphProperties7.Append(indentation8);
+
+                NumberingSymbolRunProperties numberingSymbolRunProperties7 = new NumberingSymbolRunProperties();
+                RunFonts runFonts8 = new RunFonts() { Hint = FontTypeHintValues.Default };
+
+                numberingSymbolRunProperties7.Append(runFonts8);
 
                 level7.Append(startNumberingValue7);
                 level7.Append(numberingFormat7);
                 level7.Append(levelText7);
                 level7.Append(levelJustification7);
                 level7.Append(previousParagraphProperties7);
+                level7.Append(numberingSymbolRunProperties7);
 
                 Level level8 = new Level() { LevelIndex = 7 };
                 StartNumberingValue startNumberingValue8 = new StartNumberingValue() { Val = 1 };
-                NumberingFormat numberingFormat8 = new NumberingFormat() { Val = NumberFormatValues.Decimal };
-                LevelText levelText8 = new LevelText() { Val = "%1.%2.%3.%4.%5.%6.%7.%8." };
+                NumberingFormat numberingFormat8 = new NumberingFormat() { Val = NumberFormatValues.LowerLetter };
+                LevelText levelText8 = new LevelText() { Val = "%8." };
                 LevelJustification levelJustification8 = new LevelJustification() { Val = LevelJustificationValues.Left };
 
                 PreviousParagraphProperties previousParagraphProperties8 = new PreviousParagraphProperties();
-                Indentation indentation9 = new Indentation() { Start = "3744", Hanging = "1224" };
+                Indentation indentation9 = new Indentation() { Start = "2880", Hanging = "360" };
 
                 previousParagraphProperties8.Append(indentation9);
+
+                NumberingSymbolRunProperties numberingSymbolRunProperties8 = new NumberingSymbolRunProperties();
+                RunFonts runFonts9 = new RunFonts() { Hint = FontTypeHintValues.Default };
+
+                numberingSymbolRunProperties8.Append(runFonts9);
 
                 level8.Append(startNumberingValue8);
                 level8.Append(numberingFormat8);
                 level8.Append(levelText8);
                 level8.Append(levelJustification8);
                 level8.Append(previousParagraphProperties8);
+                level8.Append(numberingSymbolRunProperties8);
 
                 Level level9 = new Level() { LevelIndex = 8 };
                 StartNumberingValue startNumberingValue9 = new StartNumberingValue() { Val = 1 };
-                NumberingFormat numberingFormat9 = new NumberingFormat() { Val = NumberFormatValues.Decimal };
-                LevelText levelText9 = new LevelText() { Val = "%1.%2.%3.%4.%5.%6.%7.%8.%9." };
+                NumberingFormat numberingFormat9 = new NumberingFormat() { Val = NumberFormatValues.LowerRoman };
+                LevelText levelText9 = new LevelText() { Val = "%9." };
                 LevelJustification levelJustification9 = new LevelJustification() { Val = LevelJustificationValues.Left };
 
                 PreviousParagraphProperties previousParagraphProperties9 = new PreviousParagraphProperties();
-                Indentation indentation10 = new Indentation() { Start = "4320", Hanging = "1440" };
+                Indentation indentation10 = new Indentation() { Start = "3240", Hanging = "360" };
 
                 previousParagraphProperties9.Append(indentation10);
+
+                NumberingSymbolRunProperties numberingSymbolRunProperties9 = new NumberingSymbolRunProperties();
+                RunFonts runFonts10 = new RunFonts() { Hint = FontTypeHintValues.Default };
+
+                numberingSymbolRunProperties9.Append(runFonts10);
 
                 level9.Append(startNumberingValue9);
                 level9.Append(numberingFormat9);
                 level9.Append(levelText9);
                 level9.Append(levelJustification9);
                 level9.Append(previousParagraphProperties9);
+                level9.Append(numberingSymbolRunProperties9);
 
                 abstractNum1.Append(nsid1);
                 abstractNum1.Append(multiLevelType1);
@@ -2284,10 +2375,10 @@ namespace Generate_Word_Report.NewGen
                 webSettingsPart1.WebSettings = webSettings1;
             }
 
-            
-
+           
 
         }
+
 
     }
 }
