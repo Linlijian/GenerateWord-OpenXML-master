@@ -155,7 +155,8 @@ namespace Generate_Word_Report.NewGen
 
             Body body1 = new Body();
 
-            Paragraph paragraph1 = newLineImage("00000001", "00000002", "rId4", imagePart1Data);            
+            Paragraph paragraph1 = newLineImage("00000001", "00000002", "rId4", imagePart1Data);
+            body1.Append(paragraph1);
 
             Paragraph paragraph2 = newLine("00000001", "00000002");
             Paragraph paragraph5 = newLine("00000001", "00000002");
@@ -188,6 +189,9 @@ namespace Generate_Word_Report.NewGen
             txt_prop2.Add(new string[] { "การประเมินเชิงคุณภาพ 20%", Help.paragraphUnderline, Help.paragraphBold, Help.paragraphItalic });
             Paragraph paragraph13 = newLineManyprop("00000001", "00000001", txt_prop2);
 
+            Paragraph a = TestnewLineFont("","","","");
+            body1.Append(a);
+
 
             SectionProperties sectionProperties1 = new SectionProperties() { RsidR = "003F2413" };
             PageSize pageSize1 = new PageSize() { Width = (UInt32Value)12240U, Height = (UInt32Value)15840U };
@@ -200,7 +204,7 @@ namespace Generate_Word_Report.NewGen
             sectionProperties1.Append(columns1);
             sectionProperties1.Append(docGrid1);
 
-            body1.Append(paragraph1);
+            
             body1.Append(paragraph7);
             body1.Append(paragraph2);
             body1.Append(paragraph3);
@@ -2684,39 +2688,73 @@ namespace Generate_Word_Report.NewGen
 
         public void aaa()
         {
-            Paragraph paragraph6 = new Paragraph() { RsidParagraphMarkRevision = "00702081", RsidParagraphAddition = "00702081", RsidParagraphProperties = "00F56D5B", RsidRunAdditionDefault = "00702081", ParagraphId = "066DAA1B", TextId = "76E4C2FC" };
-
-            Run run4 = new Run() { RsidRunProperties = "00702081" };
-            Text text4 = new Text() { Space = SpaceProcessingModeValues.Preserve };
-            text4.Text = "Add a ";
-
-            run4.Append(text4);
-
-            Run run5 = new Run() { RsidRunProperties = "00702081" };
-
-            RunProperties runProperties4 = new RunProperties();
-            Bold bold3 = new Bold();
-            BoldComplexScript boldComplexScript3 = new BoldComplexScript();
-
-            runProperties4.Append(bold3);
-            runProperties4.Append(boldComplexScript3);
-            Text text5 = new Text();
-            text5.Text = "README";
-
-            run5.Append(runProperties4);
-            run5.Append(text5);
-
-            Run run6 = new Run() { RsidRunProperties = "00702081" };
-            Text text6 = new Text() { Space = SpaceProcessingModeValues.Preserve };
-            text6.Text = " with an overview of your project.";
-
-            run6.Append(text6);
-
-            paragraph6.Append(run4);
-            paragraph6.Append(run5);
-            paragraph6.Append(run6);
+            
         }
+        private Paragraph TestnewLineFont(string paragraphId, string textId, string srtText, string text_prop)
+        {
+            Paragraph paragraph1 = new Paragraph() { RsidParagraphMarkRevision = "00B55F5A", RsidParagraphAddition = "00F56D5B", RsidParagraphProperties = "00F56D5B", RsidRunAdditionDefault = "00B55F5A", ParagraphId = paragraphId, TextId = textId };
 
+            ParagraphProperties paragraphProperties = new ParagraphProperties();
+            ParagraphMarkRunProperties paragraphMarkRunProperties = new ParagraphMarkRunProperties();
+
+            //Fonts
+            RunFonts runFonts = new RunFonts() { Ascii = "Itim", HighAnsi = "Itim", ComplexScript = "Itim" };
+            paragraphMarkRunProperties.Append(runFonts);
+
+            //fontSize
+            FontSize fontSize = new FontSize() { Val = "128" }; // 128/2 = 64
+            FontSizeComplexScript fontSizeComplexScript1 = new FontSizeComplexScript() { Val = "128" };
+            paragraphMarkRunProperties.Append(fontSize);
+            paragraphMarkRunProperties.Append(fontSizeComplexScript1);
+
+            //Color
+            Color color1 = new Color() { Val = Help.Yellow_Green_Grosbeak };
+            paragraphMarkRunProperties.Append(color1);
+
+            Justification justification1 = new Justification() { Val = JustificationValues.Center };
+            paragraphProperties.Append(justification1);
+
+            paragraphProperties.Append(paragraphMarkRunProperties);
+
+
+            ProofError proofError1 = new ProofError() { Type = ProofingErrorValues.SpellStart };
+            Run run = new Run() { RsidRunProperties = "00B55F5A" };
+
+            RunProperties runProperties5 = new RunProperties();
+
+            //Fonts
+            RunFonts runFonts2 = new RunFonts() { Ascii = "Itim", HighAnsi = "Itim", ComplexScript = "Itim" };
+            runProperties5.Append(runFonts2);
+
+            //fontSize
+            FontSize fontSize2 = new FontSize() { Val = "128" };
+            FontSizeComplexScript fontSizeComplexScript2 = new FontSizeComplexScript() { Val = "128" };
+            runProperties5.Append(fontSize2);
+            runProperties5.Append(fontSizeComplexScript2);
+
+            //Highlight
+            Highlight highlight1 = new Highlight() { Val = HighlightColorValues.Yellow };
+            runProperties5.Append(highlight1);
+
+            //Color
+            Color color2 = new Color() { Val = Help.Yellow_Green_Grosbeak };
+            runProperties5.Append(color2);
+
+            Text text5 = new Text();
+            text5.Text = "Itim_";
+
+            run.Append(runProperties5);
+            run.Append(text5);
+
+            ProofError proofError2 = new ProofError() { Type = ProofingErrorValues.SpellEnd };
+
+            paragraph1.Append(paragraphProperties);
+            paragraph1.Append(proofError1);
+            paragraph1.Append(run);
+            paragraph1.Append(proofError2);
+
+            return paragraph1;
+        }
 
 
         #region Binary Data
