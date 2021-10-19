@@ -21,6 +21,10 @@ namespace Generate_Word_Report
         public static string wrapThrough = "wrapThrough";
         public static string wrapTight = "WrapTight";
 
+        public static int numberingIdNumbering = 1;
+        public static int numberingIdBullet = 2;
+
+
         #region color
         public static string Black_W3C = "000000";
         public static string Night = "0C090A";
