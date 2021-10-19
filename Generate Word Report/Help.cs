@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Drawing;
 using System.IO;
 
@@ -24,6 +25,27 @@ namespace Generate_Word_Report
         public static int numberingIdNumbering = 1;
         public static int numberingIdBullet = 2;
 
+        public static string justificationLeft = "left";
+        public static string justificationCenter = "center";
+        public static string justificationRight = "right";
+
+        public static string highlightColorBlack = "Black";
+        public static string highlightColorBlue = "Blue";
+        public static string highlightColorCyan = "Cyan";
+        public static string highlightColorGreen = "Green";
+        public static string highlightColorMagenta = "Magenta";
+        public static string highlightColorRed = "Red";
+        public static string highlightColorYellow = "Yellow";
+        public static string highlightColorWhite = "White";
+        public static string highlightColorDarkBlue = "DarkBlue";
+        public static string highlightColorDarkCyan = "DarkCyan";
+        public static string highlightColorDarkGreen = "DarkGreen";
+        public static string highlightColorDarkMagenta = "DarkMagenta";
+        public static string highlightColorDarkRed = "DarkRed";
+        public static string highlightColorDarkYellow = "DarkYellow";
+        public static string highlightColorDarkGray = "DarkGray";
+        public static string highlightColorLightGray = "LightGray";
+        public static string highlightColorNone = "None";
 
         #region color
         public static string Black_W3C = "000000";
@@ -605,8 +627,21 @@ namespace Generate_Word_Report
         public static string White_W3C = "FFFFFF";
         #endregion
 
+        public static bool IsNullableType(Type type)
+        {
+            return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
+        }
+        public static bool IsNullOrEmpty(this object data)
+        {
+            return string.IsNullOrEmpty(Convert.ToString(data));
+        }
+        public static int AsInt(this object data, int? defaultValue = null)
+        {
+            if (IsNullOrEmpty(data))
+                return defaultValue != null ? Convert.ToInt32(defaultValue) : 0;
 
-
+            return Convert.ToInt32(data);
+        }
         public static Bitmap Base64StringToBitmap(this string base64String)
         {
             Bitmap bmpReturn = null;
@@ -626,5 +661,4 @@ namespace Generate_Word_Report
             return bmpReturn;
         }
     }
-
 }

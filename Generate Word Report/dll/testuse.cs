@@ -14,32 +14,69 @@ namespace Generate_Word_Report.dll
             //qwe.Model.template1.Text = "";
 
             pikunword_dto dto = new pikunword_dto();
-            dto.Pictures.Add(new Picture
+            dto.Pictures.Add(new PikunPicture
             {
                 sizeY = 0
             });
 
             pikunword da = new pikunword();
-            da.word.Pictures.Add(new Picture
+            da.word.Pictures.Add(new PikunPicture
             {
                 sizeY = 0
             });
             da.Generate(dto);
 
 
-
+            
 
             da.word.Model.path = @"c:\\aaa.worx";
-            da.word.Models.Add(new pikunword_model {
+
+            var models = new List<PikunParagraphManyProp>();
+            models.Add(new PikunParagraphManyProp{
+                text = "การประเมินความเสี่ยง Internal Rating ประกอบด้วย",
+                font = "Itim",
+                font_size = 12,
+                prop = new string[] { Help.paragraphNormal }
+            });
+            models.Add(new PikunParagraphManyProp
+            {
+                text = " การประเมินเชิงปริมาณ 80%",
+                font = "Itim",
+                justification = Help.justificationLeft,
+                font_size = 12,
+                prop = new string[] { Help.paragraphItalic, Help.paragraphBold }
+            });
+
+            da.word.Models.Add(new pikunword_model
+            {
                 rId = 1,
-                execut_type = pikun_execut_type.picture,
-                picture = new Picture { sizeX = 0 },
+                execut_type = pikun_execut_type.paragraphs,
+                paragraph = new PikunParagraph {
+                    rId = 1,
+                    many_prop = models
+                },
             });
             da.word.Models.Add(new pikunword_model
             {
-                rId = 2,
+                rId = 1,
                 execut_type = pikun_execut_type.paragraphs,
-                paragraph = new Paragraph { align = "center" },
+                paragraph = new PikunParagraph
+                {
+                    rId = 1,
+                    text = "Hello"
+                },
+            });
+
+            da.word.Models.Add(new pikunword_model {
+                rId = 2,
+                execut_type = pikun_execut_type.picture,
+                picture = new PikunPicture { sizeX = 0 },
+            });
+            da.word.Models.Add(new pikunword_model
+            {
+                rId = 3,
+                execut_type = pikun_execut_type.paragraphs,
+                paragraph = new PikunParagraph { align = "center" },
             });
         }
     }

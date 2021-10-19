@@ -242,6 +242,7 @@ namespace Generate_Word_Report.NewGen
             mainDocumentPart1.Document = document1;
         }
 
+        #region MyRegion
         // Generates content of webSettingsPart1.
         private void GenerateWebSettingsPart1Content(WebSettingsPart webSettingsPart1)
         {
@@ -1963,6 +1964,8 @@ namespace Generate_Word_Report.NewGen
             fontTablePart1.Fonts = fonts1;
         }
 
+        #endregion
+        
         // Generates content of imagePart1.
         private void GenerateImagePart1Content(ImagePart imagePart1)
         {
@@ -3520,6 +3523,11 @@ namespace Generate_Word_Report.NewGen
             ParagraphProperties paragraphProperties;
             ParagraphMarkRunProperties paragraphMarkRunProperties;
 
+            //txt_prop2.Add(new string[] { "การประเมินความเสี่ยง Internal Rating ประกอบด้วย", Help.paragraphNormal });
+            //txt_prop2.Add(new string[] { " การประเมินเชิงปริมาณ 80%", Help.paragraphBold, Help.paragraphItalic });
+            //txt_prop2.Add(new string[] { " และ ", Help.paragraphNormal });
+            //txt_prop2.Add(new string[] { "การประเมินเชิงคุณภาพ 20%", Help.paragraphUnderline, Help.paragraphBold, Help.paragraphItalic });
+
             int i = 0;
             foreach (var txt in text_prop)
             {
@@ -3753,6 +3761,7 @@ namespace Generate_Word_Report.NewGen
             Color color1 = new Color() { Val = Help.Yellow_Green_Grosbeak };
             paragraphMarkRunProperties.Append(color1);
 
+            //justification
             Justification justification1 = new Justification() { Val = JustificationValues.Center };
             paragraphProperties.Append(justification1);
 

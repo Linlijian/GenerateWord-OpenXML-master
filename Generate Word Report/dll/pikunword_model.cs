@@ -11,8 +11,8 @@ namespace Generate_Word_Report.dll
         public string path { get; set; }
 
         public ExtendedFileProperties extended_file_properties { get; set; }
-        public Picture picture { get; set; }
-        public Paragraph paragraph { get; set; }
+        public PikunPicture picture { get; set; }
+        public PikunParagraph paragraph { get; set; }
         public PackageProperties package_properties { get; set; }
     }
 
@@ -36,16 +36,36 @@ namespace Generate_Word_Report.dll
         public Ap.ApplicationVersion applicationVersion { get; set; }
     }
 
-    public class Paragraph
+    public class PikunParagraph
     {
         public int rId { get; set; }
         public string text { get; set; }
-        public string align { get; set; }
-        public string txt_align { get; set; }
-        public string[] many_prop { get; set; }
+        public string txt_justification { get; set; } //ข้อความบางส่วน align
+        public string font { get; set; }
+        public int font_size { get; set; }
+        public string justification { get; set; } //ข้อความทั้งหมด align ไปทางเดียวกัน
+        public string color { get; set; }
+        public string highlight { get; set; }   
+        public string prop { get; set; }
+        public int numbering_level_reference { get; set; }
+        public string number_format_values { get; set; }
+        public int numbering_id { get; set; } // 1 numbering | 2 bullet
+        public string[] numbering_type { get; set; } // "-", ".", "ü", "o", etc.. ไม่เกิน  9 ตัว
+        public List<PikunParagraphManyProp> many_prop { get; set; }
     }
 
-    public class Picture
+    public class PikunParagraphManyProp
+    {
+        public string text { get; set; }
+        public string font { get; set; }
+        public int font_size { get; set; }
+        public string justification { get; set; }
+        public string color { get; set; }
+        public string highlight { get; set; }
+        public string[] prop { get; set; }
+    }
+
+    public class PikunPicture
     {
         public int rId { get; set; }
         public string base64image { get; set; }
