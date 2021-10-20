@@ -50,7 +50,7 @@ namespace Generate_Word_Report.dll
             da.word.Models.Add(new pikunword_model
             {
                 rId = 1,
-                execut_type = pikun_execut_type.paragraphs,
+                execut_type = pikun_execut_function.newLineManyprop,
                 paragraph = new PikunParagraph {
                     rId = 1,
                     many_prop = models
@@ -59,7 +59,7 @@ namespace Generate_Word_Report.dll
             da.word.Models.Add(new pikunword_model
             {
                 rId = 1,
-                execut_type = pikun_execut_type.paragraphs,
+                execut_type = pikun_execut_function.newLineManyprop,
                 paragraph = new PikunParagraph
                 {
                     rId = 1,
@@ -67,17 +67,8 @@ namespace Generate_Word_Report.dll
                 },
             });
 
-            da.word.Models.Add(new pikunword_model {
-                rId = 2,
-                execut_type = pikun_execut_type.picture,
-                picture = new PikunPicture { sizeX = 0 },
-            });
-            da.word.Models.Add(new pikunword_model
-            {
-                rId = 3,
-                execut_type = pikun_execut_type.paragraphs,
-                paragraph = new PikunParagraph { align = "center" },
-            });
+            da.word.Model.execut_type = pikun_execut_type.create_packet;
+            da.Generate(dto);
         }
     }
 }
