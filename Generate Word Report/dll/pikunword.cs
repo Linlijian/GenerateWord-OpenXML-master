@@ -199,6 +199,11 @@ namespace Generate_Word_Report.dll
                     Paragraph paragraph = newLine(p.paragraph);
                     body.Append(paragraph);
                 }
+                else if (p.execut_type == pikun_execut_function.newLineManyprop)
+                {
+                    Paragraph paragraph = newLineManyProp(p.paragraph);
+                    body.Append(paragraph);
+                }
             }
             //===============================================
             //  end body zone
@@ -1834,9 +1839,9 @@ namespace Generate_Word_Report.dll
 
 
 
-        private Paragraph newLineManyProp(PikunParagraph p)
+        private Paragraph newLineManyProp(PikunParagraph _paragraph)
         {
-            Paragraph paragraph = new Paragraph() { RsidParagraphMarkRevision = "PIKUNRPM", RsidParagraphAddition = "PIKUNRPA", RsidParagraphProperties = "PIKUNRPP", RsidRunAdditionDefault = "PIKUNRAD", ParagraphId = "PIKUNP" + p.rId, TextId = "PIKUNT" + p.rId };
+            Paragraph paragraph = newLine(_paragraph.rId.ToString());
 
             RunProperties runProperties;
             ParagraphProperties paragraphProperties;
@@ -1844,7 +1849,7 @@ namespace Generate_Word_Report.dll
 
             #region ใส่คุณลักษณะมากกว่าหนึ่งอย่าง
             int i = 0;
-            foreach (var txt in p.many_prop)
+            foreach (var txt in _paragraph.many_prop)
             {
                 runProperties = new RunProperties();
                 paragraphProperties = new ParagraphProperties();
@@ -1854,172 +1859,59 @@ namespace Generate_Word_Report.dll
                 {
                     if (txt.prop[tp] == Help.paragraphBold)
                     {
-                        Bold bold = new Bold();
-                        BoldComplexScript boldComplexScript = new BoldComplexScript();
+                        paragraphMarkRunProperties.Append(newBold());
+                        paragraphMarkRunProperties.Append(newBoldComplexScript());
 
-                        paragraphMarkRunProperties.Append(bold);
-                        paragraphMarkRunProperties.Append(boldComplexScript);
-
-
-                        Bold bold2 = new Bold();
-                        BoldComplexScript boldComplexScript2 = new BoldComplexScript();
-
-                        runProperties.Append(bold2);
-                        runProperties.Append(boldComplexScript2);
+                        runProperties.Append(newBold());
+                        runProperties.Append(newBoldComplexScript());
                     }
                     else if (txt.prop[tp] == Help.paragraphItalic)
                     {
-                        Italic italic = new Italic();
-                        ItalicComplexScript italicComplexScript = new ItalicComplexScript();
+                        paragraphMarkRunProperties.Append(newItalic());
+                        paragraphMarkRunProperties.Append(newItalicComplexScript());
 
-                        paragraphMarkRunProperties.Append(italic);
-                        paragraphMarkRunProperties.Append(italicComplexScript);
-
-
-                        Italic italic2 = new Italic();
-                        ItalicComplexScript italicComplexScript2 = new ItalicComplexScript();
-
-                        runProperties.Append(italic2);
-                        runProperties.Append(italicComplexScript2);
+                        runProperties.Append(newItalic());
+                        runProperties.Append(newItalicComplexScript());
                     }
                     else if (txt.prop[tp] == Help.paragraphUnderline)
                     {
-                        Underline underline = new Underline() { Val = UnderlineValues.Single };
-                        paragraphMarkRunProperties.Append(underline);
-
-                        Underline underline2 = new Underline() { Val = UnderlineValues.Single };
-                        runProperties.Append(underline2);
+                        paragraphMarkRunProperties.Append(newUnderline());
+                        runProperties.Append(newUnderline());
                     }
                 }
 
                 if (!txt.font.IsNullOrEmpty())
                 {
-                    RunFonts runFonts = new RunFonts() { Ascii = txt.font, HighAnsi = txt.font, ComplexScript = txt.font };
-                    paragraphMarkRunProperties.Append(runFonts);
-
-                    RunFonts runFonts2 = new RunFonts() { Ascii = txt.font, HighAnsi = txt.font, ComplexScript = txt.font };
-                    runProperties.Append(runFonts2);
+                    paragraphMarkRunProperties.Append(newRunFonts(txt.font));
+                    runProperties.Append(newRunFonts(txt.font));
                 }
 
-                if (!txt.font_size.IsNullOrEmpty())
+                if (txt.font_size != 0)
                 {
-                    FontSize fontSize = new FontSize() { Val = (txt.font_size * 2).ToString() };
-                    FontSizeComplexScript fontSizeComplexScript = new FontSizeComplexScript() { Val = (txt.font_size * 2).ToString() };
-                    paragraphMarkRunProperties.Append(fontSize);
-                    paragraphMarkRunProperties.Append(fontSizeComplexScript);
+                    paragraphMarkRunProperties.Append(newFontSize(txt.font_size));
+                    paragraphMarkRunProperties.Append(newFontSizeComplexScript(txt.font_size));
 
-                    FontSize fontSize1 = new FontSize() { Val = (txt.font_size * 2).ToString() };
-                    FontSizeComplexScript fontSizeComplexScript1 = new FontSizeComplexScript() { Val = (txt.font_size * 2).ToString() };
-                    runProperties.Append(fontSize1);
-                    runProperties.Append(fontSizeComplexScript1);
+                    runProperties.Append(newFontSize(txt.font_size));
+                    runProperties.Append(newFontSize(txt.font_size));
                 }
 
                 if (!txt.color.IsNullOrEmpty())
                 {
-                    Color color = new Color() { Val = txt.color };
-                    paragraphMarkRunProperties.Append(color);
-
-                    Color color1 = new Color() { Val = txt.color };
-                    runProperties.Append(color1);
+                    paragraphMarkRunProperties.Append(newColor(txt.color));
+                    runProperties.Append(newColor(txt.color));
                 }
 
                 if (!txt.justification.IsNullOrEmpty())
                 {
-                    if (txt.justification == Help.justificationCenter)
-                    {
-                        Justification justification = new Justification() { Val = JustificationValues.Center };
-                        paragraphProperties.Append(justification);
-                    }
-                    else if (txt.justification == Help.justificationRight)
-                    {
-                        Justification justification = new Justification() { Val = JustificationValues.Right };
-                        paragraphProperties.Append(justification);
-                    }
-                    else
-                    {
-                        Justification justification = new Justification() { Val = JustificationValues.Left };
-                        paragraphProperties.Append(justification);
-                    }
+                    paragraphProperties.Append(newJustification(txt.justification));
                 }
 
                 if (!txt.highlight.IsNullOrEmpty())
                 {
-                    Highlight highlight;
-                    switch (txt.highlight)
-                    {
-                        case "Black":
-                            highlight = new Highlight() { Val = HighlightColorValues.Black };
-                            runProperties.Append(highlight);
-                            break;
-                        case "Blue":
-                            highlight = new Highlight() { Val = HighlightColorValues.Blue };
-                            runProperties.Append(highlight);
-                            break;
-                        case "Cyan":
-                            highlight = new Highlight() { Val = HighlightColorValues.Cyan };
-                            runProperties.Append(highlight);
-                            break;
-                        case "DarkBlue":
-                            highlight = new Highlight() { Val = HighlightColorValues.DarkBlue };
-                            runProperties.Append(highlight);
-                            break;
-                        case "DarkCyan":
-                            highlight = new Highlight() { Val = HighlightColorValues.DarkCyan };
-                            runProperties.Append(highlight);
-                            break;
-                        case "DarkGray":
-                            highlight = new Highlight() { Val = HighlightColorValues.DarkGray };
-                            runProperties.Append(highlight);
-                            break;
-                        case "DarkGreen":
-                            highlight = new Highlight() { Val = HighlightColorValues.DarkGreen };
-                            runProperties.Append(highlight);
-                            break;
-                        case "DarkMagenta":
-                            highlight = new Highlight() { Val = HighlightColorValues.DarkMagenta };
-                            runProperties.Append(highlight);
-                            break;
-                        case "DarkRed":
-                            highlight = new Highlight() { Val = HighlightColorValues.DarkRed };
-                            runProperties.Append(highlight);
-                            break;
-                        case "DarkYellow":
-                            highlight = new Highlight() { Val = HighlightColorValues.DarkYellow };
-                            runProperties.Append(highlight);
-                            break;
-                        case "Green":
-                            highlight = new Highlight() { Val = HighlightColorValues.Green };
-                            runProperties.Append(highlight);
-                            break;
-                        case "LightGray":
-                            highlight = new Highlight() { Val = HighlightColorValues.LightGray };
-                            runProperties.Append(highlight);
-                            break;
-                        case "Magenta":
-                            highlight = new Highlight() { Val = HighlightColorValues.Magenta };
-                            runProperties.Append(highlight);
-                            break;
-                        case "None":
-                            highlight = new Highlight() { Val = HighlightColorValues.None };
-                            runProperties.Append(highlight);
-                            break;
-                        case "Red":
-                            highlight = new Highlight() { Val = HighlightColorValues.Red };
-                            runProperties.Append(highlight);
-                            break;
-                        case "White":
-                            highlight = new Highlight() { Val = HighlightColorValues.White };
-                            runProperties.Append(highlight);
-                            break;
-                        case "Yellow":
-                            highlight = new Highlight() { Val = HighlightColorValues.Yellow };
-                            runProperties.Append(highlight);
-                            break;
-                        default:
-                            break;
-                    }
+                    runProperties.Append(newHighlight(txt.highlight));
                 }
 
+                //Append all prop
                 paragraphProperties.Append(paragraphMarkRunProperties);
 
                 Run run = new Run() { RsidRunProperties = "PIKUNRRP" };
@@ -2036,11 +1928,7 @@ namespace Generate_Word_Report.dll
 
                 text.Text = txt.text;
 
-                if (txt.prop.First() != Help.paragraphNormal)
-                {
-                    run.Append(runProperties);
-                }
-
+                run.Append(runProperties);
                 run.Append(text);
 
                 ProofError proofError1 = new ProofError() { Type = ProofingErrorValues.SpellStart };
