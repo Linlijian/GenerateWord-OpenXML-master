@@ -22,7 +22,7 @@ namespace Generate_Word_Report
             {
                 rId = 1,
                 execut_type = dll.pikun_execut_function.newLineNormal,
-                paragraph = new dll.PikunParagraph { text = "I LOVE MUK!", rId = 1, prop = Help.paragraphBold, font_size = 20}
+                paragraph = new dll.PikunParagraph { text = "I LOVE MUK!", rId = 1, prop = Help.paragraphBold, font_size = 20, highlight = Help.highlightColorDarkBlue}
             });
 
             pk.word.Model.execut_type = dll.pikun_execut_type.create_packet;
