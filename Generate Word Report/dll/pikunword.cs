@@ -1879,6 +1879,9 @@ namespace Generate_Word_Report.dll
             numbering.AddNamespaceDeclaration("wps", "http://schemas.microsoft.com/office/word/2010/wordprocessingShape");
             #endregion
 
+            List<AbstractNum> abstractNums = new List<AbstractNum>();
+            List<NumberingInstance> numberingInstances = new List<NumberingInstance>();
+
             int abstractNumberId = 0;
             foreach (var word in _dto.NumberingDefinitions)
             {
@@ -1889,16 +1892,25 @@ namespace Generate_Word_Report.dll
                 word.numbering_type = defaultNumberingType(word.numbering_type, word.number_format_values);
 
                 AbstractNum abstractNum = newNumbering(pikun_number_format, startIndentation, hangingIndentation, word.numbering_type, abstractNumberId, word.font);
+                abstractNums.Add(abstractNum);
 
                 NumberingInstance numberingInstance = new NumberingInstance() { NumberID = abstractNumberId + 1 };
                 AbstractNumId abstractNumId = new AbstractNumId() { Val = abstractNumberId };
 
                 numberingInstance.Append(abstractNumId);
-              
-                numbering.Append(abstractNum);
-                numbering.Append(numberingInstance);
+                numberingInstances.Add(numberingInstance);
+               
+                abstractNumberId++;
             }
 
+            for (int i = 0; i < abstractNums.Count; i++)
+            {
+                numbering.Append(abstractNums[i]);
+            }
+            for (int i = 0; i < numberingInstances.Count; i++)
+            {
+                numbering.Append(numberingInstances[i]);
+            }
             numberingDefinitionsPart.Numbering = numbering;
         }
 
@@ -2263,13 +2275,13 @@ namespace Generate_Word_Report.dll
         {
             AbstractNum abstractNum = new AbstractNum() { AbstractNumberId = _abstractNumberId };
             abstractNum.SetAttribute(new OpenXmlAttribute("w15", "restartNumberingAfterBreak", "http://schemas.microsoft.com/office/word/2012/wordml", "0"));
-            Nsid nsid = new Nsid() { Val = "5CCD5ED1" };
+            Nsid nsid = new Nsid() { Val = "5CCD5ED" + _abstractNumberId };
             MultiLevelType multiLevelType = new MultiLevelType() { Val = MultiLevelValues.HybridMultilevel };
-            TemplateCode templateCode = new TemplateCode() { Val = "CCE2B53C" };
+            TemplateCode templateCode = new TemplateCode() { Val = "CCE2B53" + _abstractNumberId };
 
             int i = 0;
 
-            Level level10 = new Level() { LevelIndex = 0, TemplateCode = "9FDE9940" };
+            Level level10 = new Level() { LevelIndex = 0, TemplateCode = "9FDE994" + _abstractNumberId };
             StartNumberingValue startNumberingValue10 = new StartNumberingValue() { Val = 1 };
             NumberingFormat numberingFormat10 = new NumberingFormat() { Val = (NumberFormatValues)_pikun_number_format[i] };
             LevelText levelText10 = new LevelText() { Val = _numbering_type[i] };
