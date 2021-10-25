@@ -22,18 +22,20 @@ namespace Generate_Word_Report.dll
     public class pikunword
     {
         public pikunword_dto word { get; set; }
-        private const int rId = 6;
+        private const int rId = 7;
         private const string ExtendedFilePropertiesPart_rId = "rId1";
         private const string WebSettingsPart_rId = "rId2";
         private const string StyleDefinitionsPart_rId = "rId3";
         private const string ThemePart_rId = "rId4";
         private const string FontTablePart_rId = "rId5";
+        private const string NumberingDefinitionsPart_rId = "rId6";
 
 
         public pikunword()
         {
             word = new pikunword_dto();
         }
+
         public pikunword_dto Generate(pikunword_dto _dto)
         {
             switch (_dto.Model.execut_type)
@@ -83,9 +85,9 @@ namespace Generate_Word_Report.dll
         //newLineListParagraph
 
         /*
-         * newLine enter space
-         * newLine Normal | all single prop
-         * newLine Manyprop
+         * / newLine enter space
+         * / newLine Normal | all single prop
+         * / newLine Manyprop
          * newLine numbering | all single prop
          * newLine bullet | all single prop
          * newLine numbering prop
@@ -115,7 +117,11 @@ namespace Generate_Word_Report.dll
             FontTablePart fontTablePart = mainDocumentPart.AddNewPart<FontTablePart>(FontTablePart_rId);
             GenerateFontTablePartContent(fontTablePart);
 
-
+            if (_dto.NumberingDefinitions.Count() > 0) 
+            {
+                NumberingDefinitionsPart numberingDefinitionsPart = mainDocumentPart.AddNewPart<NumberingDefinitionsPart>(NumberingDefinitionsPart_rId);
+                GenerateNumberingDefinitionsPartContent(numberingDefinitionsPart, _dto);
+            }
             //image
             //bullet-numbering
             //chart
@@ -188,10 +194,10 @@ namespace Generate_Word_Report.dll
             //  start body zone
             //===============================================
             foreach (var p in _dto.Models)
-            {
+            {               
                 if (p.execut_type == pikun_execut_function.newLine) 
                 {
-                    Paragraph paragraph = newLine(p.rId.ToString());
+                    Paragraph paragraph = newLine(p.paragraph.rId.ToString());
                     body.Append(paragraph);
                 }
                 else if (p.execut_type == pikun_execut_function.newLineNormal)
@@ -202,6 +208,11 @@ namespace Generate_Word_Report.dll
                 else if (p.execut_type == pikun_execut_function.newLineManyprop)
                 {
                     Paragraph paragraph = newLineManyProp(p.paragraph);
+                    body.Append(paragraph);
+                }
+                else if (p.execut_type == pikun_execut_function.newLineNumbering)
+                {
+                    Paragraph paragraph = newLineNumbering(p.paragraph);
                     body.Append(paragraph);
                 }
             }
@@ -1830,8 +1841,173 @@ namespace Generate_Word_Report.dll
 
             fontTablePart.Fonts = fonts1;
         }
+        //private void GenerateNumberingDefinitionsPartContent(NumberingDefinitionsPart numberingDefinitionsPart, pikunword_dto _dto)
+        //{
+        //    #region web service
+        //    Numbering numbering = new Numbering() { MCAttributes = new MarkupCompatibilityAttributes() { Ignorable = "w14 w15 w16se w16cid w16 w16cex w16sdtdh wp14" } };
+        //    numbering.AddNamespaceDeclaration("wpc", "http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas");
+        //    numbering.AddNamespaceDeclaration("cx", "http://schemas.microsoft.com/office/drawing/2014/chartex");
+        //    numbering.AddNamespaceDeclaration("cx1", "http://schemas.microsoft.com/office/drawing/2015/9/8/chartex");
+        //    numbering.AddNamespaceDeclaration("cx2", "http://schemas.microsoft.com/office/drawing/2015/10/21/chartex");
+        //    numbering.AddNamespaceDeclaration("cx3", "http://schemas.microsoft.com/office/drawing/2016/5/9/chartex");
+        //    numbering.AddNamespaceDeclaration("cx4", "http://schemas.microsoft.com/office/drawing/2016/5/10/chartex");
+        //    numbering.AddNamespaceDeclaration("cx5", "http://schemas.microsoft.com/office/drawing/2016/5/11/chartex");
+        //    numbering.AddNamespaceDeclaration("cx6", "http://schemas.microsoft.com/office/drawing/2016/5/12/chartex");
+        //    numbering.AddNamespaceDeclaration("cx7", "http://schemas.microsoft.com/office/drawing/2016/5/13/chartex");
+        //    numbering.AddNamespaceDeclaration("cx8", "http://schemas.microsoft.com/office/drawing/2016/5/14/chartex");
+        //    numbering.AddNamespaceDeclaration("mc", "http://schemas.openxmlformats.org/markup-compatibility/2006");
+        //    numbering.AddNamespaceDeclaration("aink", "http://schemas.microsoft.com/office/drawing/2016/ink");
+        //    numbering.AddNamespaceDeclaration("am3d", "http://schemas.microsoft.com/office/drawing/2017/model3d");
+        //    numbering.AddNamespaceDeclaration("o", "urn:schemas-microsoft-com:office:office");
+        //    numbering.AddNamespaceDeclaration("r", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
+        //    numbering.AddNamespaceDeclaration("m", "http://schemas.openxmlformats.org/officeDocument/2006/math");
+        //    numbering.AddNamespaceDeclaration("v", "urn:schemas-microsoft-com:vml");
+        //    numbering.AddNamespaceDeclaration("wp14", "http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing");
+        //    numbering.AddNamespaceDeclaration("wp", "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing");
+        //    numbering.AddNamespaceDeclaration("w10", "urn:schemas-microsoft-com:office:word");
+        //    numbering.AddNamespaceDeclaration("w", "http://schemas.openxmlformats.org/wordprocessingml/2006/main");
+        //    numbering.AddNamespaceDeclaration("w14", "http://schemas.microsoft.com/office/word/2010/wordml");
+        //    numbering.AddNamespaceDeclaration("w15", "http://schemas.microsoft.com/office/word/2012/wordml");
+        //    numbering.AddNamespaceDeclaration("w16cex", "http://schemas.microsoft.com/office/word/2018/wordml/cex");
+        //    numbering.AddNamespaceDeclaration("w16cid", "http://schemas.microsoft.com/office/word/2016/wordml/cid");
+        //    numbering.AddNamespaceDeclaration("w16", "http://schemas.microsoft.com/office/word/2018/wordml");
+        //    numbering.AddNamespaceDeclaration("w16sdtdh", "http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash");
+        //    numbering.AddNamespaceDeclaration("w16se", "http://schemas.microsoft.com/office/word/2015/wordml/symex");
+        //    numbering.AddNamespaceDeclaration("wpg", "http://schemas.microsoft.com/office/word/2010/wordprocessingGroup");
+        //    numbering.AddNamespaceDeclaration("wpi", "http://schemas.microsoft.com/office/word/2010/wordprocessingInk");
+        //    numbering.AddNamespaceDeclaration("wne", "http://schemas.microsoft.com/office/word/2006/wordml");
+        //    numbering.AddNamespaceDeclaration("wps", "http://schemas.microsoft.com/office/word/2010/wordprocessingShape");
+        //    #endregion
 
+        //    int abstractNumberId = 0;
+        //    foreach (var word in _dto.Models.Where(w => w.execut_type == pikun_execut_function.newLineNumbering
+        //                            || w.execut_type == pikun_execut_function.newLineNumberingProp))
+        //    {
+        //        AbstractNum abstractNum = new AbstractNum() { AbstractNumberId = abstractNumberId };
+        //        abstractNum.SetAttribute(new OpenXmlAttribute("w15", "restartNumberingAfterBreak", "http://schemas.microsoft.com/office/word/2012/wordml", "0"));
+        //        Nsid nsid = new Nsid() { Val = "42EE7048" }; //<< จัดแม่งดิ๊
+        //        MultiLevelType multiLevelType = new MultiLevelType() { Val = MultiLevelValues.HybridMultilevel };
+        //        TemplateCode templateCode = new TemplateCode() { Val = "48A2DC94" }; //<< จัดแม่งดิ๊
 
+        //        PikunNumberingFormat[] pikun_number_format = defaultNumberFormatValues(word.paragraph.number_format_values);
+        //        string[] startIndentation = defualtIndentationStart();
+        //        string[] hangingIndentation = defualtIndentationHanging();
+
+        //        word.paragraph.numbering_type = defaultNumberingType(word.paragraph.numbering_type, word.paragraph.number_format_values);
+        //        for (int i = 0; i < word.paragraph.numbering_type.Length; i++)
+        //        {
+        //            Level level = new Level() { LevelIndex = i, TemplateCode = "0409000F" }; //<< จัดแม่งดิ๊
+        //            StartNumberingValue startNumberingValue = new StartNumberingValue() { Val = 1 };
+        //            NumberingFormat numberingFormat = new NumberingFormat() { Val = (NumberFormatValues)pikun_number_format[i] };
+        //            LevelText levelText = new LevelText() { Val = word.paragraph.numbering_type[i] };
+        //            LevelJustification levelJustification = new LevelJustification() { Val = LevelJustificationValues.Left };
+
+        //            PreviousParagraphProperties previousParagraphProperties = new PreviousParagraphProperties();
+
+        //            /*
+        //             * ถ้าติดปัญหาเรื่องย่อหน้า อยากได้อย่างงั้นอย่างงี้ ให้สร้างเป็น model แม่ง (ถ้ามั่วก็ array) แล้วจัด Start/Hanging
+        //             * ลงไปพร้อมกับ prop อื่นๆ ให้ครบไปเลย จากนั้นจัด config เอาเองเราจะไม่เกื่ยวกันอีกต่่อไป
+        //             */
+
+        //            Indentation indentation = new Indentation() { Start = startIndentation[i], Hanging = hangingIndentation[i] };
+        //            previousParagraphProperties.Append(indentation);
+
+        //            if(i == 0)
+        //            {
+        //                NumberingSymbolRunProperties numberingSymbolRunProperties = new NumberingSymbolRunProperties();
+        //                RunFonts runFonts = new RunFonts() { Hint = FontTypeHintValues.Default };
+
+        //                numberingSymbolRunProperties.Append(runFonts);
+        //                level.Append(numberingSymbolRunProperties);
+
+        //                abstractNum.Append(nsid);
+        //                abstractNum.Append(multiLevelType);
+        //                abstractNum.Append(templateCode);
+        //            }
+                    
+
+        //            level.Append(startNumberingValue);
+        //            level.Append(numberingFormat);
+        //            level.Append(levelText);
+        //            level.Append(levelJustification);
+        //            level.Append(previousParagraphProperties);
+
+        //            abstractNum.Append(level);
+        //        }
+
+        //        NumberingInstance numberingInstance = new NumberingInstance() { NumberID = abstractNumberId++ };
+        //        AbstractNumId abstractNumId = new AbstractNumId() { Val = abstractNumberId };
+
+        //        numberingInstance.Append(abstractNumId);
+
+        //        numbering.Append(abstractNum);
+        //        numbering.Append(numberingInstance);
+
+        //        abstractNumberId++;
+        //    }
+
+        //    numberingDefinitionsPart.Numbering = numbering;
+        //}
+        private void GenerateNumberingDefinitionsPartContent(NumberingDefinitionsPart numberingDefinitionsPart, pikunword_dto _dto)
+        {
+            #region web service
+            Numbering numbering = new Numbering() { MCAttributes = new MarkupCompatibilityAttributes() { Ignorable = "w14 w15 w16se w16cid w16 w16cex w16sdtdh wp14" } };
+            numbering.AddNamespaceDeclaration("wpc", "http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas");
+            numbering.AddNamespaceDeclaration("cx", "http://schemas.microsoft.com/office/drawing/2014/chartex");
+            numbering.AddNamespaceDeclaration("cx1", "http://schemas.microsoft.com/office/drawing/2015/9/8/chartex");
+            numbering.AddNamespaceDeclaration("cx2", "http://schemas.microsoft.com/office/drawing/2015/10/21/chartex");
+            numbering.AddNamespaceDeclaration("cx3", "http://schemas.microsoft.com/office/drawing/2016/5/9/chartex");
+            numbering.AddNamespaceDeclaration("cx4", "http://schemas.microsoft.com/office/drawing/2016/5/10/chartex");
+            numbering.AddNamespaceDeclaration("cx5", "http://schemas.microsoft.com/office/drawing/2016/5/11/chartex");
+            numbering.AddNamespaceDeclaration("cx6", "http://schemas.microsoft.com/office/drawing/2016/5/12/chartex");
+            numbering.AddNamespaceDeclaration("cx7", "http://schemas.microsoft.com/office/drawing/2016/5/13/chartex");
+            numbering.AddNamespaceDeclaration("cx8", "http://schemas.microsoft.com/office/drawing/2016/5/14/chartex");
+            numbering.AddNamespaceDeclaration("mc", "http://schemas.openxmlformats.org/markup-compatibility/2006");
+            numbering.AddNamespaceDeclaration("aink", "http://schemas.microsoft.com/office/drawing/2016/ink");
+            numbering.AddNamespaceDeclaration("am3d", "http://schemas.microsoft.com/office/drawing/2017/model3d");
+            numbering.AddNamespaceDeclaration("o", "urn:schemas-microsoft-com:office:office");
+            numbering.AddNamespaceDeclaration("r", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
+            numbering.AddNamespaceDeclaration("m", "http://schemas.openxmlformats.org/officeDocument/2006/math");
+            numbering.AddNamespaceDeclaration("v", "urn:schemas-microsoft-com:vml");
+            numbering.AddNamespaceDeclaration("wp14", "http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing");
+            numbering.AddNamespaceDeclaration("wp", "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing");
+            numbering.AddNamespaceDeclaration("w10", "urn:schemas-microsoft-com:office:word");
+            numbering.AddNamespaceDeclaration("w", "http://schemas.openxmlformats.org/wordprocessingml/2006/main");
+            numbering.AddNamespaceDeclaration("w14", "http://schemas.microsoft.com/office/word/2010/wordml");
+            numbering.AddNamespaceDeclaration("w15", "http://schemas.microsoft.com/office/word/2012/wordml");
+            numbering.AddNamespaceDeclaration("w16cex", "http://schemas.microsoft.com/office/word/2018/wordml/cex");
+            numbering.AddNamespaceDeclaration("w16cid", "http://schemas.microsoft.com/office/word/2016/wordml/cid");
+            numbering.AddNamespaceDeclaration("w16", "http://schemas.microsoft.com/office/word/2018/wordml");
+            numbering.AddNamespaceDeclaration("w16sdtdh", "http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash");
+            numbering.AddNamespaceDeclaration("w16se", "http://schemas.microsoft.com/office/word/2015/wordml/symex");
+            numbering.AddNamespaceDeclaration("wpg", "http://schemas.microsoft.com/office/word/2010/wordprocessingGroup");
+            numbering.AddNamespaceDeclaration("wpi", "http://schemas.microsoft.com/office/word/2010/wordprocessingInk");
+            numbering.AddNamespaceDeclaration("wne", "http://schemas.microsoft.com/office/word/2006/wordml");
+            numbering.AddNamespaceDeclaration("wps", "http://schemas.microsoft.com/office/word/2010/wordprocessingShape");
+            #endregion
+
+            int abstractNumberId = 0;
+            foreach (var word in _dto.NumberingDefinitions)
+            {
+                PikunNumberingFormat[] pikun_number_format = defaultNumberFormatValues(word.number_format_values);
+                string[] startIndentation = defualtIndentationStart();
+                string[] hangingIndentation = defualtIndentationHanging();
+
+                word.numbering_type = defaultNumberingType(word.numbering_type, word.number_format_values);
+
+                AbstractNum abstractNum = newNumbering(pikun_number_format, startIndentation, hangingIndentation, word.numbering_type, abstractNumberId, word.font);
+
+                NumberingInstance numberingInstance = new NumberingInstance() { NumberID = abstractNumberId + 1 };
+                AbstractNumId abstractNumId = new AbstractNumId() { Val = abstractNumberId };
+
+                numberingInstance.Append(abstractNumId);
+              
+                numbering.Append(abstractNum);
+                numbering.Append(numberingInstance);
+            }
+
+            numberingDefinitionsPart.Numbering = numbering;
+        }
 
 
 
@@ -1841,6 +2017,11 @@ namespace Generate_Word_Report.dll
 
         private Paragraph newLineManyProp(PikunParagraph _paragraph)
         {
+            if(_paragraph.rId == 0)
+            {
+                return newLineError(_paragraph.rId.ToString());
+            }
+
             Paragraph paragraph = newLine(_paragraph.rId.ToString());
 
             RunProperties runProperties;
@@ -1953,6 +2134,11 @@ namespace Generate_Word_Report.dll
         }
         private Paragraph newLine(PikunParagraph _paragraph)
         {
+            if (_paragraph.rId == 0)
+            {
+                return newLineError(_paragraph.rId.ToString());
+            }
+
             Paragraph paragraph = newLine(_paragraph.rId.ToString());
 
             ParagraphProperties paragraphProperties = new ParagraphProperties();
@@ -2033,10 +2219,485 @@ namespace Generate_Word_Report.dll
 
             return paragraph;
         }
+        private Paragraph newLineNumbering(PikunParagraph _paragraph)
+        {
+            if (_paragraph.rId == 0)
+            {
+                return newLineError(_paragraph.rId.ToString());
+            }
 
+            if (_paragraph.numbering_id == 0)
+            {
+                return newLineError(_paragraph.rId.ToString(), "ใส่ numbering_id ด้วยสิเว้ย! щ(゜ロ゜щ)");
+            }
 
-        
+            Paragraph paragraph = newLine(_paragraph.rId.ToString());
 
+            RunProperties runProperties = new RunProperties();
+            ParagraphProperties paragraphProperties = new ParagraphProperties();
+            ParagraphStyleId paragraphStyleId = new ParagraphStyleId() { Val = "ListParagraph" };
+            ParagraphMarkRunProperties paragraphMarkRunProperties = new ParagraphMarkRunProperties();
+
+            NumberingProperties numberingProperties = new NumberingProperties();
+            NumberingLevelReference numberingLevelReference = new NumberingLevelReference() { Val = _paragraph.numbering_level_reference };
+            NumberingId numberingId = new NumberingId() { Val = _paragraph.numbering_id }; // 1 numbering | 2 bullet
+
+            numberingProperties.Append(numberingLevelReference);
+            numberingProperties.Append(numberingId);
+
+            if (_paragraph.prop == Help.paragraphBold)
+            {
+                paragraphMarkRunProperties.Append(newBold());
+                paragraphMarkRunProperties.Append(newBoldComplexScript());
+
+                runProperties.Append(newBold());
+                runProperties.Append(newBoldComplexScript());
+            }
+            else if (_paragraph.prop == Help.paragraphItalic)
+            {
+                paragraphMarkRunProperties.Append(newItalic());
+                paragraphMarkRunProperties.Append(newItalicComplexScript());
+
+                runProperties.Append(newItalic());
+                runProperties.Append(newItalicComplexScript());
+            }
+            else if (_paragraph.prop == Help.paragraphUnderline)
+            {
+                paragraphMarkRunProperties.Append(newUnderline());
+                runProperties.Append(newUnderline());
+            }
+
+            if (!_paragraph.font.IsNullOrEmpty())
+            {
+                paragraphMarkRunProperties.Append(newRunFonts(_paragraph.font));
+                runProperties.Append(newRunFonts(_paragraph.font));
+            }
+
+            if (_paragraph.font_size != 0)
+            {
+                paragraphMarkRunProperties.Append(newFontSize(_paragraph.font_size));
+                paragraphMarkRunProperties.Append(newFontSizeComplexScript(_paragraph.font_size));
+
+                runProperties.Append(newFontSize(_paragraph.font_size));
+                runProperties.Append(newFontSize(_paragraph.font_size));
+            }
+
+            if (!_paragraph.color.IsNullOrEmpty())
+            {
+                paragraphMarkRunProperties.Append(newColor(_paragraph.color));
+                runProperties.Append(newColor(_paragraph.color));
+            }
+
+            if (!_paragraph.justification.IsNullOrEmpty())
+            {
+                paragraphProperties.Append(newJustification(_paragraph.justification));
+            }
+
+            if (!_paragraph.highlight.IsNullOrEmpty())
+            {
+                runProperties.Append(newHighlight(_paragraph.highlight));
+            }
+
+            //Append all prop
+            paragraphProperties.Append(paragraphMarkRunProperties);
+
+            paragraphProperties.Append(paragraphStyleId);
+            paragraphProperties.Append(numberingProperties);
+
+            ProofError proofError1 = new ProofError() { Type = ProofingErrorValues.SpellStart };
+            Run run = new Run() { RsidRunProperties = "PIKUNRRP" };
+
+            Text text = new Text();
+            text.Text = _paragraph.text;
+
+            run.Append(runProperties);
+            run.Append(text);
+
+            ProofError proofError2 = new ProofError() { Type = ProofingErrorValues.SpellEnd };
+
+            paragraph.Append(paragraphProperties);
+            paragraph.Append(proofError1);
+            paragraph.Append(run);
+            paragraph.Append(proofError2);
+
+            return paragraph;
+        }
+        private Paragraph newLineError(string _rId, string txt = "")
+        {
+            Paragraph paragraph = newLine(_rId);
+
+            ParagraphProperties paragraphProperties = new ParagraphProperties();
+            ParagraphMarkRunProperties paragraphMarkRunProperties = new ParagraphMarkRunProperties();
+            RunProperties runProperties = new RunProperties();
+
+            paragraphMarkRunProperties.Append(newBold());
+            paragraphMarkRunProperties.Append(newBoldComplexScript());
+
+            runProperties.Append(newBold());
+            runProperties.Append(newBoldComplexScript());
+
+            paragraphMarkRunProperties.Append(newFontSize(20));
+            paragraphMarkRunProperties.Append(newFontSizeComplexScript(20));
+
+            runProperties.Append(newFontSize(20));
+            runProperties.Append(newFontSize(20));
+
+            paragraphMarkRunProperties.Append(newColor(Help.Red_Blood));
+            runProperties.Append(newColor(Help.Red_Blood));
+            
+            //Append all prop
+            paragraphProperties.Append(paragraphMarkRunProperties);
+
+            ProofError proofError1 = new ProofError() { Type = ProofingErrorValues.SpellStart };
+            Run run = new Run() { RsidRunProperties = "PIKUNRRP" };
+
+            Text text = new Text();
+            text.Text = txt == "" ? "ใส่ rId ด้วยสิเว้ย! щ(゜ロ゜щ)" : txt;
+
+            run.Append(runProperties);
+            run.Append(text);
+
+            ProofError proofError2 = new ProofError() { Type = ProofingErrorValues.SpellEnd };
+
+            paragraph.Append(paragraphProperties);
+            paragraph.Append(proofError1);
+            paragraph.Append(run);
+            paragraph.Append(proofError2);
+
+            return paragraph;
+        }
+        private AbstractNum newNumbering(PikunNumberingFormat[] _pikun_number_format, string[] _startIndentation, string[] _hangingIndentation, string[] _numbering_type, int _abstractNumberId, string _font)
+        {
+            AbstractNum abstractNum = new AbstractNum() { AbstractNumberId = _abstractNumberId };
+            abstractNum.SetAttribute(new OpenXmlAttribute("w15", "restartNumberingAfterBreak", "http://schemas.microsoft.com/office/word/2012/wordml", "0"));
+            Nsid nsid = new Nsid() { Val = "5CCD5ED1" };
+            MultiLevelType multiLevelType = new MultiLevelType() { Val = MultiLevelValues.HybridMultilevel };
+            TemplateCode templateCode = new TemplateCode() { Val = "CCE2B53C" };
+
+            int i = 0;
+
+            Level level10 = new Level() { LevelIndex = 0, TemplateCode = "9FDE9940" };
+            StartNumberingValue startNumberingValue10 = new StartNumberingValue() { Val = 1 };
+            NumberingFormat numberingFormat10 = new NumberingFormat() { Val = (NumberFormatValues)_pikun_number_format[i] };
+            LevelText levelText10 = new LevelText() { Val = _numbering_type[i] };
+            LevelJustification levelJustification10 = new LevelJustification() { Val = LevelJustificationValues.Left };
+
+            PreviousParagraphProperties previousParagraphProperties10 = new PreviousParagraphProperties();
+            Indentation indentation11 = new Indentation() { Start = _startIndentation[i], Hanging = _hangingIndentation[i] };
+
+            previousParagraphProperties10.Append(indentation11);
+
+            NumberingSymbolRunProperties numberingSymbolRunProperties2 = new NumberingSymbolRunProperties();
+            RunFonts runFonts3 = new RunFonts() { Hint = FontTypeHintValues.Default, Ascii = _font, HighAnsi = _font, ComplexScript = _font};
+
+            numberingSymbolRunProperties2.Append(runFonts3);
+
+            level10.Append(startNumberingValue10);
+            level10.Append(numberingFormat10);
+            level10.Append(levelText10);
+            level10.Append(levelJustification10);
+            level10.Append(previousParagraphProperties10);
+            level10.Append(numberingSymbolRunProperties2);
+
+            Level level11 = new Level() { LevelIndex = 1, TemplateCode = "04090003" };
+            StartNumberingValue startNumberingValue11 = new StartNumberingValue() { Val = 1 };
+            NumberingFormat numberingFormat11 = new NumberingFormat() { Val = (NumberFormatValues)_pikun_number_format[i + 1] };
+            LevelText levelText11 = new LevelText() { Val = _numbering_type[i + 1] };
+            LevelJustification levelJustification11 = new LevelJustification() { Val = LevelJustificationValues.Left };
+
+            PreviousParagraphProperties previousParagraphProperties11 = new PreviousParagraphProperties();
+            Indentation indentation12 = new Indentation() { Start = _startIndentation[i + 1], Hanging = _hangingIndentation[i + 1] };
+
+            previousParagraphProperties11.Append(indentation12);
+
+            NumberingSymbolRunProperties numberingSymbolRunProperties3 = new NumberingSymbolRunProperties();
+            RunFonts runFonts4 = new RunFonts() { Hint = FontTypeHintValues.Default, Ascii = _font, HighAnsi = _font, ComplexScript = _font };
+
+            numberingSymbolRunProperties3.Append(runFonts4);
+
+            level11.Append(startNumberingValue11);
+            level11.Append(numberingFormat11);
+            level11.Append(levelText11);
+            level11.Append(levelJustification11);
+            level11.Append(previousParagraphProperties11);
+            level11.Append(numberingSymbolRunProperties3);
+
+            Level level12 = new Level() { LevelIndex = 2, TemplateCode = "04090005", Tentative = true };
+            StartNumberingValue startNumberingValue12 = new StartNumberingValue() { Val = 1 };
+            NumberingFormat numberingFormat12 = new NumberingFormat() { Val = (NumberFormatValues)_pikun_number_format[i + 2] };
+            LevelText levelText12 = new LevelText() { Val = _numbering_type[i + 2] };
+            LevelJustification levelJustification12 = new LevelJustification() { Val = LevelJustificationValues.Left };
+
+            PreviousParagraphProperties previousParagraphProperties12 = new PreviousParagraphProperties();
+            Indentation indentation13 = new Indentation() { Start = _startIndentation[i + 2], Hanging = _hangingIndentation[i + 2] };
+
+            previousParagraphProperties12.Append(indentation13);
+
+            NumberingSymbolRunProperties numberingSymbolRunProperties4 = new NumberingSymbolRunProperties();
+            RunFonts runFonts5 = new RunFonts() { Hint = FontTypeHintValues.Default, Ascii = _font, HighAnsi = _font, ComplexScript = _font };
+
+            numberingSymbolRunProperties4.Append(runFonts5);
+
+            level12.Append(startNumberingValue12);
+            level12.Append(numberingFormat12);
+            level12.Append(levelText12);
+            level12.Append(levelJustification12);
+            level12.Append(previousParagraphProperties12);
+            level12.Append(numberingSymbolRunProperties4);
+
+            Level level13 = new Level() { LevelIndex = 3, TemplateCode = "04090001", Tentative = true };
+            StartNumberingValue startNumberingValue13 = new StartNumberingValue() { Val = 1 };
+            NumberingFormat numberingFormat13 = new NumberingFormat() { Val = (NumberFormatValues)_pikun_number_format[i + 3] };
+            LevelText levelText13 = new LevelText() { Val = _numbering_type[i + 3] };
+            LevelJustification levelJustification13 = new LevelJustification() { Val = LevelJustificationValues.Left };
+
+            PreviousParagraphProperties previousParagraphProperties13 = new PreviousParagraphProperties();
+            Indentation indentation14 = new Indentation() { Start = _startIndentation[i + 3], Hanging = _hangingIndentation[i + 3] };
+
+            previousParagraphProperties13.Append(indentation14);
+
+            NumberingSymbolRunProperties numberingSymbolRunProperties5 = new NumberingSymbolRunProperties();
+            RunFonts runFonts6 = new RunFonts() { Hint = FontTypeHintValues.Default, Ascii = _font, HighAnsi = _font, ComplexScript = _font };
+
+            numberingSymbolRunProperties5.Append(runFonts6);
+
+            level13.Append(startNumberingValue13);
+            level13.Append(numberingFormat13);
+            level13.Append(levelText13);
+            level13.Append(levelJustification13);
+            level13.Append(previousParagraphProperties13);
+            level13.Append(numberingSymbolRunProperties5);
+
+            Level level14 = new Level() { LevelIndex = 4, TemplateCode = "04090003", Tentative = true };
+            StartNumberingValue startNumberingValue14 = new StartNumberingValue() { Val = 1 };
+            NumberingFormat numberingFormat14 = new NumberingFormat() { Val = (NumberFormatValues)_pikun_number_format[i + 4] };
+            LevelText levelText14 = new LevelText() { Val = _numbering_type[i + 4] };
+            LevelJustification levelJustification14 = new LevelJustification() { Val = LevelJustificationValues.Left };
+
+            PreviousParagraphProperties previousParagraphProperties14 = new PreviousParagraphProperties();
+            Indentation indentation15 = new Indentation() { Start = _startIndentation[i + 4], Hanging = _hangingIndentation[i + 4] };
+
+            previousParagraphProperties14.Append(indentation15);
+
+            NumberingSymbolRunProperties numberingSymbolRunProperties6 = new NumberingSymbolRunProperties();
+            RunFonts runFonts7 = new RunFonts() { Hint = FontTypeHintValues.Default, Ascii = _font, HighAnsi = _font, ComplexScript = _font };
+
+            numberingSymbolRunProperties6.Append(runFonts7);
+
+            level14.Append(startNumberingValue14);
+            level14.Append(numberingFormat14);
+            level14.Append(levelText14);
+            level14.Append(levelJustification14);
+            level14.Append(previousParagraphProperties14);
+            level14.Append(numberingSymbolRunProperties6);
+
+            Level level15 = new Level() { LevelIndex = 5, TemplateCode = "04090005", Tentative = true };
+            StartNumberingValue startNumberingValue15 = new StartNumberingValue() { Val = 1 };
+            NumberingFormat numberingFormat15 = new NumberingFormat() { Val = (NumberFormatValues)_pikun_number_format[i + 5] };
+            LevelText levelText15 = new LevelText() { Val = _numbering_type[i + 5] };
+            LevelJustification levelJustification15 = new LevelJustification() { Val = LevelJustificationValues.Left };
+
+            PreviousParagraphProperties previousParagraphProperties15 = new PreviousParagraphProperties();
+            Indentation indentation16 = new Indentation() { Start = _startIndentation[i + 5], Hanging = _hangingIndentation[i + 5] };
+
+            previousParagraphProperties15.Append(indentation16);
+
+            NumberingSymbolRunProperties numberingSymbolRunProperties7 = new NumberingSymbolRunProperties();
+            RunFonts runFonts8 = new RunFonts() { Hint = FontTypeHintValues.Default, Ascii = _font, HighAnsi = _font, ComplexScript = _font };
+
+            numberingSymbolRunProperties7.Append(runFonts8);
+
+            level15.Append(startNumberingValue15);
+            level15.Append(numberingFormat15);
+            level15.Append(levelText15);
+            level15.Append(levelJustification15);
+            level15.Append(previousParagraphProperties15);
+            level15.Append(numberingSymbolRunProperties7);
+
+            Level level16 = new Level() { LevelIndex = 6, TemplateCode = "04090001", Tentative = true };
+            StartNumberingValue startNumberingValue16 = new StartNumberingValue() { Val = 1 };
+            NumberingFormat numberingFormat16 = new NumberingFormat() { Val = (NumberFormatValues)_pikun_number_format[i + 6] };
+            LevelText levelText16 = new LevelText() { Val = _numbering_type[i + 6] };
+            LevelJustification levelJustification16 = new LevelJustification() { Val = LevelJustificationValues.Left };
+
+            PreviousParagraphProperties previousParagraphProperties16 = new PreviousParagraphProperties();
+            Indentation indentation17 = new Indentation() { Start = _startIndentation[i + 6], Hanging = _hangingIndentation[i + 6] };
+
+            previousParagraphProperties16.Append(indentation17);
+
+            NumberingSymbolRunProperties numberingSymbolRunProperties8 = new NumberingSymbolRunProperties();
+            RunFonts runFonts9 = new RunFonts() { Hint = FontTypeHintValues.Default, Ascii = _font, HighAnsi = _font, ComplexScript = _font };
+
+            numberingSymbolRunProperties8.Append(runFonts9);
+
+            level16.Append(startNumberingValue16);
+            level16.Append(numberingFormat16);
+            level16.Append(levelText16);
+            level16.Append(levelJustification16);
+            level16.Append(previousParagraphProperties16);
+            level16.Append(numberingSymbolRunProperties8);
+
+            Level level17 = new Level() { LevelIndex = 7, TemplateCode = "04090003", Tentative = true };
+            StartNumberingValue startNumberingValue17 = new StartNumberingValue() { Val = 1 };
+            NumberingFormat numberingFormat17 = new NumberingFormat() { Val = (NumberFormatValues)_pikun_number_format[i + 7] };
+            LevelText levelText17 = new LevelText() { Val = _numbering_type[i + 7] };
+            LevelJustification levelJustification17 = new LevelJustification() { Val = LevelJustificationValues.Left };
+
+            PreviousParagraphProperties previousParagraphProperties17 = new PreviousParagraphProperties();
+            Indentation indentation18 = new Indentation() { Start = _startIndentation[i + 7], Hanging = _hangingIndentation[i + 7] };
+
+            previousParagraphProperties17.Append(indentation18);
+
+            NumberingSymbolRunProperties numberingSymbolRunProperties9 = new NumberingSymbolRunProperties();
+            RunFonts runFonts10 = new RunFonts() { Hint = FontTypeHintValues.Default, Ascii = _font, HighAnsi = _font, ComplexScript = _font };
+
+            numberingSymbolRunProperties9.Append(runFonts10);
+
+            level17.Append(startNumberingValue17);
+            level17.Append(numberingFormat17);
+            level17.Append(levelText17);
+            level17.Append(levelJustification17);
+            level17.Append(previousParagraphProperties17);
+            level17.Append(numberingSymbolRunProperties9);
+
+            Level level18 = new Level() { LevelIndex = 8, TemplateCode = "04090005", Tentative = true };
+            StartNumberingValue startNumberingValue18 = new StartNumberingValue() { Val = 1 };
+            NumberingFormat numberingFormat18 = new NumberingFormat() { Val = (NumberFormatValues)_pikun_number_format[i + 8] };
+            LevelText levelText18 = new LevelText() { Val = _numbering_type[i + 8] };
+            LevelJustification levelJustification18 = new LevelJustification() { Val = LevelJustificationValues.Left };
+
+            PreviousParagraphProperties previousParagraphProperties18 = new PreviousParagraphProperties();
+            Indentation indentation19 = new Indentation() { Start = _startIndentation[i + 8], Hanging = _hangingIndentation[i + 8] };
+
+            previousParagraphProperties18.Append(indentation19);
+
+            NumberingSymbolRunProperties numberingSymbolRunProperties10 = new NumberingSymbolRunProperties();
+            RunFonts runFonts11 = new RunFonts() { Hint = FontTypeHintValues.Default, Ascii = _font, HighAnsi = _font, ComplexScript = _font };
+
+            numberingSymbolRunProperties10.Append(runFonts11);
+
+            level18.Append(startNumberingValue18);
+            level18.Append(numberingFormat18);
+            level18.Append(levelText18);
+            level18.Append(levelJustification18);
+            level18.Append(previousParagraphProperties18);
+            level18.Append(numberingSymbolRunProperties10);
+
+            abstractNum.Append(nsid);
+            abstractNum.Append(multiLevelType);
+            abstractNum.Append(templateCode);
+            abstractNum.Append(level10);
+            abstractNum.Append(level11);
+            abstractNum.Append(level12);
+            abstractNum.Append(level13);
+            abstractNum.Append(level14);
+            abstractNum.Append(level15);
+            abstractNum.Append(level16);
+            abstractNum.Append(level17);
+            abstractNum.Append(level18);
+
+            return abstractNum;
+        }
+
+        private string[] defaultNumberingType(string[] _numbering_type, string _number_format_values)
+        {
+            int maxNumberingType = 9;
+            string[] newNumberingType = new string[maxNumberingType];
+
+            try
+            {               
+                if (_number_format_values == Help.numberFormatValuesBullet)
+                {
+                    string[] defaultNumberingType = { "-", "o", "§", "·", "o", "§", "·", "o", "§" };
+                    newNumberingType = defaultNumberingType;
+                }
+                else if (_number_format_values == Help.numberFormatValuesDecimal)
+                {
+                    string[] defaultNumberingType = { "%1.", "%2.", "%3.", "%4.", "%5.", "%6.", "%7.", "%8.", "%9." };
+                    newNumberingType = defaultNumberingType;
+                }
+                else if (_number_format_values == Help.numberFormatValuesDecimalABC)
+                {
+
+                }
+                else //defualt
+                {
+                    string[] defaultNumberingType = { "-", "o", "§", "·", "o", "§", "·", "o", "§" };
+                    newNumberingType = defaultNumberingType;
+                }
+
+                if (_numbering_type.Length != maxNumberingType)
+                {
+                    for (int i = 0; i < _numbering_type.Length; i++)
+                    {
+                        newNumberingType[i] = _numbering_type[i];
+                    }
+                }
+
+                return newNumberingType;
+            }
+            catch
+            {
+                string[] defaultNumberingType = { "-", "o", "§", "·", "o", "§", "·", "o", "§" };
+                newNumberingType = defaultNumberingType;
+
+                return newNumberingType;
+            }
+        }
+        private PikunNumberingFormat[] defaultNumberFormatValues(string _number_format_values)
+        {
+            int maxNumberingType = 9;
+            PikunNumberingFormat[] newNumberingType = new PikunNumberingFormat[maxNumberingType];
+
+            if (_number_format_values == Help.numberFormatValuesBullet)
+            {
+                for (int i = 0; i < newNumberingType.Length; i++)
+                {
+                    newNumberingType[i] = PikunNumberingFormat.Bullet;
+                }
+            }
+            else if (_number_format_values == Help.numberFormatValuesDecimal)
+            {
+                for (int i = 0; i < newNumberingType.Length; i++)
+                {
+                    if(i == 0 || i == 3 || i == 6)
+                    {
+                        newNumberingType[i] = PikunNumberingFormat.Decimal;
+                    }
+                    else if(i == 1 || i == 4 || i == 7)
+                    {
+                        newNumberingType[i] = PikunNumberingFormat.LowerLetter;
+                    }
+                    else if (i == 2 || i == 5 || i == 8)
+                    {
+                        newNumberingType[i] = PikunNumberingFormat.LowerRoman;
+                    }
+                }
+            }
+            else if (_number_format_values == Help.numberFormatValuesDecimalABC)
+            {
+
+            }
+            else //defualt
+            {
+                for (int i = 0; i < newNumberingType.Length; i++)
+                {
+                    newNumberingType[i] = PikunNumberingFormat.Bullet;
+                }
+            }
+
+            return newNumberingType;
+        }
+        private string[] defualtIndentationStart()
+        {
+            string[] arr = { "720", "1440", "2160", "2880", "3600", "4320", "5040", "5760", "6480" };
+            return arr;
+        }
+        private string[] defualtIndentationHanging()
+        {
+            string[] arr = { "360", "360", "180","360", "360", "180", "360", "360", "180" };
+            return arr;
+        }
 
 
 

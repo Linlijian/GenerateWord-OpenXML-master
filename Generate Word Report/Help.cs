@@ -22,7 +22,7 @@ namespace Generate_Word_Report
         public static string wrapThrough = "wrapThrough";
         public static string wrapTight = "WrapTight";
 
-        public static int numberingIdNumbering = 1;
+        public static int numberingIdDecimal = 1;
         public static int numberingIdBullet = 2;
 
         public static string justificationLeft = "left";
@@ -46,6 +46,10 @@ namespace Generate_Word_Report
         public static string highlightColorDarkGray = "DarkGray";
         public static string highlightColorLightGray = "LightGray";
         public static string highlightColorNone = "None";
+
+        public static string numberFormatValuesBullet = "Bullet";
+        public static string numberFormatValuesDecimal = "Decimal";
+        public static string numberFormatValuesDecimalABC = "DecimalABC";
 
         #region color
         public static string Black_W3C = "000000";

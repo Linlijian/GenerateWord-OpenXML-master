@@ -84,6 +84,7 @@
     <Compile Include="NewGen\text__multi_list.cs" />
     <Compile Include="Picture.cs" />
     <Compile Include="PicturePart2.cs" />
+    <Compile Include="PikunNumberingFormat.cs" />
     <Compile Include="PikunJustification.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

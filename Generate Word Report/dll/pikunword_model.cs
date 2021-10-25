@@ -6,7 +6,7 @@ namespace Generate_Word_Report.dll
 {
     public class pikunword_model
     {
-        public int rId { get; set; }
+        //public int rId { get; set; }
         public string execut_type { get; set; }
         public string path { get; set; }
 
@@ -47,11 +47,16 @@ namespace Generate_Word_Report.dll
         public string color { get; set; }
         public string highlight { get; set; }   
         public string prop { get; set; }
-        public int numbering_level_reference { get; set; }
-        public string number_format_values { get; set; }
+        public int numbering_level_reference { get; set; } //ย่อหน้า
         public int numbering_id { get; set; } // 1 numbering | 2 bullet
-        public string[] numbering_type { get; set; } // "-", ".", "ü", "o", etc.. ไม่เกิน  9 ตัว
         public List<PikunParagraphManyProp> many_prop { get; set; }
+    }
+
+    public class PikunNumberingDefinitions
+    {
+        public string number_format_values { get; set; } //numberFormatValuesDecimalABC | numberFormatValuesDecimal
+        public string[] numbering_type { get; set; } // "-", ".", "ü", "o", etc.. ไม่เกิน  9 ตัว
+        public string font { get; set; }
     }
 
     public class PikunParagraphManyProp

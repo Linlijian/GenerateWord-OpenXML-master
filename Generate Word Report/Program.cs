@@ -41,16 +41,45 @@ namespace Generate_Word_Report
             dll.pikunword pk = new dll.pikunword();
             pk.word.Models.Add(new dll.pikunword_model
             {
-                rId = 1,
                 execut_type = dll.pikun_execut_function.newLineNormal,
                 paragraph = new dll.PikunParagraph { text = "I LOVE MUK!", rId = 1, prop = Help.paragraphBold, font_size = 20, highlight = Help.highlightColorDarkBlue}
             });
             pk.word.Models.Add(new dll.pikunword_model
             {
-                rId = 2,
                 execut_type = dll.pikun_execut_function.newLineManyprop,
                 paragraph = new dll.PikunParagraph {
                     many_prop = models
+                }
+            });
+
+            /*
+             * setting numbering
+             */
+            pk.word.NumberingDefinitions.Add(new dll.PikunNumberingDefinitions {
+                numbering_type = new string[] { },
+                number_format_values = Help.numberFormatValuesDecimal
+            });
+
+            pk.word.Models.Add(new dll.pikunword_model
+            {
+                execut_type = dll.pikun_execut_function.newLineNumbering,
+                paragraph = new dll.PikunParagraph { text = "I LOVE MUK! Numbering",
+                    rId = 1,
+                    prop = Help.paragraphBold,
+                    font_size = 20,
+                    numbering_id = 1,
+                    numbering_level_reference = 0
+                }
+            });
+            pk.word.Models.Add(new dll.pikunword_model
+            {
+                execut_type = dll.pikun_execut_function.newLineNumbering,
+                paragraph = new dll.PikunParagraph { text = "I LOVE MUK! Numbering 2",
+                    rId = 1,
+                    prop = Help.paragraphBold,
+                    font_size = 20,
+                    numbering_id = 1,
+                    numbering_level_reference = 1
                 }
             });
             pk.word.Model.execut_type = dll.pikun_execut_type.create_packet;

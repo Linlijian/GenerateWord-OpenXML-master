@@ -16,14 +16,15 @@ namespace Generate_Word_Report.dll
             Pictures = new List<PikunPicture>();
             Paragraphs = new List<PikunParagraph>();
             PackageProperties = new PackageProperties();
+            NumberingDefinitions = new List<PikunNumberingDefinitions>();
         }
-
         public pikunword_model Model { get; set; }
         public List<pikunword_model> Models { get; set; }
         public ExtendedFileProperties ExtendedFileProperties { get; set; }
         public List<PikunPicture> Pictures { get; set; }
         public List<PikunParagraph> Paragraphs { get; set; }
         public PackageProperties PackageProperties { get; set; }
+        public List<PikunNumberingDefinitions> NumberingDefinitions { get; set; }
     }
 
     public class pikun_execut_type

@@ -49,7 +49,6 @@ namespace Generate_Word_Report.dll
 
             da.word.Models.Add(new pikunword_model
             {
-                rId = 1,
                 execut_type = pikun_execut_function.newLineManyprop,
                 paragraph = new PikunParagraph {
                     rId = 1,
@@ -58,7 +57,6 @@ namespace Generate_Word_Report.dll
             });
             da.word.Models.Add(new pikunword_model
             {
-                rId = 1,
                 execut_type = pikun_execut_function.newLineManyprop,
                 paragraph = new PikunParagraph
                 {
