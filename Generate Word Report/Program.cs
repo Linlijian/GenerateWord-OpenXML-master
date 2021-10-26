@@ -27,7 +27,8 @@ namespace Generate_Word_Report
                 text = "การประเมินความเสี่ยง Internal Rating ประกอบด้วย",
                 font = "Itim",
                 font_size = 12,
-                prop = new string[] { Help.paragraphNormal }
+                color = Help.Red_Dirt,
+                prop = new string[] { Help.paragraphItalic, Help.paragraphUnderline }
             });
             models.Add(new dll.PikunParagraphManyProp
             {
@@ -48,6 +49,7 @@ namespace Generate_Word_Report
             {
                 execut_type = dll.pikun_execut_function.newLineManyprop,
                 paragraph = new dll.PikunParagraph {
+                    rId = 22,
                     many_prop = models
                 }
             });
@@ -120,6 +122,18 @@ namespace Generate_Word_Report
                     numbering_level_reference = 0
                 }
             });
+            pk.word.Models.Add(new dll.pikunword_model
+            {
+                execut_type = dll.pikun_execut_function.newLineNumberingProp,
+                paragraph = new dll.PikunParagraph
+                {
+                    rId = 1,
+                    many_prop = models,                    
+                    numbering_id = 2,
+                    numbering_level_reference = 0
+                }
+            });
+
             pk.word.Model.execut_type = dll.pikun_execut_type.create_packet;
             pk.word.Model.path = @"F:\OIC.research\GenerateWord-OpenXML-master\GenerateWord-OpenXML-master\Generate Word Report\bin\Debug\pikun.docx";
 

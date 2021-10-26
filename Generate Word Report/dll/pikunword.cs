@@ -215,6 +215,11 @@ namespace Generate_Word_Report.dll
                     Paragraph paragraph = newLineNumbering(p.paragraph);
                     body.Append(paragraph);
                 }
+                else if (p.execut_type == pikun_execut_function.newLineNumberingProp)
+                {
+                    Paragraph paragraph = newLineNumberingManyProp(p.paragraph);
+                    body.Append(paragraph);
+                }
             }
             //===============================================
             //  end body zone
@@ -1913,10 +1918,7 @@ namespace Generate_Word_Report.dll
             }
             numberingDefinitionsPart.Numbering = numbering;
         }
-
-
-
-
+        
 
 
 
@@ -1978,7 +1980,7 @@ namespace Generate_Word_Report.dll
                     paragraphMarkRunProperties.Append(newFontSizeComplexScript(txt.font_size));
 
                     runProperties.Append(newFontSize(txt.font_size));
-                    runProperties.Append(newFontSize(txt.font_size));
+                    runProperties.Append(newFontSizeComplexScript(txt.font_size));
                 }
 
                 if (!txt.color.IsNullOrEmpty())
@@ -2017,10 +2019,11 @@ namespace Generate_Word_Report.dll
                 run.Append(runProperties);
                 run.Append(text);
 
-                ProofError proofError1 = new ProofError() { Type = ProofingErrorValues.SpellStart };
-
+                
                 if (i == 0)
                 {
+                    ProofError proofError1 = new ProofError() { Type = ProofingErrorValues.SpellStart };
+
                     paragraph.Append(paragraphProperties);
                     paragraph.Append(proofError1);
                 }
@@ -2030,7 +2033,13 @@ namespace Generate_Word_Report.dll
                 i++;
             }
             #endregion
-           
+
+            /*
+             * ถ้าพังก็ไอ้เชี่ยนี้
+             */
+            ProofError proofError2 = new ProofError() { Type = ProofingErrorValues.SpellEnd };
+            paragraph.Append(proofError2);
+
             return paragraph;
         }
         private Paragraph newLine(string _rId)
@@ -2227,6 +2236,120 @@ namespace Generate_Word_Report.dll
 
             return paragraph;
         }
+        private Paragraph newLineNumberingManyProp(PikunParagraph _paragraph)
+        {
+            if (_paragraph.rId == 0)
+            {
+                return newLineError(_paragraph.rId.ToString());
+            }
+
+            if (_paragraph.numbering_id == 0)
+            {
+                return newLineError(_paragraph.rId.ToString(), "ใส่ numbering_id ด้วยสิเว้ย! щ(゜ロ゜щ)");
+            }
+
+            Paragraph paragraph = newLine(_paragraph.rId.ToString());
+
+            ParagraphProperties paragraphProperties = new ParagraphProperties();
+            ParagraphStyleId paragraphStyleId = new ParagraphStyleId() { Val = "ListParagraph" };
+
+            NumberingProperties numberingProperties = new NumberingProperties();
+            NumberingLevelReference numberingLevelReference = new NumberingLevelReference() { Val = _paragraph.numbering_level_reference };
+            NumberingId numberingId = new NumberingId() { Val = _paragraph.numbering_id };
+
+            numberingProperties.Append(numberingLevelReference);
+            numberingProperties.Append(numberingId);
+
+            paragraphProperties.Append(paragraphStyleId);
+            paragraphProperties.Append(numberingProperties);
+
+            RunProperties runProperties;
+
+            int i = 0;           
+            foreach (var txt in _paragraph.many_prop)
+            {
+                runProperties = new RunProperties();
+                for (int tp = 0; tp < txt.prop.Length; tp++)
+                {
+                    if (txt.prop[tp] == Help.paragraphBold)
+                    {
+                        runProperties.Append(newBold());
+                        runProperties.Append(newBoldComplexScript());
+                    }
+                    else if (txt.prop[tp] == Help.paragraphItalic)
+                    {
+                        runProperties.Append(newItalic());
+                        runProperties.Append(newItalicComplexScript());
+                    }
+                    else if (txt.prop[tp] == Help.paragraphUnderline)
+                    {
+                        runProperties.Append(newUnderline());
+                    }
+                }
+
+                if (!txt.font.IsNullOrEmpty())
+                {
+                    runProperties.Append(newRunFonts(txt.font));
+                }
+
+                if (txt.font_size != 0)
+                {
+                    runProperties.Append(newFontSize(txt.font_size));
+                    runProperties.Append(newFontSizeComplexScript(txt.font_size));
+                }
+
+                if (!txt.color.IsNullOrEmpty())
+                {
+                    runProperties.Append(newColor(txt.color));
+                }
+
+                if (!txt.justification.IsNullOrEmpty())
+                {
+                    paragraphProperties.Append(newJustification(txt.justification));
+                }
+
+                if (!txt.highlight.IsNullOrEmpty())
+                {
+                    runProperties.Append(newHighlight(txt.highlight));
+                }
+
+                Run run = new Run() { RsidRunProperties = "PIKUNRRP" };
+
+                Text text;
+                if (i == 0)
+                {
+                    text = new Text();
+                }
+                else
+                {
+                    text = new Text() { Space = SpaceProcessingModeValues.Preserve };
+                }
+
+                text.Text = txt.text;
+
+                run.Append(runProperties);
+                run.Append(text);
+
+                ProofError proofError1 = new ProofError() { Type = ProofingErrorValues.SpellStart };
+
+                if (i == 0)
+                {
+                    paragraph.Append(paragraphProperties);
+                    paragraph.Append(proofError1);
+                }
+
+                paragraph.Append(run);
+
+                i++;
+            }
+
+            ProofError proofError2 = new ProofError() { Type = ProofingErrorValues.SpellEnd };
+
+            paragraph.Append(proofError2);
+
+            return paragraph;
+        }
+
         private Paragraph newLineError(string _rId, string txt = "")
         {
             Paragraph paragraph = newLine(_rId);
