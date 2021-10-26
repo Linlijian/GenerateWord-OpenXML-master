@@ -40,8 +40,9 @@ namespace Generate_Word_Report.dll
         public const string newLineNormal = "newLineNormal";
         public const string newLineManyprop = "newLineManyprop";
         public const string newLineNumbering = "newLineNumbering";
-        public const string newLineBullet = "newLineBullet";
+        public const string newLineImage = "newLineImage";
+        public const string newLineImageNoFormat = "newLineImageNoFormat";
         public const string newLineNumberingProp = "newLineNumberingProp";
-        public const string newLineBulletProp = "newLineBulletProp";
+        public const string xxx = "xxx";
     }
 }

@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace Generate_Word_Report.dll
 {
@@ -122,8 +123,20 @@ namespace Generate_Word_Report.dll
                 NumberingDefinitionsPart numberingDefinitionsPart = mainDocumentPart.AddNewPart<NumberingDefinitionsPart>(NumberingDefinitionsPart_rId);
                 GenerateNumberingDefinitionsPartContent(numberingDefinitionsPart, _dto);
             }
-            //image
-            //bullet-numbering
+
+            if(_dto.Pictures.Count > 0)
+            {
+                foreach (var pic in _dto.Pictures)
+                {
+                    if (pic.rId == 0)
+                        break;
+                    
+                    string rid = string.Format("rId{0}", pic.rId + rId);
+                    ImagePart imagePart = mainDocumentPart.AddNewPart<ImagePart>("image/jpeg", rid);
+                    GenerateImagePartContent(imagePart, pic.base64image);
+                }
+            }
+            
             //chart
         }
 
@@ -218,6 +231,16 @@ namespace Generate_Word_Report.dll
                 else if (p.execut_type == pikun_execut_function.newLineNumberingProp)
                 {
                     Paragraph paragraph = newLineNumberingManyProp(p.paragraph);
+                    body.Append(paragraph);
+                }
+                else if (p.execut_type == pikun_execut_function.newLineImage)
+                {
+                    Paragraph paragraph = newLineImage(p.picture);
+                    body.Append(paragraph);
+                }
+                else if (p.execut_type == pikun_execut_function.newLineImageNoFormat)
+                {
+                    Paragraph paragraph = newLineImageNoFormat(p.picture);
                     body.Append(paragraph);
                 }
             }
@@ -1918,7 +1941,12 @@ namespace Generate_Word_Report.dll
             }
             numberingDefinitionsPart.Numbering = numbering;
         }
-        
+        private void GenerateImagePartContent(ImagePart imagePart, string _base64String)
+        {
+            Stream data = GetBinaryDataStream(_base64String);
+            imagePart.FeedData(data);
+            data.Close();
+        }
 
 
 
@@ -2349,7 +2377,109 @@ namespace Generate_Word_Report.dll
 
             return paragraph;
         }
+        private Paragraph newLineImage(PikunPicture _picture)
+        {
+            if(_picture.rId == 0)
+            {
+                return newLineError("99", "ไม่ใส่ rId รูปไม่ขึ้นสิเว้ย! щ(゜ロ゜щ)");
+            }
 
+            if (!_picture.horizontal_alignment.IsNullOrEmpty())
+            {
+                return newLineImageAlignment(_picture);
+            }
+
+            _picture.rId = _picture.rId + rId;
+            string rid = string.Format("rId{0}", _picture.rId);
+
+            Paragraph paragraph = newLine(_picture.rId.ToString());
+
+            Run run = new Run();
+
+            RunProperties runProperties = new RunProperties();
+            NoProof noProof = new NoProof();
+
+            Drawing drawing = addPicFormat(rid, _picture.base64image, _picture.layout_option, _picture.horizontal_position, _picture.vertical_position, _picture.sizeX, _picture.sizeY);
+
+            runProperties.Append(noProof);
+            run.Append(runProperties);
+            run.Append(drawing);
+
+            paragraph.Append(run);
+
+            return paragraph;
+        }
+        private Paragraph newLineImageAlignment(PikunPicture _picture)
+        {
+            if (_picture.rId == 0)
+            {
+                return newLineError("99", "ไม่ใส่ rId รูปไม่ขึ้นสิเว้ย! щ(゜ロ゜щ)");
+            }
+
+            _picture.rId = _picture.rId + rId;
+            string rid = string.Format("rId{0}", _picture.rId);
+
+            Paragraph paragraph = newLine(_picture.rId.ToString());
+
+            ParagraphProperties paragraphProperties = new ParagraphProperties();
+            if (_picture.horizontal_alignment == Help.horizontalAlignmentCenter)
+            {
+                Justification justification = new Justification() { Val = JustificationValues.Center };
+                paragraphProperties.Append(justification);
+            }
+            else if (_picture.horizontal_alignment == Help.horizontalAlignmentLeft)
+            {
+                Justification justification = new Justification() { Val = JustificationValues.Left };
+                paragraphProperties.Append(justification);
+            }
+            else if (_picture.horizontal_alignment == Help.horizontalAlignmentRight)
+            {
+                Justification justification = new Justification() { Val = JustificationValues.Right };
+                paragraphProperties.Append(justification);
+            }
+
+            Run run = new Run();
+
+            RunProperties runProperties = new RunProperties();
+            NoProof noProof = new NoProof();
+
+            Drawing drawing = addPicFormat(rid, _picture.base64image, null, 0, 0, _picture.sizeX, _picture.sizeY);
+
+            runProperties.Append(noProof);
+            run.Append(runProperties);
+            run.Append(drawing);
+
+            paragraph.Append(paragraphProperties);
+            paragraph.Append(run);
+
+            return paragraph;
+        }
+        private Paragraph newLineImageNoFormat(PikunPicture _picture)
+        {
+            if (_picture.rId == 0)
+            {
+                return newLineError("99", "ไม่ใส่ rId รูปไม่ขึ้นสิเว้ย! щ(゜ロ゜щ)");
+            }
+
+            _picture.rId = _picture.rId + rId;
+            string rid = string.Format("rId{0}", _picture.rId);
+
+            Paragraph paragraph = newLine(_picture.rId.ToString());
+            Run run = new Run();
+
+            RunProperties runProperties = new RunProperties();
+            NoProof noProof = new NoProof();
+
+            Drawing drawing = addPicNoFormat(rid, _picture.base64image, _picture.sizeX, _picture.sizeY);
+
+            runProperties.Append(noProof);
+            run.Append(runProperties);
+            run.Append(drawing);
+
+            paragraph.Append(run);
+
+            return paragraph;
+        }
         private Paragraph newLineError(string _rId, string txt = "")
         {
             Paragraph paragraph = newLine(_rId);
@@ -2626,7 +2756,281 @@ namespace Generate_Word_Report.dll
 
             return abstractNum;
         }
+        private Drawing addPicFormat(string _rId, string _base64image, string _format = null, int _horizontalPosition = 0, int _verticalPosition = 0, int _sizeX = 0, int _sizeY = 0)
+        {
+            if (_format == null)
+            {
+                return addPicNoFormat(_rId, _base64image, _sizeX, _sizeY);
+            }
 
+            Drawing drawing1 = new Drawing();
+
+            var size = Getsize(_base64image, _sizeX, _sizeY);
+
+            Wp.Anchor anchor1 = new Wp.Anchor() { DistanceFromTop = (UInt32Value)0U, DistanceFromBottom = (UInt32Value)0U, DistanceFromLeft = (UInt32Value)114300U, DistanceFromRight = (UInt32Value)114300U, SimplePos = false, RelativeHeight = (UInt32Value)251658240U, BehindDoc = false, Locked = false, LayoutInCell = true, AllowOverlap = true, EditId = "3FC09DD6", AnchorId = "4502AFD8" };
+            Wp.SimplePosition simplePosition1 = new Wp.SimplePosition() { X = 0L, Y = 0L };
+
+            Wp.HorizontalPosition horizontalPosition1 = new Wp.HorizontalPosition() { RelativeFrom = Wp.HorizontalRelativePositionValues.Column };
+            Wp.PositionOffset positionOffset1 = new Wp.PositionOffset();
+            positionOffset1.Text = Getspacebar(_horizontalPosition);
+
+            horizontalPosition1.Append(positionOffset1);
+
+            Wp.VerticalPosition verticalPosition1 = new Wp.VerticalPosition() { RelativeFrom = Wp.VerticalRelativePositionValues.Paragraph };
+            Wp.PositionOffset positionOffset2 = new Wp.PositionOffset();
+            positionOffset2.Text = Getenter(_verticalPosition);
+
+            verticalPosition1.Append(positionOffset2);
+            Wp.Extent extent1 = new Wp.Extent() { Cx = size[0], Cy = size[1] };
+            Wp.EffectExtent effectExtent1 = new Wp.EffectExtent() { LeftEdge = 0L, TopEdge = 0L, RightEdge = 0L, BottomEdge = 0L };
+
+            Wp.WrapSquare wrapSquare1 = wrapSquare1 = new Wp.WrapSquare() { WrapText = Wp.WrapTextValues.BothSides };
+            Wp.WrapThrough wrapThrough1 = new Wp.WrapThrough() { WrapText = Wp.WrapTextValues.BothSides };
+            Wp.WrapTight wrapTight1 = new Wp.WrapTight() { WrapText = Wp.WrapTextValues.BothSides };
+            Wp.WrapNone wrapNone1 = new Wp.WrapNone();
+            Wp.WrapTopBottom wrapTopBottom1 = new Wp.WrapTopBottom();
+
+            Wp.WrapPolygon wrapPolygon1 = new Wp.WrapPolygon() { Edited = false };
+            Wp.StartPoint startPoint1 = new Wp.StartPoint() { X = 0L, Y = 0L };
+            Wp.LineTo lineTo1 = new Wp.LineTo() { X = 0L, Y = 21499L };
+            Wp.LineTo lineTo2 = new Wp.LineTo() { X = 21433L, Y = 21499L };
+            Wp.LineTo lineTo3 = new Wp.LineTo() { X = 21433L, Y = 0L };
+            Wp.LineTo lineTo4 = new Wp.LineTo() { X = 0L, Y = 0L };
+
+            wrapPolygon1.Append(startPoint1);
+            wrapPolygon1.Append(lineTo1);
+            wrapPolygon1.Append(lineTo2);
+            wrapPolygon1.Append(lineTo3);
+            wrapPolygon1.Append(lineTo4);
+
+            if (_format == Help.wrapThrough)
+            {
+                wrapThrough1.Append(wrapPolygon1);
+            }
+            else if (_format == Help.wrapTight)
+            {
+                wrapTight1.Append(wrapPolygon1);
+            }
+
+            Wp.DocProperties docProperties1 = new Wp.DocProperties() { Id = (UInt32Value)1U, Name = "Picture 1" };
+
+            Wp.NonVisualGraphicFrameDrawingProperties nonVisualGraphicFrameDrawingProperties1 = new Wp.NonVisualGraphicFrameDrawingProperties();
+
+            A.GraphicFrameLocks graphicFrameLocks1 = new A.GraphicFrameLocks() { NoChangeAspect = true };
+            graphicFrameLocks1.AddNamespaceDeclaration("a", "http://schemas.openxmlformats.org/drawingml/2006/main");
+
+            nonVisualGraphicFrameDrawingProperties1.Append(graphicFrameLocks1);
+
+            A.Graphic graphic1 = new A.Graphic();
+            graphic1.AddNamespaceDeclaration("a", "http://schemas.openxmlformats.org/drawingml/2006/main");
+
+            A.GraphicData graphicData1 = new A.GraphicData() { Uri = "http://schemas.openxmlformats.org/drawingml/2006/picture" };
+
+            Pic.Picture picture1 = new Pic.Picture();
+            picture1.AddNamespaceDeclaration("pic", "http://schemas.openxmlformats.org/drawingml/2006/picture");
+
+            Pic.NonVisualPictureProperties nonVisualPictureProperties1 = new Pic.NonVisualPictureProperties();
+            Pic.NonVisualDrawingProperties nonVisualDrawingProperties1 = new Pic.NonVisualDrawingProperties() { Id = (UInt32Value)0U, Name = "Picture 1" };
+
+            Pic.NonVisualPictureDrawingProperties nonVisualPictureDrawingProperties1 = new Pic.NonVisualPictureDrawingProperties();
+            A.PictureLocks pictureLocks1 = new A.PictureLocks() { NoChangeAspect = true, NoChangeArrowheads = true };
+
+            nonVisualPictureDrawingProperties1.Append(pictureLocks1);
+
+            nonVisualPictureProperties1.Append(nonVisualDrawingProperties1);
+            nonVisualPictureProperties1.Append(nonVisualPictureDrawingProperties1);
+
+            Pic.BlipFill blipFill1 = new Pic.BlipFill();
+
+            A.Blip blip1 = new A.Blip() { Embed = _rId };
+
+            A.BlipExtensionList blipExtensionList1 = new A.BlipExtensionList();
+
+            A.BlipExtension blipExtension1 = new A.BlipExtension() { Uri = "{28A0092B-C50C-407E-A947-70E740481C1C}" };
+
+            A14.UseLocalDpi useLocalDpi1 = new A14.UseLocalDpi() { Val = false };
+            useLocalDpi1.AddNamespaceDeclaration("a14", "http://schemas.microsoft.com/office/drawing/2010/main");
+
+            blipExtension1.Append(useLocalDpi1);
+
+            blipExtensionList1.Append(blipExtension1);
+
+            blip1.Append(blipExtensionList1);
+            A.SourceRectangle sourceRectangle1 = new A.SourceRectangle();
+
+            A.Stretch stretch1 = new A.Stretch();
+            A.FillRectangle fillRectangle1 = new A.FillRectangle();
+
+            stretch1.Append(fillRectangle1);
+
+            blipFill1.Append(blip1);
+            blipFill1.Append(sourceRectangle1);
+            blipFill1.Append(stretch1);
+
+            Pic.ShapeProperties shapeProperties1 = new Pic.ShapeProperties() { BlackWhiteMode = A.BlackWhiteModeValues.Auto };
+
+            A.Transform2D transform2D1 = new A.Transform2D();
+            A.Offset offset1 = new A.Offset() { X = 0L, Y = 0L };
+            A.Extents extents1 = new A.Extents() { Cx = size[0], Cy = size[1] };
+
+            transform2D1.Append(offset1);
+            transform2D1.Append(extents1);
+
+            A.PresetGeometry presetGeometry1 = new A.PresetGeometry() { Preset = A.ShapeTypeValues.Rectangle };
+            A.AdjustValueList adjustValueList1 = new A.AdjustValueList();
+
+            presetGeometry1.Append(adjustValueList1);
+            A.NoFill noFill1 = new A.NoFill();
+
+            A.Outline outline1 = new A.Outline();
+            A.NoFill noFill2 = new A.NoFill();
+
+            outline1.Append(noFill2);
+
+            shapeProperties1.Append(transform2D1);
+            shapeProperties1.Append(presetGeometry1);
+            shapeProperties1.Append(noFill1);
+            shapeProperties1.Append(outline1);
+
+            picture1.Append(nonVisualPictureProperties1);
+            picture1.Append(blipFill1);
+            picture1.Append(shapeProperties1);
+
+            graphicData1.Append(picture1);
+
+            graphic1.Append(graphicData1);
+
+            anchor1.Append(simplePosition1);
+            anchor1.Append(horizontalPosition1);
+            anchor1.Append(verticalPosition1);
+            anchor1.Append(extent1);
+            anchor1.Append(effectExtent1);
+
+            if (_format == Help.wrapThrough)
+                anchor1.Append(wrapThrough1);
+            else if (_format == Help.wrapTopBottom)
+                anchor1.Append(wrapTopBottom1);
+            else if (_format == Help.wrapSquare)
+                anchor1.Append(wrapSquare1);
+            else if (_format == Help.wrapNone)
+                anchor1.Append(wrapNone1);
+            else if (_format == Help.wrapTight)
+                anchor1.Append(wrapTight1);
+
+            anchor1.Append(docProperties1);
+            anchor1.Append(nonVisualGraphicFrameDrawingProperties1);
+            anchor1.Append(graphic1);
+
+            drawing1.Append(anchor1);
+            return drawing1;
+        }
+        private Drawing addPicNoFormat(string _rId, string _base64image, int _sizeX = 0, int _sizeY = 0)
+        {
+            Drawing drawing1 = new Drawing();
+
+            var size = Getsize(_base64image, _sizeX, _sizeY);
+
+            Wp.Inline inline1 = new Wp.Inline() { DistanceFromTop = (UInt32Value)0U, DistanceFromBottom = (UInt32Value)0U, DistanceFromLeft = (UInt32Value)0U, DistanceFromRight = (UInt32Value)0U, AnchorId = "4502AFD8", EditId = "7E13B630" };
+            Wp.Extent extent1 = new Wp.Extent() { Cx = size[0], Cy = size[1] };
+            Wp.EffectExtent effectExtent1 = new Wp.EffectExtent() { LeftEdge = 0L, TopEdge = 0L, RightEdge = 0L, BottomEdge = 635L };
+            Wp.DocProperties docProperties1 = new Wp.DocProperties() { Id = (UInt32Value)1U, Name = "Picture 1" };
+
+            Wp.NonVisualGraphicFrameDrawingProperties nonVisualGraphicFrameDrawingProperties1 = new Wp.NonVisualGraphicFrameDrawingProperties();
+
+            A.GraphicFrameLocks graphicFrameLocks1 = new A.GraphicFrameLocks() { NoChangeAspect = true };
+            graphicFrameLocks1.AddNamespaceDeclaration("a", "http://schemas.openxmlformats.org/drawingml/2006/main");
+
+            nonVisualGraphicFrameDrawingProperties1.Append(graphicFrameLocks1);
+
+            A.Graphic graphic1 = new A.Graphic();
+            graphic1.AddNamespaceDeclaration("a", "http://schemas.openxmlformats.org/drawingml/2006/main");
+
+            A.GraphicData graphicData1 = new A.GraphicData() { Uri = "http://schemas.openxmlformats.org/drawingml/2006/picture" };
+
+            Pic.Picture picture1 = new Pic.Picture();
+            picture1.AddNamespaceDeclaration("pic", "http://schemas.openxmlformats.org/drawingml/2006/picture");
+
+            Pic.NonVisualPictureProperties nonVisualPictureProperties1 = new Pic.NonVisualPictureProperties();
+            Pic.NonVisualDrawingProperties nonVisualDrawingProperties1 = new Pic.NonVisualDrawingProperties() { Id = (UInt32Value)0U, Name = "Picture 1" };
+
+            Pic.NonVisualPictureDrawingProperties nonVisualPictureDrawingProperties1 = new Pic.NonVisualPictureDrawingProperties();
+            A.PictureLocks pictureLocks1 = new A.PictureLocks() { NoChangeAspect = true, NoChangeArrowheads = true };
+
+            nonVisualPictureDrawingProperties1.Append(pictureLocks1);
+
+            nonVisualPictureProperties1.Append(nonVisualDrawingProperties1);
+            nonVisualPictureProperties1.Append(nonVisualPictureDrawingProperties1);
+
+            Pic.BlipFill blipFill1 = new Pic.BlipFill();
+
+            A.Blip blip1 = new A.Blip() { Embed = _rId, CompressionState = A.BlipCompressionValues.Print };
+
+            A.BlipExtensionList blipExtensionList1 = new A.BlipExtensionList();
+
+            A.BlipExtension blipExtension1 = new A.BlipExtension() { Uri = "{28A0092B-C50C-407E-A947-70E740481C1C}" };
+
+            A14.UseLocalDpi useLocalDpi1 = new A14.UseLocalDpi() { Val = false };
+            useLocalDpi1.AddNamespaceDeclaration("a14", "http://schemas.microsoft.com/office/drawing/2010/main");
+
+            blipExtension1.Append(useLocalDpi1);
+
+            blipExtensionList1.Append(blipExtension1);
+
+            blip1.Append(blipExtensionList1);
+            A.SourceRectangle sourceRectangle1 = new A.SourceRectangle();
+
+            A.Stretch stretch1 = new A.Stretch();
+            A.FillRectangle fillRectangle1 = new A.FillRectangle();
+
+            stretch1.Append(fillRectangle1);
+
+            blipFill1.Append(blip1);
+            blipFill1.Append(sourceRectangle1);
+            blipFill1.Append(stretch1);
+
+            Pic.ShapeProperties shapeProperties1 = new Pic.ShapeProperties() { BlackWhiteMode = A.BlackWhiteModeValues.Auto };
+
+            A.Transform2D transform2D1 = new A.Transform2D();
+            A.Offset offset1 = new A.Offset() { X = 0L, Y = 0L };
+            A.Extents extents1 = new A.Extents() { Cx = size[0], Cy = size[1] };
+
+            transform2D1.Append(offset1);
+            transform2D1.Append(extents1);
+
+            A.PresetGeometry presetGeometry1 = new A.PresetGeometry() { Preset = A.ShapeTypeValues.Rectangle };
+            A.AdjustValueList adjustValueList1 = new A.AdjustValueList();
+
+            presetGeometry1.Append(adjustValueList1);
+            A.NoFill noFill1 = new A.NoFill();
+
+            A.Outline outline1 = new A.Outline();
+            A.NoFill noFill2 = new A.NoFill();
+
+            outline1.Append(noFill2);
+
+            shapeProperties1.Append(transform2D1);
+            shapeProperties1.Append(presetGeometry1);
+            shapeProperties1.Append(noFill1);
+            shapeProperties1.Append(outline1);
+
+            picture1.Append(nonVisualPictureProperties1);
+            picture1.Append(blipFill1);
+            picture1.Append(shapeProperties1);
+
+            graphicData1.Append(picture1);
+
+            graphic1.Append(graphicData1);
+
+            inline1.Append(extent1);
+            inline1.Append(effectExtent1);
+            inline1.Append(docProperties1);
+            inline1.Append(nonVisualGraphicFrameDrawingProperties1);
+            inline1.Append(graphic1);
+
+            drawing1.Append(inline1);
+
+            return drawing1;
+        }
         private string[] defaultNumberingType(string[] _numbering_type, string _number_format_values)
         {
             int maxNumberingType = 9;
@@ -2726,9 +3130,41 @@ namespace Generate_Word_Report.dll
             string[] arr = { "360", "360", "180","360", "360", "180", "360", "360", "180" };
             return arr;
         }
+        private Stream GetBinaryDataStream(string base64String)
+        {
+            return new MemoryStream(Convert.FromBase64String(base64String));
+        }
+        private string Getenter(int enter)
+        {
+            return ((long)(enter * 228600)).ToString();
+        }
+        private string Getspacebar(int spacebar)
+        {
+            return ((long)(spacebar * 34000)).ToString();
+        }
+        private List<long> Getsize(string base64image, int sizeX, int sizeY)
+        {
+            var data = base64image.Base64StringToBitmap();
+            var img = new System.Drawing.Bitmap(data);
+            var widthPx = sizeX == 0 ? img.Width : sizeX;
+            var heightPx = sizeY == 0 ? img.Height : sizeY;
+            var horzRezDpi = img.HorizontalResolution;
+            var vertRezDpi = img.VerticalResolution;
+            const int emusPerInch = 914400;
+            const int emusPerCm = 360000;
+            var maxWidthCm = 16.51;
+            var widthEmus = (long)(widthPx / horzRezDpi * emusPerInch);
+            var heightEmus = (long)(heightPx / vertRezDpi * emusPerInch);
+            var maxWidthEmus = (long)(maxWidthCm * emusPerCm);
+            if (widthEmus > maxWidthEmus)
+            {
+                var ratio = (heightEmus * 1.0m) / widthEmus;
+                widthEmus = maxWidthEmus;
+                heightEmus = (long)(widthEmus * ratio);
+            }
 
-
-
+            return new List<long> { widthEmus, heightEmus };
+        }
         #endregion
 
         #region new obj
