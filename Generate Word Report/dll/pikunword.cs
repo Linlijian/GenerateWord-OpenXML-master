@@ -131,8 +131,7 @@ namespace Generate_Word_Report.dll
                     if (pic.rId == 0)
                         break;
                     
-                    string rid = string.Format("rId{0}", pic.rId + rId);
-                    ImagePart imagePart = mainDocumentPart.AddNewPart<ImagePart>("image/jpeg", rid);
+                    ImagePart imagePart = mainDocumentPart.AddNewPart<ImagePart>("image/jpeg", GetrId(pic.rId));
                     GenerateImagePartContent(imagePart, pic.base64image);
                 }
             }
@@ -2384,14 +2383,16 @@ namespace Generate_Word_Report.dll
                 return newLineError("99", "ไม่ใส่ rId รูปไม่ขึ้นสิเว้ย! щ(゜ロ゜щ)");
             }
 
+            if (_picture.base64image.IsNullOrEmpty())
+            {
+                return newLineError("99", "ไม่ใส่ base64image ขนาดของรูปไม่มีสิเว้ย! щ(゜ロ゜щ)");
+            }
+
             if (!_picture.horizontal_alignment.IsNullOrEmpty())
             {
                 return newLineImageAlignment(_picture);
             }
-
-            _picture.rId = _picture.rId + rId;
-            string rid = string.Format("rId{0}", _picture.rId);
-
+                        
             Paragraph paragraph = newLine(_picture.rId.ToString());
 
             Run run = new Run();
@@ -2399,7 +2400,7 @@ namespace Generate_Word_Report.dll
             RunProperties runProperties = new RunProperties();
             NoProof noProof = new NoProof();
 
-            Drawing drawing = addPicFormat(rid, _picture.base64image, _picture.layout_option, _picture.horizontal_position, _picture.vertical_position, _picture.sizeX, _picture.sizeY);
+            Drawing drawing = addPicFormat(GetrId(_picture.rId), _picture.base64image, _picture.layout_option, _picture.horizontal_position, _picture.vertical_position, _picture.sizeX, _picture.sizeY);
 
             runProperties.Append(noProof);
             run.Append(runProperties);
@@ -2416,8 +2417,10 @@ namespace Generate_Word_Report.dll
                 return newLineError("99", "ไม่ใส่ rId รูปไม่ขึ้นสิเว้ย! щ(゜ロ゜щ)");
             }
 
-            _picture.rId = _picture.rId + rId;
-            string rid = string.Format("rId{0}", _picture.rId);
+            if (_picture.base64image.IsNullOrEmpty())
+            {
+                return newLineError("99", "ไม่ใส่ base64image ขนาดของรูปไม่มีสิเว้ย! щ(゜ロ゜щ)");
+            }
 
             Paragraph paragraph = newLine(_picture.rId.ToString());
 
@@ -2443,7 +2446,7 @@ namespace Generate_Word_Report.dll
             RunProperties runProperties = new RunProperties();
             NoProof noProof = new NoProof();
 
-            Drawing drawing = addPicFormat(rid, _picture.base64image, null, 0, 0, _picture.sizeX, _picture.sizeY);
+            Drawing drawing = addPicFormat(GetrId(_picture.rId), _picture.base64image, null, 0, 0, _picture.sizeX, _picture.sizeY);
 
             runProperties.Append(noProof);
             run.Append(runProperties);
@@ -2461,8 +2464,10 @@ namespace Generate_Word_Report.dll
                 return newLineError("99", "ไม่ใส่ rId รูปไม่ขึ้นสิเว้ย! щ(゜ロ゜щ)");
             }
 
-            _picture.rId = _picture.rId + rId;
-            string rid = string.Format("rId{0}", _picture.rId);
+            if (_picture.base64image.IsNullOrEmpty())
+            {
+                return newLineError("99", "ไม่ใส่ base64image ขนาดของรูปไม่มีสิเว้ย! щ(゜ロ゜щ)");
+            }
 
             Paragraph paragraph = newLine(_picture.rId.ToString());
             Run run = new Run();
@@ -2470,7 +2475,7 @@ namespace Generate_Word_Report.dll
             RunProperties runProperties = new RunProperties();
             NoProof noProof = new NoProof();
 
-            Drawing drawing = addPicNoFormat(rid, _picture.base64image, _picture.sizeX, _picture.sizeY);
+            Drawing drawing = addPicNoFormat(GetrId(_picture.rId), _picture.base64image, _picture.sizeX, _picture.sizeY);
 
             runProperties.Append(noProof);
             run.Append(runProperties);
@@ -3164,6 +3169,10 @@ namespace Generate_Word_Report.dll
             }
 
             return new List<long> { widthEmus, heightEmus };
+        }
+        private string GetrId(int rid)
+        {
+            return string.Format("rId{0}", (rId + rid));
         }
         #endregion
 
