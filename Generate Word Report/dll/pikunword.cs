@@ -3182,6 +3182,10 @@ namespace Generate_Word_Report.dll
                         newNumberingType[i] = _numbering_type[i];
                     }
                 }
+                else
+                {
+                    newNumberingType = _numbering_type;
+                }
 
                 return newNumberingType;
             }

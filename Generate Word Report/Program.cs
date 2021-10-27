@@ -57,10 +57,10 @@ namespace Generate_Word_Report
             /*
              * setting numbering
              */
-            pk.word.NumberingDefinitions.Add(new dll.PikunNumberingDefinitions {
-                numbering_type = new string[] { },
-                number_format_values = Help.numberFormatValuesDecimal,
-                font = "Itim"
+            pk.word.NumberingDefinitions.Add(new dll.PikunNumberingDefinitions
+            {
+                numbering_type = new string[] { "%1.", "%1.%2.", "%1.%2.%3.", "%1.%2.%3.%4.", "%1.%2.%3.%4.%5.", "%1.%2.%3.%4.%5.%6.", "%1.%2.%3.%4.%5.%6.%7.", "%1.%2.%3.%4.%5.%6.%7.%8.", "%1.%2.%3.%4.%5.%6.%7.%8.%9." },
+                number_format_values = Help.numberFormatValuesDecimal
             });
             pk.word.NumberingDefinitions.Add(new dll.PikunNumberingDefinitions
             {

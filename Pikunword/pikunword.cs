@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.IO;
+using System.Diagnostics;
 
 namespace Pikunword
 {
@@ -54,21 +55,30 @@ namespace Pikunword
 
         public pikunword_dto create_packet(pikunword_dto _dto)
         {
-            using (WordprocessingDocument package = WordprocessingDocument.Create(_dto.Model.path, WordprocessingDocumentType.Document))
+            try
             {
-                create_part(package, _dto);
-            }
+                using (WordprocessingDocument package = WordprocessingDocument.Create(_dto.Model.path, WordprocessingDocumentType.Document))
+                {
+                    create_part(package, _dto);
+                }
 
-            //int i = 0;
-            //foreach (var m in _dto.Models)
-            //{
-            //    switch (m.execut_type)
-            //    {
-            //        case pikun_execut_type.picture: return picture(_dto);
-            //        case pikun_execut_type.paragraphs: return paragraphs(_dto);
-            //    }
-            //}
-            return _dto;
+                //int i = 0;
+                //foreach (var m in _dto.Models)
+                //{
+                //    switch (m.execut_type)
+                //    {
+                //        case pikun_execut_type.picture: return picture(_dto);
+                //        case pikun_execut_type.paragraphs: return paragraphs(_dto);
+                //    }
+                //}
+                return _dto;
+            }
+            catch (Exception ex)
+            {
+                _dto.ErrorResults.error_message = ex.Message;
+                Debug.WriteLine(ex.Message);
+                return _dto;
+            }
         }
 
         public pikunword_dto picture(pikunword_dto _dto)
@@ -2049,7 +2059,7 @@ namespace Pikunword
             ProofError proofError1 = new ProofError() { Type = ProofingErrorValues.SpellStart };
             Run run = new Run() { RsidRunProperties = "PIKUNRRP" };
 
-            Text text = new Text();
+            Text text = new Text() { Space = SpaceProcessingModeValues.Preserve };
             text.Text = _paragraph.text;
 
             run.Append(runProperties);
@@ -2286,7 +2296,7 @@ namespace Pikunword
             ProofError proofError1 = new ProofError() { Type = ProofingErrorValues.SpellStart };
             Run run = new Run() { RsidRunProperties = "PIKUNRRP" };
 
-            Text text = new Text();
+            Text text = new Text() { Space = SpaceProcessingModeValues.Preserve };
             text.Text = _paragraph.text;
 
             run.Append(runProperties);
@@ -3161,13 +3171,15 @@ namespace Pikunword
                 }
                 else if (_number_format_values == Pikun.numberFormatValuesDecimal)
                 {
-                    string[] defaultNumberingType = { "%1.", "%2.", "%3.", "%4.", "%5.", "%6.", "%7.", "%8.", "%9." };
+                    string[] defaultNumberingType = { "%1.", "%1.%2.", "%1.%2.%3.", "%1.%2.%3.%4.", "%1.%2.%3.%4.%5.", "%1.%2.%3.%4.%5.%6.", "%1.%2.%3.%4.%5.%6.%7.", "%1.%2.%3.%4.%5.%6.%7.%8.", "%1.%2.%3.%4.%5.%6.%7.%8.%9." };
                     newNumberingType = defaultNumberingType;
                 }
                 else if (_number_format_values == Pikun.numberFormatValuesDecimalABC)
                 {
                     //numberFormatValuesDecimalABC
                     //ตอนนี้ไม่ได้ใช้ ถ้าอยากได้หาเอา
+                    string[] defaultNumberingType = { "%1.", "%2.", "%3.", "%4.", "%5.", "%6.", "%7.", "%8.", "%9." };
+                    newNumberingType = defaultNumberingType;
                 }
                 else //defualt
                 {
@@ -3181,6 +3193,10 @@ namespace Pikunword
                     {
                         newNumberingType[i] = _numbering_type[i];
                     }
+                }
+                else
+                {
+                    newNumberingType = _numbering_type;
                 }
 
                 return newNumberingType;
@@ -3215,6 +3231,13 @@ namespace Pikunword
             {
                 for (int i = 0; i < newNumberingType.Length; i++)
                 {
+                    newNumberingType[i] = PikunNumberingFormat.Decimal;
+                }
+            }
+            else if (_number_format_values == Pikun.numberFormatValuesDecimalABC)
+            {
+                for (int i = 0; i < newNumberingType.Length; i++)
+                {
                     if (i == 0 || i == 3 || i == 6)
                     {
                         newNumberingType[i] = PikunNumberingFormat.Decimal;
@@ -3228,10 +3251,6 @@ namespace Pikunword
                         newNumberingType[i] = PikunNumberingFormat.LowerRoman;
                     }
                 }
-            }
-            else if (_number_format_values == Pikun.numberFormatValuesDecimalABC)
-            {
-
             }
             else //defualt
             {
