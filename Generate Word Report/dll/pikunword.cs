@@ -89,10 +89,12 @@ namespace Generate_Word_Report.dll
          * / newLine enter space
          * / newLine Normal | all single prop
          * / newLine Manyprop
-         * newLine numbering | all single prop
-         * newLine bullet | all single prop
-         * newLine numbering prop
-         * newLine bullet prop
+         * / newLine numbering | all single prop
+         * / newLine bullet | all single prop
+         * / newLine numbering prop
+         * / newLine bullet prop
+         * / newImage
+         * newChrat
          * สร้าง paragraphProperties เป็น fn แล้วส่งกลับมาทีเดียวจะสั้นกว่า
          */
 
@@ -1868,6 +1870,10 @@ namespace Generate_Word_Report.dll
 
             fontTablePart.Fonts = fonts1;
         }
+
+        /// <summary>
+        /// ตัวตั้งค่าหัวข้อ ถ้าไม่มีการกำหนดหัวข้อฟังก์ชั่นนี้จะไม่มีการเรียกใช้
+        /// </summary>
         private void GenerateNumberingDefinitionsPartContent(NumberingDefinitionsPart numberingDefinitionsPart, pikunword_dto _dto)
         {
             #region web service
@@ -1940,6 +1946,12 @@ namespace Generate_Word_Report.dll
             }
             numberingDefinitionsPart.Numbering = numbering;
         }
+
+        /// <summary>
+        /// ตัวตั่งค่ารูป กำหนดไอดีและรูปที่จะลงใน word ถ้าไม่มีจุดนี้จะไม่มีรูปแสดง
+        /// </summary>
+        /// <param name="imagePart"></param>
+        /// <param name="_base64String">รูปที่ใช้แสดง</param>
         private void GenerateImagePartContent(ImagePart imagePart, string _base64String)
         {
             Stream data = GetBinaryDataStream(_base64String);
@@ -1949,9 +1961,119 @@ namespace Generate_Word_Report.dll
 
 
 
+
+        /// <summary>
+        /// สร้างบรรทัดใหม่เปรียมเสมือนกด Enter
+        /// </summary>
+        /// <param name="_rId">rid ของ paragraph</param>
+        /// <returns></returns>
+        private Paragraph newLine(string _rId)
+        {
+            return new Paragraph() { RsidParagraphMarkRevision = "PIKUNRPM", RsidParagraphAddition = "PIKUNRPA", RsidParagraphProperties = "PIKUNRPP", RsidRunAdditionDefault = "PIKUNRAD", ParagraphId = "PIKUNP" + _rId, TextId = "PIKUNT" + _rId };
+        }
+
+        /// <summary>
+        /// สร้างบรรทัดใหม่เป็นประโยคเดียวและสามารถใส่คุณลักษณะและแสดงผลทั้งหมดของประโยค
+        /// </summary>
+        /// <param name="_paragraph">paragraph obj</param>
+        /// <returns>Paragraph</returns>
+        private Paragraph newLine(PikunParagraph _paragraph)
+        {
+            if (_paragraph.rId == 0)
+            {
+                return newLineError(_paragraph.rId.ToString());
+            }
+
+            Paragraph paragraph = newLine(_paragraph.rId.ToString());
+
+            ParagraphProperties paragraphProperties = new ParagraphProperties();
+            ParagraphMarkRunProperties paragraphMarkRunProperties = new ParagraphMarkRunProperties();
+            RunProperties runProperties = new RunProperties();
+
+            if (_paragraph.prop == Help.paragraphBold)
+            {               
+                paragraphMarkRunProperties.Append(newBold());
+                paragraphMarkRunProperties.Append(newBoldComplexScript());
+
+                runProperties.Append(newBold());
+                runProperties.Append(newBoldComplexScript());
+            }
+            else if (_paragraph.prop == Help.paragraphItalic)
+            {
+                paragraphMarkRunProperties.Append(newItalic());
+                paragraphMarkRunProperties.Append(newItalicComplexScript());
+                
+                runProperties.Append(newItalic());
+                runProperties.Append(newItalicComplexScript());
+            }
+            else if (_paragraph.prop == Help.paragraphUnderline)
+            {
+                paragraphMarkRunProperties.Append(newUnderline());
+                runProperties.Append(newUnderline());
+            }
+
+            if (!_paragraph.font.IsNullOrEmpty())
+            {
+                paragraphMarkRunProperties.Append(newRunFonts(_paragraph.font));                
+                runProperties.Append(newRunFonts(_paragraph.font));
+            }
+
+            if (_paragraph.font_size != 0)
+            {
+                paragraphMarkRunProperties.Append(newFontSize(_paragraph.font_size));
+                paragraphMarkRunProperties.Append(newFontSizeComplexScript(_paragraph.font_size));
+
+                runProperties.Append(newFontSize(_paragraph.font_size));
+                runProperties.Append(newFontSize(_paragraph.font_size));
+            }
+
+            if (!_paragraph.color.IsNullOrEmpty())
+            {
+                paragraphMarkRunProperties.Append(newColor(_paragraph.color));
+                runProperties.Append(newColor(_paragraph.color));
+            }
+
+            if (!_paragraph.justification.IsNullOrEmpty())
+            {
+                paragraphProperties.Append(newJustification(_paragraph.justification));
+            }
+
+            if (!_paragraph.highlight.IsNullOrEmpty())
+            {
+                runProperties.Append(newHighlight(_paragraph.highlight));
+            }
+
+            //Append all prop
+            paragraphProperties.Append(paragraphMarkRunProperties);
+
+            ProofError proofError1 = new ProofError() { Type = ProofingErrorValues.SpellStart };
+            Run run = new Run() { RsidRunProperties = "PIKUNRRP" };
+
+            Text text = new Text();
+            text.Text = _paragraph.text;
+
+            run.Append(runProperties);
+            run.Append(text);
+
+            ProofError proofError2 = new ProofError() { Type = ProofingErrorValues.SpellEnd };
+
+            paragraph.Append(paragraphProperties);
+            paragraph.Append(proofError1);
+            paragraph.Append(run);
+            paragraph.Append(proofError2);
+
+            return paragraph;
+        }
+
+        /// <summary>
+        /// สร้างบรรทัดใหม่เป็นหลายคำต่อเป็นประโยคและสามารถใส่คุณลักษณะและแสดงผลทั้งหมดแต่ละคำนั้น
+        /// และต่อเป็นประยคเดียว
+        /// </summary>
+        /// <param name="_paragraph">paragraph obj</param>
+        /// <returns>Paragraph</returns>
         private Paragraph newLineManyProp(PikunParagraph _paragraph)
         {
-            if(_paragraph.rId == 0)
+            if (_paragraph.rId == 0)
             {
                 return newLineError(_paragraph.rId.ToString());
             }
@@ -2046,7 +2168,7 @@ namespace Generate_Word_Report.dll
                 run.Append(runProperties);
                 run.Append(text);
 
-                
+
                 if (i == 0)
                 {
                     ProofError proofError1 = new ProofError() { Type = ProofingErrorValues.SpellStart };
@@ -2069,97 +2191,13 @@ namespace Generate_Word_Report.dll
 
             return paragraph;
         }
-        private Paragraph newLine(string _rId)
-        {
-            return new Paragraph() { RsidParagraphMarkRevision = "PIKUNRPM", RsidParagraphAddition = "PIKUNRPA", RsidParagraphProperties = "PIKUNRPP", RsidRunAdditionDefault = "PIKUNRAD", ParagraphId = "PIKUNP" + _rId, TextId = "PIKUNT" + _rId };
-        }
-        private Paragraph newLine(PikunParagraph _paragraph)
-        {
-            if (_paragraph.rId == 0)
-            {
-                return newLineError(_paragraph.rId.ToString());
-            }
 
-            Paragraph paragraph = newLine(_paragraph.rId.ToString());
-
-            ParagraphProperties paragraphProperties = new ParagraphProperties();
-            ParagraphMarkRunProperties paragraphMarkRunProperties = new ParagraphMarkRunProperties();
-            RunProperties runProperties = new RunProperties();
-
-            if (_paragraph.prop == Help.paragraphBold)
-            {               
-                paragraphMarkRunProperties.Append(newBold());
-                paragraphMarkRunProperties.Append(newBoldComplexScript());
-
-                runProperties.Append(newBold());
-                runProperties.Append(newBoldComplexScript());
-            }
-            else if (_paragraph.prop == Help.paragraphItalic)
-            {
-                paragraphMarkRunProperties.Append(newItalic());
-                paragraphMarkRunProperties.Append(newItalicComplexScript());
-                
-                runProperties.Append(newItalic());
-                runProperties.Append(newItalicComplexScript());
-            }
-            else if (_paragraph.prop == Help.paragraphUnderline)
-            {
-                paragraphMarkRunProperties.Append(newUnderline());
-                runProperties.Append(newUnderline());
-            }
-
-            if (!_paragraph.font.IsNullOrEmpty())
-            {
-                paragraphMarkRunProperties.Append(newRunFonts(_paragraph.font));                
-                runProperties.Append(newRunFonts(_paragraph.font));
-            }
-
-            if (_paragraph.font_size != 0)
-            {
-                paragraphMarkRunProperties.Append(newFontSize(_paragraph.font_size));
-                paragraphMarkRunProperties.Append(newFontSizeComplexScript(_paragraph.font_size));
-
-                runProperties.Append(newFontSize(_paragraph.font_size));
-                runProperties.Append(newFontSize(_paragraph.font_size));
-            }
-
-            if (!_paragraph.color.IsNullOrEmpty())
-            {
-                paragraphMarkRunProperties.Append(newColor(_paragraph.color));
-                runProperties.Append(newColor(_paragraph.color));
-            }
-
-            if (!_paragraph.justification.IsNullOrEmpty())
-            {
-                paragraphProperties.Append(newJustification(_paragraph.justification));
-            }
-
-            if (!_paragraph.highlight.IsNullOrEmpty())
-            {
-                runProperties.Append(newHighlight(_paragraph.highlight));
-            }
-
-            //Append all prop
-            paragraphProperties.Append(paragraphMarkRunProperties);
-
-            ProofError proofError1 = new ProofError() { Type = ProofingErrorValues.SpellStart };
-            Run run = new Run() { RsidRunProperties = "PIKUNRRP" };
-
-            Text text = new Text();
-            text.Text = _paragraph.text;
-
-            run.Append(runProperties);
-            run.Append(text);
-
-            ProofError proofError2 = new ProofError() { Type = ProofingErrorValues.SpellEnd };
-
-            paragraph.Append(paragraphProperties);
-            paragraph.Append(proofError1);
-            paragraph.Append(run);
-            paragraph.Append(proofError2);
-
-            return paragraph;
-        }
+        /// <summary>
+        /// สร้างบรรทัดใหม่เป็นหัวข้อ และใส่คุณลักษณะรวมทั้งประยค
+        /// ลักษณะคล้าย newLine
+        /// </summary>
+        /// <param name="_paragraph">paragraph obj</param>
+        /// <returns>Paragraph</returns>
         private Paragraph newLineNumbering(PikunParagraph _paragraph)
         {
             if (_paragraph.rId == 0)
@@ -2263,6 +2301,13 @@ namespace Generate_Word_Report.dll
 
             return paragraph;
         }
+
+        /// <summary>
+        /// สร้างบรรทัดใหม่เป็นหัวข้อ และใส่คุณลักษณะแยกแต่ละคำ
+        /// ลักษณะคล้าย newLineManyProp
+        /// </summary>
+        /// <param name="_paragraph">paragraph obj</param>
+        /// <returns>Paragraph</returns>
         private Paragraph newLineNumberingManyProp(PikunParagraph _paragraph)
         {
             if (_paragraph.rId == 0)
@@ -2376,6 +2421,12 @@ namespace Generate_Word_Report.dll
 
             return paragraph;
         }
+
+        /// <summary>
+        /// ใส่รูปภาพสร้างกำหนด position, layout and size
+        /// </summary>
+        /// <param name="_picture">picture นิ่</param>
+        /// <returns>Paragraph</returns>
         private Paragraph newLineImage(PikunPicture _picture)
         {
             if(_picture.rId == 0)
@@ -2410,6 +2461,12 @@ namespace Generate_Word_Report.dll
 
             return paragraph;
         }
+
+        /// <summary>
+        /// ใส่รูปภาพสร้างกำหนด justification / alignment
+        /// </summary>
+        /// <param name="_picture">picture นิ่</param>
+        /// <returns>Paragraph</returns>
         private Paragraph newLineImageAlignment(PikunPicture _picture)
         {
             if (_picture.rId == 0)
@@ -2457,6 +2514,12 @@ namespace Generate_Word_Report.dll
 
             return paragraph;
         }
+
+        /// <summary>
+        /// ใส่รูปภาพสร้างกำหนด size เท่านั้น
+        /// </summary>
+        /// <param name="_picture">picture นิ่</param>
+        /// <returns>Paragraph</returns>
         private Paragraph newLineImageNoFormat(PikunPicture _picture)
         {
             if (_picture.rId == 0)
@@ -2485,6 +2548,13 @@ namespace Generate_Word_Report.dll
 
             return paragraph;
         }
+
+        /// <summary>
+        /// สร้างบรรทัดใหม่โดยบอกข้อผิดพลาดที่เกิดขึ้น
+        /// </summary>
+        /// <param name="_rId">rId ของ Paragraph</param>
+        /// <param name="txt">ข้อความที่จะแสดง</param>
+        /// <returns>Paragraph</returns>
         private Paragraph newLineError(string _rId, string txt = "")
         {
             Paragraph paragraph = newLine(_rId);
@@ -2529,6 +2599,19 @@ namespace Generate_Word_Report.dll
 
             return paragraph;
         }
+
+        /// <summary>
+        /// สร้าง AbstractNum ของ Numbering สำเร็จรูปแค่ส่งตัวแปรทั้งหมดมา
+        /// ไว้แก้ปัญหา TemplateCode.Val ที่ห้ามเหมือนกันในแต่ละ AbstractNum ที่สร้างขึ้น
+        /// จึงต้องทำแยกและหากอยากทำ refector ก็ระวังเรื่องนี้ด้วย
+        /// </summary>
+        /// <param name="_pikun_number_format">ชนิดของหัวข้อ</param>
+        /// <param name="_startIndentation">เดาว่า ระยะห่างจากย่อหน้า</param>
+        /// <param name="_hangingIndentation">เดาว่า ระยะห่างจากหัวข้อถึงข้อความ</param>
+        /// <param name="_numbering_type">ตัวอักษรของหัวข้อ</param>
+        /// <param name="_abstractNumberId">ลำดับ AbstractNum</param>
+        /// <param name="_font">ฟอร์นของหัวข้อ</param>
+        /// <returns>AbstractNum</returns>
         private AbstractNum newNumbering(PikunNumberingFormat[] _pikun_number_format, string[] _startIndentation, string[] _hangingIndentation, string[] _numbering_type, int _abstractNumberId, string _font)
         {
             AbstractNum abstractNum = new AbstractNum() { AbstractNumberId = _abstractNumberId };
@@ -2761,6 +2844,18 @@ namespace Generate_Word_Report.dll
 
             return abstractNum;
         }
+
+        /// <summary>
+        /// ใส่รูปภาพที่มีคุณลักษณะ
+        /// </summary>
+        /// <param name="_rId">ไอดีของรูป</param>
+        /// <param name="_base64image">รูปภาพ มาในรูปแบบ string base64</param>
+        /// <param name="_format">layout option</param>
+        /// <param name="_horizontalPosition">จำนวนช่องไฟ</param>
+        /// <param name="_verticalPosition">จำนวน enter</param>
+        /// <param name="_sizeX">ความกว้างของรูป</param>
+        /// <param name="_sizeY">ความสูงของรูป</param>
+        /// <returns>Drawing</returns>
         private Drawing addPicFormat(string _rId, string _base64image, string _format = null, int _horizontalPosition = 0, int _verticalPosition = 0, int _sizeX = 0, int _sizeY = 0)
         {
             if (_format == null)
@@ -2929,6 +3024,15 @@ namespace Generate_Word_Report.dll
             drawing1.Append(anchor1);
             return drawing1;
         }
+
+        /// <summary>
+        /// ใส่รูปภาพที่ไม่มีคุณลักษณะ
+        /// </summary>
+        /// <param name="_rId">ไอดีของรูป</param>
+        /// <param name="_base64image">รูปภาพ มาในรูปแบบ string base64</param>
+        /// <param name="_sizeX">ความกว้างของรูป</param>
+        /// <param name="_sizeY">ความสูงของรูป</param>
+        /// <returns>Drawing</returns>
         private Drawing addPicNoFormat(string _rId, string _base64image, int _sizeX = 0, int _sizeY = 0)
         {
             Drawing drawing1 = new Drawing();
@@ -3036,11 +3140,18 @@ namespace Generate_Word_Report.dll
 
             return drawing1;
         }
+
+        /// <summary>
+        /// ค่าเริ่มต้นของ NumberingType
+        /// </summary>
+        /// <param name="_numbering_type">ชนิดของหัวข้อที่จ้องการ ตัวนี้จะรับมาจากผู้ใช้</param>
+        /// <param name="_number_format_values">ชนิดของหัวข้อ Bullet หรือ Decimal</param>
+        /// <returns>newNumberingType ที่ครบทั้ง 9 ตัว</returns>
         private string[] defaultNumberingType(string[] _numbering_type, string _number_format_values)
         {
             int maxNumberingType = 9;
             string[] newNumberingType = new string[maxNumberingType];
-
+            
             try
             {               
                 if (_number_format_values == Help.numberFormatValuesBullet)
@@ -3055,7 +3166,8 @@ namespace Generate_Word_Report.dll
                 }
                 else if (_number_format_values == Help.numberFormatValuesDecimalABC)
                 {
-
+                    //numberFormatValuesDecimalABC
+                    //ตอนนี้ไม่ได้ใช้ ถ้าอยากได้หาเอา
                 }
                 else //defualt
                 {
@@ -3081,6 +3193,12 @@ namespace Generate_Word_Report.dll
                 return newNumberingType;
             }
         }
+
+        /// <summary>
+        /// ค่าเริ่มต้นของ NumberFormatValues
+        /// </summary>
+        /// <param name="_number_format_values">ชนิดของหัวข้อ Bullet หรือ Decimal</param>
+        /// <returns>newNumberingType ชนิด enum ครบทั้ง 9 ตัว</returns>
         private PikunNumberingFormat[] defaultNumberFormatValues(string _number_format_values)
         {
             int maxNumberingType = 9;
@@ -3125,28 +3243,64 @@ namespace Generate_Word_Report.dll
 
             return newNumberingType;
         }
+
+        /// <summary>
+        /// ค่าเริ่มต้นของย่อหน้า
+        /// </summary>
+        /// <returns>ค่าของย่อหน้า</returns>
         private string[] defualtIndentationStart()
         {
             string[] arr = { "720", "1440", "2160", "2880", "3600", "4320", "5040", "5760", "6480" };
             return arr;
         }
+
+        /// <summary>
+        /// ค่าเริ่มต้นของระยะห่างจากหัวข้อ
+        /// </summary>
+        /// <returns>ค่าระยะห่างจากหัวข้อ</returns>
         private string[] defualtIndentationHanging()
         {
             string[] arr = { "360", "360", "180","360", "360", "180", "360", "360", "180" };
             return arr;
         }
+
+        /// <summary>
+        /// อ่านค่า string base64 
+        /// </summary>
+        /// <param name="base64String"></param>
+        /// <returns>MemoryStream</returns>
         private Stream GetBinaryDataStream(string base64String)
         {
             return new MemoryStream(Convert.FromBase64String(base64String));
         }
+
+        /// <summary>
+        /// ระยะห่าง 1 บรรทัด หรือ 1 enter
+        /// </summary>
+        /// <param name="enter">จำนวน enter</param>
+        /// <returns>ระยะ 1 enter</returns>
         private string Getenter(int enter)
         {
             return ((long)(enter * 228600)).ToString();
         }
+
+        /// <summary>
+        /// ระยะช่องไฟ หรือ spacebar
+        /// </summary>
+        /// <param name="spacebar">จำนวน spacebar</param>
+        /// <returns>ระยะช่องไฟ</returns>
         private string Getspacebar(int spacebar)
         {
             return ((long)(spacebar * 34000)).ToString();
         }
+
+        /// <summary>
+        /// ขนาดของรูป
+        /// </summary>
+        /// <param name="base64image">รูปภาพ string base 64</param>
+        /// <param name="sizeX">ค่าความกว้าง</param>
+        /// <param name="sizeY">ค่าความสูง</param>
+        /// <returns>list ของขนาดของรูปที่แปลงเป็น long</returns>
         private List<long> Getsize(string base64image, int sizeX, int sizeY)
         {
             var data = base64image.Base64StringToBitmap();
@@ -3170,6 +3324,12 @@ namespace Generate_Word_Report.dll
 
             return new List<long> { widthEmus, heightEmus };
         }
+
+        /// <summary>
+        /// คำนวน rId จาก rId เริ่มต้น
+        /// </summary>
+        /// <param name="rid">rId</param>
+        /// <returns>format rId{0}</returns>
         private string GetrId(int rid)
         {
             return string.Format("rId{0}", (rId + rid));
