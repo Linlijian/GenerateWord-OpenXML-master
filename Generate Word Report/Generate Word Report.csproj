@@ -77,6 +77,10 @@
     <Compile Include="NewGen\one_pic_format_position.cs" />
     <Compile Include="NewGen\one_pic_format_size.cs" />
     <Compile Include="NewGen\one_pic_not_format.cs" />
+    <Compile Include="NewGen\table_merge_2.cs" />
+    <Compile Include="NewGen\table_merge_4.cs" />
+    <Compile Include="NewGen\table_merge_4_justify.cs" />
+    <Compile Include="NewGen\table.cs" />
     <Compile Include="NewGen\text_list_01.cs" />
     <Compile Include="NewGen\text_prop.cs" />
     <Compile Include="NewGen\text_prop_multi.cs" />
