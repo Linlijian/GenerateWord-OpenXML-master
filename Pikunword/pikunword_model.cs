@@ -13,6 +13,7 @@ namespace Pikunword
         public ExtendedFileProperties extended_file_properties { get; set; }
         public PikunPicture picture { get; set; }
         public PikunParagraph paragraph { get; set; }
+        public PikunTable table { get; set; }
         public PackageProperties package_properties { get; set; }
     }
 
@@ -61,6 +62,7 @@ namespace Pikunword
 
     public class PikunParagraphManyProp
     {
+        public int rId { get; set; }
         public string text { get; set; }
         public string font { get; set; }
         public int font_size { get; set; }
@@ -80,6 +82,57 @@ namespace Pikunword
         public string layout_option { get; set; } //format
         public int horizontal_position { get; set; }
         public int vertical_position { get; set; }
+    }
+
+    public class PikunTable
+    {
+        public int rId { get; set; }
+        public string table_style { get; set; }
+        public string table_width { get; set; } //defualt = 0
+        public bool have_table_cell_margin { get; set; } //tableCellMarginDefault
+        public bool table_cell_width_auto { get; set; } //tableCellMarginDefault
+        public List<PikunTableGrid> table_grid { get; set; }
+    }
+
+    public class PikunTableGrid
+    {
+        public int rId { get; set; }
+        public string grid_column { get; set; }
+        public string table_cell_width { get; set; }
+        public List<PikunTableCellProperties> table_cell_properties { get; set; }
+    }
+
+    public class PikunTableCellProperties
+    {
+        public int rId { get; set; }
+        public string text { get; set; }
+        public string font { get; set; }
+        public int font_size { get; set; }
+        public string justification { get; set; }
+        public string color { get; set; }
+        public string highlight { get; set; }
+        public string[] prop { get; set; }
+
+        public string top_border_color { get; set; }
+        public int top_border_size { get; set; }
+        public int top_border_space { get; set; }
+        public string left_border_color { get; set; }
+        public int left_border_size { get; set; }
+        public int left_border_space { get; set; }
+        public string right_border_color { get; set; }
+        public int right_border_size { get; set; }
+        public int right_border_space { get; set; }
+        public string bottom_border_color { get; set; }
+        public int bottom_border_size { get; set; }
+        public int bottom_border_space { get; set; }
+
+        public string top_margin { get; set; }
+        public string right_margin { get; set; }
+        public string left_margin { get; set; }
+        public string bottom_margin { get; set; }
+
+        public string fill { get; set; }
+
     }
 
     public class PackageProperties

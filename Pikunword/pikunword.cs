@@ -76,7 +76,10 @@ namespace Pikunword
             catch (Exception ex)
             {
                 _dto.ErrorResults.error_message = ex.Message;
+                Debug.WriteLine("============================================================");
                 Debug.WriteLine(ex.Message);
+                Debug.WriteLine("============================================================");
+
                 return _dto;
             }
         }
@@ -253,6 +256,20 @@ namespace Pikunword
                 {
                     Paragraph paragraph = newLineImageNoFormat(p.picture);
                     body.Append(paragraph);
+                }
+                else if (p.execut_type == pikun_execut_function.newTable)
+                {
+                    if (p.table.table_grid.IsNullOrEmpty())
+                    {
+                        Paragraph paragraph = newLineError("99");
+                        body.Append(paragraph);
+                    }
+                    else
+                    {
+                        Table table = newTableV4(p.table);
+                        body.Append(table);
+                    }
+
                 }
             }
             //===============================================
@@ -3149,6 +3166,917 @@ namespace Pikunword
             drawing1.Append(inline1);
 
             return drawing1;
+        }
+
+
+        private TableRow newTableRow(string _rId)
+        {
+            return new TableRow() { RsidTableRowAddition = "PIKUNRTRA", RsidTableRowProperties = "PIKUNRTRP", ParagraphId = "PIKUNPI" + _rId, TextId = "PIKUNTI" + _rId };
+        }
+
+        private Table newTable(PikunTable _table)
+        {
+            Table table = new Table();
+
+            TableProperties tableProperties = new TableProperties();
+            TableStyle tableStyle = new TableStyle() { Val = !_table.table_style.IsNullOrEmpty() ? _table.table_style : "TableGrid" };
+            TableWidth tableWidth = new TableWidth() { Width = !_table.table_width.IsNullOrEmpty() ? _table.table_width : "0", Type = TableWidthUnitValues.Auto };
+            TableLook tableLook = new TableLook() { Val = "04A0" };
+
+            tableProperties.Append(tableStyle);
+            tableProperties.Append(tableWidth);
+            tableProperties.Append(tableLook);
+
+            TableGrid tableGrid = new TableGrid();
+
+            RunProperties runProperties;
+            ParagraphProperties paragraphProperties;
+            ParagraphMarkRunProperties paragraphMarkRunProperties;
+
+            int i = 0;
+            foreach (var grid in _table.table_grid)
+            {
+                GridColumn gridColumn = new GridColumn() { Width = !grid.grid_column.IsNullOrEmpty() ? grid.grid_column : "1870" };
+                tableGrid.Append(gridColumn);
+
+                TableRow tableRow = newTableRow(grid.rId.ToString().IsNullOrEmpty() ? (_table.table_grid.Count + rId + i).ToString() : grid.rId.ToString());
+
+                foreach (var p in grid.table_cell_properties)
+                {
+                    TableCell tableCell = new TableCell();
+                    TableCellProperties tableCellProperties = new TableCellProperties();
+                    TableCellWidth tableCellWidth = new TableCellWidth() { Width = grid.table_cell_width.IsNullOrEmpty() ? "1878" : grid.table_cell_width, Type = TableWidthUnitValues.Dxa };
+
+                    tableCellProperties.Append(tableCellWidth);
+
+                    Paragraph paragraph = p.rId.ToString().IsNullOrEmpty() ? newLineError("99", "ยัง ยังไม่ใส่ rId อีกเว้ย! щ(゜ロ゜щ)") : newLine(p.rId.ToString());
+
+                    runProperties = new RunProperties();
+                    paragraphProperties = new ParagraphProperties();
+                    paragraphMarkRunProperties = new ParagraphMarkRunProperties();
+
+                    #region txt prop
+                    if(!p.prop.IsNullOrEmpty())
+                    {
+                        for (int tp = 0; tp < p.prop.Length; tp++)
+                        {
+                            if (p.prop[tp] == Pikun.paragraphBold)
+                            {
+                                paragraphMarkRunProperties.Append(newBold());
+                                paragraphMarkRunProperties.Append(newBoldComplexScript());
+
+                                runProperties.Append(newBold());
+                                runProperties.Append(newBoldComplexScript());
+                            }
+                            else if (p.prop[tp] == Pikun.paragraphItalic)
+                            {
+                                paragraphMarkRunProperties.Append(newItalic());
+                                paragraphMarkRunProperties.Append(newItalicComplexScript());
+
+                                runProperties.Append(newItalic());
+                                runProperties.Append(newItalicComplexScript());
+                            }
+                            else if (p.prop[tp] == Pikun.paragraphUnderline)
+                            {
+                                paragraphMarkRunProperties.Append(newUnderline());
+                                runProperties.Append(newUnderline());
+                            }
+                        }
+                    }
+                    
+
+                    if (!p.font.IsNullOrEmpty())
+                    {
+                        paragraphMarkRunProperties.Append(newRunFonts(p.font));
+                        runProperties.Append(newRunFonts(p.font));
+                    }
+
+                    if (p.font_size != 0)
+                    {
+                        paragraphMarkRunProperties.Append(newFontSize(p.font_size));
+                        paragraphMarkRunProperties.Append(newFontSizeComplexScript(p.font_size));
+
+                        runProperties.Append(newFontSize(p.font_size));
+                        runProperties.Append(newFontSizeComplexScript(p.font_size));
+                    }
+
+                    if (!p.color.IsNullOrEmpty())
+                    {
+                        paragraphMarkRunProperties.Append(newColor(p.color));
+                        runProperties.Append(newColor(p.color));
+                    }
+
+                    if (!p.justification.IsNullOrEmpty())
+                    {
+                        paragraphProperties.Append(newJustification(p.justification));
+                    }
+
+                    if (!p.highlight.IsNullOrEmpty())
+                    {
+                        runProperties.Append(newHighlight(p.highlight));
+                    }
+
+                    //Append all prop
+                    paragraphProperties.Append(paragraphMarkRunProperties);
+                    #endregion
+                    
+                    Run run = new Run();
+                    ProofError proofError1 = new ProofError() { Type = ProofingErrorValues.SpellStart };                    
+                    
+                    Text text = new Text() { Space = SpaceProcessingModeValues.Preserve };
+                    text.Text = p.text;
+
+                    run.Append(runProperties);
+                    run.Append(text);
+
+                    ProofError proofError2 = new ProofError() { Type = ProofingErrorValues.SpellEnd };
+                   
+                    paragraph.Append(proofError1);
+                    paragraph.Append(paragraphProperties);
+                    paragraph.Append(run);
+                    paragraph.Append(proofError2);
+
+                    tableCell.Append(tableCellProperties);
+                    tableCell.Append(paragraph);
+
+                    tableRow.Append(tableCell);
+                }
+
+                //table.Append(tableRow);
+                i++;
+            }
+
+            table.Append(tableProperties);
+            table.Append(tableGrid);
+
+            return table;
+        }
+
+        private Table newTableV2(PikunTable _table)
+        {
+            Table table1 = new Table();
+
+            TableProperties tableProperties1 = new TableProperties();
+            TableStyle tableStyle1 = new TableStyle() { Val = "TableGrid" };
+            TableWidth tableWidth1 = new TableWidth() { Width = "0", Type = TableWidthUnitValues.Auto };
+            TableLook tableLook1 = new TableLook() { Val = "04A0" };
+
+            tableProperties1.Append(tableStyle1);
+            tableProperties1.Append(tableWidth1);
+            tableProperties1.Append(tableLook1);
+
+            TableGrid tableGrid1 = new TableGrid();
+            GridColumn gridColumn1 = new GridColumn() { Width = "1870" };
+            GridColumn gridColumn2 = new GridColumn() { Width = "1870" };
+            GridColumn gridColumn3 = new GridColumn() { Width = "1870" };
+            GridColumn gridColumn4 = new GridColumn() { Width = "1870" };
+            GridColumn gridColumn5 = new GridColumn() { Width = "1870" };
+
+            tableGrid1.Append(gridColumn1);
+            tableGrid1.Append(gridColumn2);
+            tableGrid1.Append(gridColumn3);
+            tableGrid1.Append(gridColumn4);
+            tableGrid1.Append(gridColumn5);
+
+            TableRow tableRow1 = new TableRow() { RsidTableRowAddition = "00297022", RsidTableRowProperties = "00297022", ParagraphId = "4C5A6694", TextId = "77777777" };
+
+            TableCell tableCell1 = new TableCell();
+
+            TableCellProperties tableCellProperties1 = new TableCellProperties();
+            TableCellWidth tableCellWidth1 = new TableCellWidth() { Width = "1870", Type = TableWidthUnitValues.Dxa };
+
+            tableCellProperties1.Append(tableCellWidth1);
+
+            Paragraph paragraph1 = new Paragraph() { RsidParagraphAddition = "00297022", RsidRunAdditionDefault = "00DD5046", ParagraphId = "74E920D8", TextId = "292B6245" };
+
+            Run run1 = new Run();
+            Text text1 = new Text();
+            text1.Text = "C1";
+
+            run1.Append(text1);
+
+            paragraph1.Append(run1);
+
+            tableCell1.Append(tableCellProperties1);
+            tableCell1.Append(paragraph1);
+
+            TableCell tableCell2 = new TableCell();
+
+            TableCellProperties tableCellProperties2 = new TableCellProperties();
+            TableCellWidth tableCellWidth2 = new TableCellWidth() { Width = "1870", Type = TableWidthUnitValues.Dxa };
+
+            tableCellProperties2.Append(tableCellWidth2);
+
+            Paragraph paragraph2 = new Paragraph() { RsidParagraphAddition = "00297022", RsidRunAdditionDefault = "00DD5046", ParagraphId = "2E9DE99E", TextId = "5F041F43" };
+
+            Run run2 = new Run();
+            Text text2 = new Text();
+            text2.Text = "C2";
+
+            run2.Append(text2);
+
+            paragraph2.Append(run2);
+
+            tableCell2.Append(tableCellProperties2);
+            tableCell2.Append(paragraph2);
+
+            TableCell tableCell3 = new TableCell();
+
+            TableCellProperties tableCellProperties3 = new TableCellProperties();
+            TableCellWidth tableCellWidth3 = new TableCellWidth() { Width = "1870", Type = TableWidthUnitValues.Dxa };
+
+            tableCellProperties3.Append(tableCellWidth3);
+
+            Paragraph paragraph3 = new Paragraph() { RsidParagraphAddition = "00297022", RsidRunAdditionDefault = "00DD5046", ParagraphId = "7B1822A5", TextId = "4A7E29E5" };
+
+            Run run3 = new Run();
+            Text text3 = new Text();
+            text3.Text = "C3";
+
+            run3.Append(text3);
+
+            paragraph3.Append(run3);
+
+            tableCell3.Append(tableCellProperties3);
+            tableCell3.Append(paragraph3);
+
+            TableCell tableCell4 = new TableCell();
+
+            TableCellProperties tableCellProperties4 = new TableCellProperties();
+            TableCellWidth tableCellWidth4 = new TableCellWidth() { Width = "1870", Type = TableWidthUnitValues.Dxa };
+
+            tableCellProperties4.Append(tableCellWidth4);
+
+            Paragraph paragraph4 = new Paragraph() { RsidParagraphAddition = "00297022", RsidRunAdditionDefault = "00DD5046", ParagraphId = "67F60262", TextId = "0C9D2009" };
+
+            Run run4 = new Run();
+            Text text4 = new Text();
+            text4.Text = "C4";
+
+            run4.Append(text4);
+
+            paragraph4.Append(run4);
+
+            tableCell4.Append(tableCellProperties4);
+            tableCell4.Append(paragraph4);
+
+            TableCell tableCell5 = new TableCell();
+
+            TableCellProperties tableCellProperties5 = new TableCellProperties();
+            TableCellWidth tableCellWidth5 = new TableCellWidth() { Width = "1870", Type = TableWidthUnitValues.Dxa };
+
+            tableCellProperties5.Append(tableCellWidth5);
+
+            Paragraph paragraph5 = new Paragraph() { RsidParagraphAddition = "00297022", RsidRunAdditionDefault = "00DD5046", ParagraphId = "63C65FE9", TextId = "4E259960" };
+
+            Run run5 = new Run();
+            Text text5 = new Text();
+            text5.Text = "C5";
+
+            run5.Append(text5);
+
+            paragraph5.Append(run5);
+
+            tableCell5.Append(tableCellProperties5);
+            tableCell5.Append(paragraph5);
+
+            tableRow1.Append(tableCell1);
+            tableRow1.Append(tableCell2);
+            tableRow1.Append(tableCell3);
+            tableRow1.Append(tableCell4);
+            tableRow1.Append(tableCell5);
+
+            TableRow tableRow2 = new TableRow() { RsidTableRowAddition = "00297022", RsidTableRowProperties = "00297022", ParagraphId = "63118D37", TextId = "77777777" };
+
+            TableCell tableCell6 = new TableCell();
+
+            TableCellProperties tableCellProperties6 = new TableCellProperties();
+            TableCellWidth tableCellWidth6 = new TableCellWidth() { Width = "1870", Type = TableWidthUnitValues.Dxa };
+
+            tableCellProperties6.Append(tableCellWidth6);
+
+            Paragraph paragraph6 = new Paragraph() { RsidParagraphAddition = "00297022", RsidRunAdditionDefault = "00DD5046", ParagraphId = "431E1C0C", TextId = "61838FC9" };
+
+            Run run6 = new Run();
+            Text text6 = new Text();
+            text6.Text = "R1";
+
+            run6.Append(text6);
+
+            paragraph6.Append(run6);
+
+            tableCell6.Append(tableCellProperties6);
+            tableCell6.Append(paragraph6);
+
+            TableCell tableCell7 = new TableCell();
+
+            TableCellProperties tableCellProperties7 = new TableCellProperties();
+            TableCellWidth tableCellWidth7 = new TableCellWidth() { Width = "1870", Type = TableWidthUnitValues.Dxa };
+
+            tableCellProperties7.Append(tableCellWidth7);
+
+            Paragraph paragraph7 = new Paragraph() { RsidParagraphAddition = "00297022", RsidRunAdditionDefault = "00DD5046", ParagraphId = "7526E1DB", TextId = "38AC2521" };
+
+            Run run7 = new Run();
+            Text text7 = new Text();
+            text7.Text = "R2";
+
+            run7.Append(text7);
+
+            paragraph7.Append(run7);
+
+            tableCell7.Append(tableCellProperties7);
+            tableCell7.Append(paragraph7);
+
+            TableCell tableCell8 = new TableCell();
+
+            TableCellProperties tableCellProperties8 = new TableCellProperties();
+            TableCellWidth tableCellWidth8 = new TableCellWidth() { Width = "1870", Type = TableWidthUnitValues.Dxa };
+
+            tableCellProperties8.Append(tableCellWidth8);
+
+            Paragraph paragraph8 = new Paragraph() { RsidParagraphAddition = "00297022", RsidRunAdditionDefault = "00DD5046", ParagraphId = "6FB3852B", TextId = "669D6CEB" };
+
+            Run run8 = new Run();
+            Text text8 = new Text();
+            text8.Text = "R3";
+
+            run8.Append(text8);
+
+            paragraph8.Append(run8);
+
+            tableCell8.Append(tableCellProperties8);
+            tableCell8.Append(paragraph8);
+
+            TableCell tableCell9 = new TableCell();
+
+            TableCellProperties tableCellProperties9 = new TableCellProperties();
+            TableCellWidth tableCellWidth9 = new TableCellWidth() { Width = "1870", Type = TableWidthUnitValues.Dxa };
+
+            tableCellProperties9.Append(tableCellWidth9);
+
+            Paragraph paragraph9 = new Paragraph() { RsidParagraphAddition = "00297022", RsidRunAdditionDefault = "00DD5046", ParagraphId = "5508B124", TextId = "1D78EA90" };
+
+            Run run9 = new Run();
+            Text text9 = new Text();
+            text9.Text = "R4";
+
+            run9.Append(text9);
+
+            paragraph9.Append(run9);
+
+            tableCell9.Append(tableCellProperties9);
+            tableCell9.Append(paragraph9);
+
+            TableCell tableCell10 = new TableCell();
+
+            TableCellProperties tableCellProperties10 = new TableCellProperties();
+            TableCellWidth tableCellWidth10 = new TableCellWidth() { Width = "1870", Type = TableWidthUnitValues.Dxa };
+
+            tableCellProperties10.Append(tableCellWidth10);
+
+            Paragraph paragraph10 = new Paragraph() { RsidParagraphAddition = "00297022", RsidRunAdditionDefault = "00DD5046", ParagraphId = "498088EB", TextId = "1051A924" };
+
+            Run run10 = new Run();
+            Text text10 = new Text();
+            text10.Text = "R5";
+
+            run10.Append(text10);
+
+            paragraph10.Append(run10);
+
+            tableCell10.Append(tableCellProperties10);
+            tableCell10.Append(paragraph10);
+
+            tableRow2.Append(tableCell6);
+            tableRow2.Append(tableCell7);
+            tableRow2.Append(tableCell8);
+            tableRow2.Append(tableCell9);
+            tableRow2.Append(tableCell10);
+
+            TableRow tableRow3 = new TableRow() { RsidTableRowAddition = "00297022", RsidTableRowProperties = "00297022", ParagraphId = "6AB627C2", TextId = "77777777" };
+
+            TableCell tableCell11 = new TableCell();
+
+            TableCellProperties tableCellProperties11 = new TableCellProperties();
+            TableCellWidth tableCellWidth11 = new TableCellWidth() { Width = "1870", Type = TableWidthUnitValues.Dxa };
+
+            tableCellProperties11.Append(tableCellWidth11);
+
+            Paragraph paragraph11 = new Paragraph() { RsidParagraphAddition = "00297022", RsidRunAdditionDefault = "00DD5046", ParagraphId = "33635BC3", TextId = "3C71CB36" };
+
+            Run run11 = new Run();
+            Text text11 = new Text();
+            text11.Text = "Q1";
+
+            run11.Append(text11);
+
+            paragraph11.Append(run11);
+
+            tableCell11.Append(tableCellProperties11);
+            tableCell11.Append(paragraph11);
+
+            TableCell tableCell12 = new TableCell();
+
+            TableCellProperties tableCellProperties12 = new TableCellProperties();
+            TableCellWidth tableCellWidth12 = new TableCellWidth() { Width = "1870", Type = TableWidthUnitValues.Dxa };
+
+            tableCellProperties12.Append(tableCellWidth12);
+
+            Paragraph paragraph12 = new Paragraph() { RsidParagraphAddition = "00297022", RsidRunAdditionDefault = "00DD5046", ParagraphId = "05C40715", TextId = "4AF3F625" };
+
+            Run run12 = new Run();
+            Text text12 = new Text();
+            text12.Text = "Q2";
+
+            run12.Append(text12);
+
+            paragraph12.Append(run12);
+
+            tableCell12.Append(tableCellProperties12);
+            tableCell12.Append(paragraph12);
+
+            TableCell tableCell13 = new TableCell();
+
+            TableCellProperties tableCellProperties13 = new TableCellProperties();
+            TableCellWidth tableCellWidth13 = new TableCellWidth() { Width = "1870", Type = TableWidthUnitValues.Dxa };
+
+            tableCellProperties13.Append(tableCellWidth13);
+
+            Paragraph paragraph13 = new Paragraph() { RsidParagraphAddition = "00297022", RsidRunAdditionDefault = "00DD5046", ParagraphId = "4C506FCB", TextId = "1BBD32E2" };
+
+            Run run13 = new Run();
+            Text text13 = new Text();
+            text13.Text = "Q3";
+
+            run13.Append(text13);
+
+            paragraph13.Append(run13);
+
+            tableCell13.Append(tableCellProperties13);
+            tableCell13.Append(paragraph13);
+
+            TableCell tableCell14 = new TableCell();
+
+            TableCellProperties tableCellProperties14 = new TableCellProperties();
+            TableCellWidth tableCellWidth14 = new TableCellWidth() { Width = "1870", Type = TableWidthUnitValues.Dxa };
+
+            tableCellProperties14.Append(tableCellWidth14);
+
+            Paragraph paragraph14 = new Paragraph() { RsidParagraphAddition = "00297022", RsidRunAdditionDefault = "00DD5046", ParagraphId = "44DD9D4E", TextId = "3AF004C6" };
+
+            Run run14 = new Run();
+            Text text14 = new Text();
+            text14.Text = "Q4";
+
+            run14.Append(text14);
+
+            paragraph14.Append(run14);
+
+            tableCell14.Append(tableCellProperties14);
+            tableCell14.Append(paragraph14);
+
+            TableCell tableCell15 = new TableCell();
+
+            TableCellProperties tableCellProperties15 = new TableCellProperties();
+            TableCellWidth tableCellWidth15 = new TableCellWidth() { Width = "1870", Type = TableWidthUnitValues.Dxa };
+
+            tableCellProperties15.Append(tableCellWidth15);
+
+            Paragraph paragraph15 = new Paragraph() { RsidParagraphAddition = "00297022", RsidRunAdditionDefault = "00DD5046", ParagraphId = "04E89C05", TextId = "0CCC597C" };
+
+            Run run15 = new Run();
+            Text text15 = new Text();
+            text15.Text = "Q5";
+
+            run15.Append(text15);
+
+            paragraph15.Append(run15);
+
+            tableCell15.Append(tableCellProperties15);
+            tableCell15.Append(paragraph15);
+
+            tableRow3.Append(tableCell11);
+            tableRow3.Append(tableCell12);
+            tableRow3.Append(tableCell13);
+            tableRow3.Append(tableCell14);
+            tableRow3.Append(tableCell15);
+
+            TableRow tableRow4 = new TableRow() { RsidTableRowAddition = "00297022", RsidTableRowProperties = "00297022", ParagraphId = "6B28D805", TextId = "77777777" };
+
+            TableCell tableCell16 = new TableCell();
+
+            TableCellProperties tableCellProperties16 = new TableCellProperties();
+            TableCellWidth tableCellWidth16 = new TableCellWidth() { Width = "1870", Type = TableWidthUnitValues.Dxa };
+
+            tableCellProperties16.Append(tableCellWidth16);
+
+            Paragraph paragraph16 = new Paragraph() { RsidParagraphAddition = "00297022", RsidRunAdditionDefault = "00DD5046", ParagraphId = "6920234D", TextId = "1C629ECC" };
+
+            Run run16 = new Run();
+            Text text16 = new Text();
+            text16.Text = "W1";
+
+            run16.Append(text16);
+
+            paragraph16.Append(run16);
+
+            tableCell16.Append(tableCellProperties16);
+            tableCell16.Append(paragraph16);
+
+            TableCell tableCell17 = new TableCell();
+
+            TableCellProperties tableCellProperties17 = new TableCellProperties();
+            TableCellWidth tableCellWidth17 = new TableCellWidth() { Width = "1870", Type = TableWidthUnitValues.Dxa };
+
+            tableCellProperties17.Append(tableCellWidth17);
+
+            Paragraph paragraph17 = new Paragraph() { RsidParagraphAddition = "00297022", RsidRunAdditionDefault = "00DD5046", ParagraphId = "10F73B69", TextId = "1C88BCA1" };
+
+            Run run17 = new Run();
+            Text text17 = new Text();
+            text17.Text = "W2";
+
+            run17.Append(text17);
+
+            paragraph17.Append(run17);
+
+            tableCell17.Append(tableCellProperties17);
+            tableCell17.Append(paragraph17);
+
+            TableCell tableCell18 = new TableCell();
+
+            TableCellProperties tableCellProperties18 = new TableCellProperties();
+            TableCellWidth tableCellWidth18 = new TableCellWidth() { Width = "1870", Type = TableWidthUnitValues.Dxa };
+
+            tableCellProperties18.Append(tableCellWidth18);
+
+            Paragraph paragraph18 = new Paragraph() { RsidParagraphAddition = "00297022", RsidRunAdditionDefault = "00DD5046", ParagraphId = "77AED6F9", TextId = "00702F06" };
+
+            Run run18 = new Run();
+            Text text18 = new Text();
+            text18.Text = "W3";
+
+            run18.Append(text18);
+
+            paragraph18.Append(run18);
+
+            tableCell18.Append(tableCellProperties18);
+            tableCell18.Append(paragraph18);
+
+            TableCell tableCell19 = new TableCell();
+
+            TableCellProperties tableCellProperties19 = new TableCellProperties();
+            TableCellWidth tableCellWidth19 = new TableCellWidth() { Width = "1870", Type = TableWidthUnitValues.Dxa };
+
+            tableCellProperties19.Append(tableCellWidth19);
+
+            Paragraph paragraph19 = new Paragraph() { RsidParagraphAddition = "00297022", RsidRunAdditionDefault = "00DD5046", ParagraphId = "097A18A1", TextId = "3464CC17" };
+
+            Run run19 = new Run();
+            Text text19 = new Text();
+            text19.Text = "W4";
+
+            run19.Append(text19);
+
+            paragraph19.Append(run19);
+
+            tableCell19.Append(tableCellProperties19);
+            tableCell19.Append(paragraph19);
+
+            TableCell tableCell20 = new TableCell();
+
+            TableCellProperties tableCellProperties20 = new TableCellProperties();
+            TableCellWidth tableCellWidth20 = new TableCellWidth() { Width = "1870", Type = TableWidthUnitValues.Dxa };
+
+            tableCellProperties20.Append(tableCellWidth20);
+
+            Paragraph paragraph20 = new Paragraph() { RsidParagraphAddition = "00297022", RsidRunAdditionDefault = "00DD5046", ParagraphId = "2C0F89DE", TextId = "1159E4C4" };
+
+            Run run20 = new Run();
+            Text text20 = new Text();
+            text20.Text = "W5";
+
+            run20.Append(text20);
+
+            paragraph20.Append(run20);
+
+            tableCell20.Append(tableCellProperties20);
+            tableCell20.Append(paragraph20);
+
+            tableRow4.Append(tableCell16);
+            tableRow4.Append(tableCell17);
+            tableRow4.Append(tableCell18);
+            tableRow4.Append(tableCell19);
+            tableRow4.Append(tableCell20);
+
+            table1.Append(tableProperties1);
+            table1.Append(tableGrid1);
+            table1.Append(tableRow1);
+            table1.Append(tableRow2);
+            table1.Append(tableRow3);
+            table1.Append(tableRow4);
+
+            return table1;
+        }
+
+        private Table newTableV3()
+        {
+            Table table2 = new Table();
+
+            TableProperties tableProperties2 = new TableProperties();
+            TableStyle tableStyle1 = new TableStyle() { Val = "TableGrid" };
+            TableWidth tableWidth2 = new TableWidth() { Width = "0", Type = TableWidthUnitValues.Auto };
+            TableLook tableLook2 = new TableLook() { Val = "04A0", FirstRow = true, LastRow = false, FirstColumn = true, LastColumn = false, NoHorizontalBand = false, NoVerticalBand = true };
+
+            tableProperties2.Append(tableStyle1);
+            tableProperties2.Append(tableWidth2);
+            tableProperties2.Append(tableLook2);
+
+            TableGrid tableGrid2 = new TableGrid();
+            GridColumn gridColumn13 = new GridColumn() { Width = "1368" };
+            GridColumn gridColumn14 = new GridColumn() { Width = "1368" };
+            GridColumn gridColumn15 = new GridColumn() { Width = "1368" };
+            GridColumn gridColumn16 = new GridColumn() { Width = "1368" };
+            GridColumn gridColumn17 = new GridColumn() { Width = "1368" };
+            GridColumn gridColumn18 = new GridColumn() { Width = "1368" };
+            GridColumn gridColumn19 = new GridColumn() { Width = "1368" };
+
+            tableGrid2.Append(gridColumn13);
+            tableGrid2.Append(gridColumn14);
+            tableGrid2.Append(gridColumn15);
+            tableGrid2.Append(gridColumn16);
+            tableGrid2.Append(gridColumn17);
+            tableGrid2.Append(gridColumn18);
+            tableGrid2.Append(gridColumn19);
+
+            table2.Append(tableProperties2);
+            table2.Append(tableGrid2);
+
+            for (var i = 0; i <= 5; i++)
+            {
+                var tr = new TableRow() { RsidTableRowAddition = "00F216F1", RsidTableRowProperties = "00F216F1" };
+                for (var j = 0; j <= 6; j++)
+                {
+                    var tableCell61 = new TableCell();
+
+                    TableCellProperties tableCellProperties61 = new TableCellProperties();
+                    TableCellWidth tableCellWidth61 = new TableCellWidth() { Width = "1368", Type = TableWidthUnitValues.Dxa };
+
+                    tableCellProperties61.Append(tableCellWidth61);
+
+                    Paragraph paragraph65 = new Paragraph() { RsidParagraphAddition = "00F216F1", RsidRunAdditionDefault = "00F216F1" };
+
+                    Run run73 = new Run();
+                    Text text72 = new Text();
+                    text72.Text = (i + j).ToString();
+
+                    run73.Append(text72);
+
+                    paragraph65.Append(run73);
+
+                    tableCell61.Append(tableCellProperties61);
+                    tableCell61.Append(paragraph65);
+
+                    tr.Append(tableCell61);
+                }
+                table2.Append(tr);
+            }
+
+            return table2;
+        }
+
+        private Table newTableV4(PikunTable _table)
+        {
+            Table table = new Table();
+
+            TableProperties tableProperties = new TableProperties();
+            TableStyle tableStyle = new TableStyle() { Val = !_table.table_style.IsNullOrEmpty() ? _table.table_style : "TableGrid" };
+            TableWidth tableWidth = new TableWidth() { Width = !_table.table_width.IsNullOrEmpty() ? _table.table_width : "0", Type = TableWidthUnitValues.Auto };
+            TableLook tableLook = new TableLook() { Val = "04A0", FirstRow = true, LastRow = false, FirstColumn = true, LastColumn = false, NoHorizontalBand = false, NoVerticalBand = true };
+
+            TableBorders tableBorders = new TableBorders();
+            TopBorder topBorder = new TopBorder() { Val = BorderValues.Single, Color = Pikun.Black_W3C, Size = (UInt32Value)6U, Space = (UInt32Value)0U };
+            LeftBorder leftBorder = new LeftBorder() { Val = BorderValues.Single, Color = Pikun.Black_W3C, Size = (UInt32Value)6U, Space = (UInt32Value)0U };
+            BottomBorder bottomBorder = new BottomBorder() { Val = BorderValues.Single, Color = Pikun.Black_W3C, Size = (UInt32Value)6U, Space = (UInt32Value)0U };
+            RightBorder rightBorder = new RightBorder() { Val = BorderValues.Single, Color = Pikun.Black_W3C, Size = (UInt32Value)6U, Space = (UInt32Value)0U };
+
+            tableBorders.Append(topBorder);
+            tableBorders.Append(leftBorder);
+            tableBorders.Append(bottomBorder);
+            tableBorders.Append(rightBorder);
+
+            tableProperties.Append(tableStyle);
+            tableProperties.Append(tableWidth);
+            tableProperties.Append(tableLook);
+            tableProperties.Append(tableBorders);
+
+            if (_table.have_table_cell_margin)
+            {
+                TableCellMarginDefault tableCellMarginDefault = new TableCellMarginDefault();
+                TopMargin topMargin = new TopMargin() { Width = "15", Type = TableWidthUnitValues.Dxa };
+                TableCellLeftMargin tableCellLeftMargin = new TableCellLeftMargin() { Width = 15, Type = TableWidthValues.Dxa };
+                BottomMargin bottomMargin = new BottomMargin() { Width = "15", Type = TableWidthUnitValues.Dxa };
+                TableCellRightMargin tableCellRightMargin = new TableCellRightMargin() { Width = 15, Type = TableWidthValues.Dxa };
+
+                tableCellMarginDefault.Append(topMargin);
+                tableCellMarginDefault.Append(tableCellLeftMargin);
+                tableCellMarginDefault.Append(bottomMargin);
+                tableCellMarginDefault.Append(tableCellRightMargin);
+
+                tableProperties.Append(tableCellMarginDefault);
+            }            
+
+            TableGrid tableGrid = new TableGrid();
+            
+            foreach (var grid in _table.table_grid)
+            {
+                GridColumn gridColumn = new GridColumn() { Width = !grid.grid_column.IsNullOrEmpty() ? grid.grid_column : "1870" };
+                tableGrid.Append(gridColumn);
+            }
+
+            table.Append(tableProperties);
+            table.Append(tableGrid);
+
+            RunProperties runProperties;
+            ParagraphProperties paragraphProperties;
+            ParagraphMarkRunProperties paragraphMarkRunProperties;
+
+            int i = 0;
+            foreach (var grid in _table.table_grid)
+            {
+                TableRow tableRow = newTableRow(grid.rId.ToString().IsNullOrEmpty() ? (_table.table_grid.Count + rId + i).ToString() : grid.rId.ToString());
+
+                foreach (var p in grid.table_cell_properties)
+                {
+                    TableCell tableCell = new TableCell();
+
+                    TableCellProperties tableCellProperties = new TableCellProperties();
+
+                    TableCellWidth tableCellWidth;
+                    if (_table.table_cell_width_auto)
+                    {
+                         tableCellWidth = new TableCellWidth() { Width = "0", Type = TableWidthUnitValues.Auto };
+                    }
+                    else
+                    {
+                         tableCellWidth = new TableCellWidth() { Width = grid.table_cell_width.IsNullOrEmpty() ? "1878" : grid.table_cell_width, Type = TableWidthUnitValues.Dxa };
+                    }
+
+                    TableCellBorders tableCellBorders = new TableCellBorders();
+                    TopBorder c_topBorder = new TopBorder() {
+                        Val = BorderValues.Single,
+                        Color = p.top_border_color.IsNullOrEmpty() ? Pikun.Black_W3C : p.top_border_color,
+                        Size = p.top_border_size != 0 ? p.top_border_size.AsUInt32Value() : (UInt32Value)0U,
+                        Space = p.top_border_space != 0 ? p.top_border_space.AsUInt32Value() : (UInt32Value)0U
+                    };
+                    LeftBorder c_leftBorder = new LeftBorder() {
+                        Val = BorderValues.Single,
+                        Color = p.left_border_color.IsNullOrEmpty() ? Pikun.Black_W3C : p.left_border_color,
+                        Size = p.left_border_size != 0 ? p.left_border_size.AsUInt32Value() : (UInt32Value)0U,
+                        Space = p.left_border_space != 0 ? p.left_border_space.AsUInt32Value() : (UInt32Value)0U
+                    };
+                    BottomBorder c_bottomBorder = new BottomBorder() {
+                        Val = BorderValues.Single,
+                        Color = p.bottom_border_color.IsNullOrEmpty() ? Pikun.Black_W3C : p.bottom_border_color,
+                        Size = p.bottom_border_size != 0 ? p.bottom_border_size.AsUInt32Value() : (UInt32Value)0U,
+                        Space = p.bottom_border_space != 0 ? p.bottom_border_space.AsUInt32Value() : (UInt32Value)0U
+                    };
+                    RightBorder c_rightBorder = new RightBorder() {
+                        Val = BorderValues.Single,
+                        Color = p.right_border_color.IsNullOrEmpty() ? Pikun.Black_W3C : p.right_border_color,
+                        Size = p.right_border_size != 0 ? p.right_border_size.AsUInt32Value() : (UInt32Value)0U,
+                        Space = p.right_border_space != 0 ? p.right_border_space.AsUInt32Value() : (UInt32Value)0U
+                    };
+
+                    tableCellBorders.Append(c_topBorder);
+                    tableCellBorders.Append(c_leftBorder);
+                    tableCellBorders.Append(c_bottomBorder);
+                    tableCellBorders.Append(c_rightBorder);
+
+                    //F9F9F9
+                    Shading shading = new Shading() { Val = ShadingPatternValues.Clear, Color = "auto", Fill = p.fill.IsNullOrEmpty() ? Pikun.White_W3C : p.fill };
+
+                    TableCellMargin tableCellMargin = new TableCellMargin();
+                    TopMargin c_topMargin = new TopMargin() { Width = p.top_margin.IsNullOrEmpty() ? "48" : p.top_margin, Type = TableWidthUnitValues.Dxa };
+                    LeftMargin c_leftMargin = new LeftMargin() { Width = p.left_margin.IsNullOrEmpty() ? "48" : p.left_margin, Type = TableWidthUnitValues.Dxa };
+                    BottomMargin c_bottomMargin = new BottomMargin() { Width = p.bottom_margin.IsNullOrEmpty() ? "48" : p.bottom_margin, Type = TableWidthUnitValues.Dxa };
+                    RightMargin c_rightMargin = new RightMargin() { Width = p.right_margin.IsNullOrEmpty() ? "48" : p.right_margin, Type = TableWidthUnitValues.Dxa };
+
+                    tableCellMargin.Append(c_topMargin);
+                    tableCellMargin.Append(c_leftMargin);
+                    tableCellMargin.Append(c_bottomMargin);
+                    tableCellMargin.Append(c_rightMargin);
+
+                    TableCellVerticalAlignment tableCellVerticalAlignment = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
+                    HideMark hideMark = new HideMark();
+
+                    tableCellProperties.Append(tableCellWidth);
+                    tableCellProperties.Append(tableCellBorders);
+                    tableCellProperties.Append(shading);
+                    tableCellProperties.Append(tableCellMargin);
+                    tableCellProperties.Append(tableCellVerticalAlignment);
+                    tableCellProperties.Append(hideMark);
+
+                    #region paragraph
+                    Paragraph paragraph = p.rId.ToString().IsNullOrEmpty() ? newLineError("99", "ยัง ยังไม่ใส่ rId อีกเว้ย! щ(゜ロ゜щ)") : newLine(p.rId.ToString());
+
+                    runProperties = new RunProperties();
+                    paragraphProperties = new ParagraphProperties();
+                    paragraphMarkRunProperties = new ParagraphMarkRunProperties();
+
+                    #region txt prop
+                    if (!p.prop.IsNullOrEmpty())
+                    {
+                        for (int tp = 0; tp < p.prop.Length; tp++)
+                        {
+                            if (p.prop[tp] == Pikun.paragraphBold)
+                            {
+                                paragraphMarkRunProperties.Append(newBold());
+                                paragraphMarkRunProperties.Append(newBoldComplexScript());
+
+                                runProperties.Append(newBold());
+                                runProperties.Append(newBoldComplexScript());
+                            }
+                            else if (p.prop[tp] == Pikun.paragraphItalic)
+                            {
+                                paragraphMarkRunProperties.Append(newItalic());
+                                paragraphMarkRunProperties.Append(newItalicComplexScript());
+
+                                runProperties.Append(newItalic());
+                                runProperties.Append(newItalicComplexScript());
+                            }
+                            else if (p.prop[tp] == Pikun.paragraphUnderline)
+                            {
+                                paragraphMarkRunProperties.Append(newUnderline());
+                                runProperties.Append(newUnderline());
+                            }
+                        }
+                    }
+
+
+                    if (!p.font.IsNullOrEmpty())
+                    {
+                        paragraphMarkRunProperties.Append(newRunFonts(p.font));
+                        runProperties.Append(newRunFonts(p.font));
+                    }
+
+                    if (p.font_size != 0)
+                    {
+                        paragraphMarkRunProperties.Append(newFontSize(p.font_size));
+                        paragraphMarkRunProperties.Append(newFontSizeComplexScript(p.font_size));
+
+                        runProperties.Append(newFontSize(p.font_size));
+                        runProperties.Append(newFontSizeComplexScript(p.font_size));
+                    }
+
+                    if (!p.color.IsNullOrEmpty())
+                    {
+                        paragraphMarkRunProperties.Append(newColor(p.color));
+                        runProperties.Append(newColor(p.color));
+                    }
+
+                    if (!p.justification.IsNullOrEmpty())
+                    {
+                        paragraphProperties.Append(newJustification(p.justification));
+                    }
+
+                    if (!p.highlight.IsNullOrEmpty())
+                    {
+                        runProperties.Append(newHighlight(p.highlight));
+                    }
+
+                    //Append all prop
+                    paragraphProperties.Append(paragraphMarkRunProperties);
+                    #endregion
+
+                    Run run = new Run();
+                    ProofError proofError1 = new ProofError() { Type = ProofingErrorValues.SpellStart };
+
+                    Text text = new Text() { Space = SpaceProcessingModeValues.Preserve };
+                    text.Text = p.text;
+
+                    run.Append(runProperties);
+                    run.Append(text);
+
+                    ProofError proofError2 = new ProofError() { Type = ProofingErrorValues.SpellEnd };
+
+                    paragraph.Append(proofError1);
+                    paragraph.Append(paragraphProperties);
+                    paragraph.Append(run);
+                    paragraph.Append(proofError2);
+                    #endregion
+
+                    tableCell.Append(tableCellProperties);
+                    tableCell.Append(paragraph);
+
+                    tableRow.Append(tableCell);
+                }
+                table.Append(tableRow);
+                i++;
+            }
+
+            return table;
         }
 
         /// <summary>

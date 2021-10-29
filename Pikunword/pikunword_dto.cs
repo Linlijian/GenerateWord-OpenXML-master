@@ -17,6 +17,9 @@ namespace Pikunword
             Paragraphs = new List<PikunParagraph>();
             PackageProperties = new PackageProperties();
             NumberingDefinitions = new List<PikunNumberingDefinitions>();
+            Table = new PikunTable();
+
+            //Table.table_grid = new List<PikunTableGrid>();
         }
         public pikunword_model Model { get; set; }
         public List<pikunword_model> Models { get; set; }
@@ -25,13 +28,14 @@ namespace Pikunword
         public List<PikunParagraph> Paragraphs { get; set; }
         public PackageProperties PackageProperties { get; set; }
         public List<PikunNumberingDefinitions> NumberingDefinitions { get; set; }
+        public PikunTable Table { get; set; }
     }
 
     public class pikun_execut_type
     {
         public const string create_packet = "create_packet";
-        public const string picture = "picture";
-        public const string paragraphs = "paragraphs";
+        public const string picture = "picture"; //มีเพื่อ?
+        public const string paragraphs = "paragraphs"; //มีเพื่อ?
     }
 
     public class pikun_execut_function
@@ -43,6 +47,7 @@ namespace Pikunword
         public const string newLineImage = "newLineImage";
         public const string newLineImageNoFormat = "newLineImageNoFormat";
         public const string newLineNumberingProp = "newLineNumberingProp";
+        public const string newTable = "newTable";
         public const string xxx = "xxx";
     }
 }

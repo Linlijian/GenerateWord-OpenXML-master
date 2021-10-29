@@ -44,7 +44,7 @@ namespace Pikunword.Test
             //=============================================================================================
             pk.word.NumberingDefinitions.Add(new PikunNumberingDefinitions
             {
-                numbering_type = new string[] { "%1.", "%1.%2.", "%1.%2.%3.", "%1.%2.%3.%4.", "%1.%2.%3.%4.%5.", "%1.%2.%3.%4.%5.%6.", "%1.%2.%3.%4.%5.%6.%7.", "%1.%2.%3.%4.%5.%6.%7.%8.", "%1.%2.%3.%4.%5.%6.%7.%8.%9." },
+                numbering_type = new string[] {  },
                 number_format_values = Pikun.numberFormatValuesDecimal                
             });
             //=============================================================================================
@@ -157,6 +157,52 @@ namespace Pikunword.Test
                 }
             });
             //=============================================================================================
+            var pmp = new List<PikunTableCellProperties>();
+            pmp.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Size1",
+                prop = new string[] { Pikun.paragraphBold }
+            });
+            pmp.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Size2",
+                prop = new string[] { Pikun.paragraphBold }
+            });
+            pmp.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Size3",
+                prop = new string[] { Pikun.paragraphBold }
+            });
+            var t = new List<PikunTableGrid>();
+            t.Add(new PikunTableGrid
+            {
+                rId = 12,
+                grid_column = "3882",
+                table_cell_width = "1700",
+                table_cell_properties = pmp
+            });
+            t.Add(new PikunTableGrid
+            {
+                rId = 12,
+                grid_column = "1882",
+                table_cell_width = "500",
+                table_cell_properties = pmp
+            });
+            pk.word.Models.Add(new pikunword_model
+            {
+                execut_type = pikun_execut_function.newTable,
+                table = new PikunTable
+                {
+                    rId = 8,
+                    table_style = "TableGrid",
+                    table_width = "1870",
+                    have_table_cell_margin = false,
+                    table_grid = t
+                }
+            });
             //=============================================================================================
             //=============================================================================================
             //=============================================================================================

@@ -1,5 +1,5 @@
-﻿using System;
-using System.CodeDom.Compiler;
+﻿using DocumentFormat.OpenXml;
+using System;
 using System.Drawing;
 using System.IO;
 
@@ -678,6 +678,10 @@ namespace Pikunword
                     return base64String;
                 }
             }
+        }
+        public static UInt32Value AsUInt32Value(this int i)
+        {
+           return i != 0 ? UInt32Value.FromUInt32((UInt32)(i)): UInt32Value.FromUInt32((UInt32)(0));
         }
     }
 }
