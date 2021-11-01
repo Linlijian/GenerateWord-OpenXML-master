@@ -166,7 +166,9 @@ namespace Pikunword.Test
                 text = "MERGE4",
                 prop = new string[] { Pikun.paragraphBold },
                 vertical_merge = true,
-                grid_span = 2
+                grid_span = 2,
+                justification = Pikun.justificationRight,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentBottom
             });
             pmp.Add(new PikunTableCellProperties
             {

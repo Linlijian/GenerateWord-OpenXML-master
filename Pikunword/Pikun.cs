@@ -51,6 +51,11 @@ namespace Pikunword
         public static string numberFormatValuesDecimal = "Decimal";
         public static string numberFormatValuesDecimalABC = "DecimalABC";
 
+        public static string tableCellVerticalAlignmentTop = "Top";
+        public static string tableCellVerticalAlignmentCenter = "Center";
+        public static string tableCellVerticalAlignmentBottom = "Bottom";
+
+
         #region color
         public static string Black_W3C = "000000";
         public static string Night = "0C090A";

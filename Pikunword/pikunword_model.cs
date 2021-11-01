@@ -135,8 +135,9 @@ namespace Pikunword
         public int grid_span { get; set; } //จำนวนช่องในการ merge
         public bool vertical_merge { get; set; } //merge แนวตั้ง
         public bool vertical_merge_child { get; set; } //merge แนวตั้ง
+        public string table_cell_vertical_alignment { get; set; }
     }
-
+    
     public class PackageProperties
     {
         public string creator { get; set; }

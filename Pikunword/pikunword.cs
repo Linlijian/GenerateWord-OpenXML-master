@@ -3968,7 +3968,7 @@ namespace Pikunword
                     tableCellMargin.Append(c_bottomMargin);
                     tableCellMargin.Append(c_rightMargin);
 
-                    TableCellVerticalAlignment tableCellVerticalAlignment = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
+                    TableCellVerticalAlignment tableCellVerticalAlignment = newTableCellVerticalAlignment(p.table_cell_vertical_alignment);
                     HideMark hideMark = new HideMark();
 
                     if (p.grid_span > 1)
@@ -3987,6 +3987,7 @@ namespace Pikunword
                         VerticalMerge verticalMerge = new VerticalMerge();
                         tableCellProperties.Append(verticalMerge);
                     }
+
 
                     tableCellProperties.Append(tableCellWidth);
                     tableCellProperties.Append(tableCellBorders);
@@ -4393,6 +4394,21 @@ namespace Pikunword
             }
 
             return new Highlight() { Val = HighlightColorValues.None };
+        }
+        private TableCellVerticalAlignment newTableCellVerticalAlignment(string _table_cell_vertical_alignment)
+        {
+            if (_table_cell_vertical_alignment == Pikun.tableCellVerticalAlignmentTop)
+            {
+                return new TableCellVerticalAlignment { Val = TableVerticalAlignmentValues.Top };
+            }
+            else if (_table_cell_vertical_alignment == Pikun.tableCellVerticalAlignmentBottom)
+            {
+                return new TableCellVerticalAlignment { Val = TableVerticalAlignmentValues.Bottom };
+            }
+            else
+            {
+                return new TableCellVerticalAlignment { Val = TableVerticalAlignmentValues.Center };
+            }
         }
         #endregion
     }
