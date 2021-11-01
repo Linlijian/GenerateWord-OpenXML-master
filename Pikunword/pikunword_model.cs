@@ -133,8 +133,8 @@ namespace Pikunword
 
         public string fill { get; set; } //สี
         public int grid_span { get; set; } //จำนวนช่องในการ merge
-        public bool vertical_merge { get; set; } //merge แนวตั้ง
-        public bool vertical_merge_child { get; set; } //merge แนวตั้ง
+        public bool vertical_merge { get; set; } //merge แนวตั้ง ด้านบน
+        public bool vertical_merge_child { get; set; } //merge แนวตั้ง ด้านล่าง
         public string table_cell_vertical_alignment { get; set; }
     }
     
