@@ -3971,6 +3971,23 @@ namespace Pikunword
                     TableCellVerticalAlignment tableCellVerticalAlignment = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
                     HideMark hideMark = new HideMark();
 
+                    if (p.grid_span > 1)
+                    {
+                        GridSpan gridSpan = new GridSpan() { Val = p.grid_span };
+                        tableCellProperties.Append(gridSpan);
+                    }
+
+                    if (p.vertical_merge)
+                    {
+                        VerticalMerge verticalMerge = new VerticalMerge() { Val = MergedCellValues.Restart };
+                        tableCellProperties.Append(verticalMerge);
+                    }
+                    else if (p.vertical_merge_child)
+                    {
+                        VerticalMerge verticalMerge = new VerticalMerge();
+                        tableCellProperties.Append(verticalMerge);
+                    }
+
                     tableCellProperties.Append(tableCellWidth);
                     tableCellProperties.Append(tableCellBorders);
                     tableCellProperties.Append(shading);

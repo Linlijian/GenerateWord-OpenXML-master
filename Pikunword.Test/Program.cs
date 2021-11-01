@@ -158,31 +158,69 @@ namespace Pikunword.Test
             });
             //=============================================================================================
             var pmp = new List<PikunTableCellProperties>();
-            pmp.Add(new PikunTableCellProperties
-            {
-                rId = 13,
-                text = "Size1",
-                prop = new string[] { Pikun.paragraphBold }
-            });
-            pmp.Add(new PikunTableCellProperties
-            {
-                rId = 13,
-                text = "Size2",
-                prop = new string[] { Pikun.paragraphBold }
-            });
-            pmp.Add(new PikunTableCellProperties
-            {
-                rId = 13,
-                text = "Size3",
-                prop = new string[] { Pikun.paragraphBold }
-            });
             var t = new List<PikunTableGrid>();
+
+            pmp.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "MERGE4",
+                prop = new string[] { Pikun.paragraphBold },
+                vertical_merge = true,
+                grid_span = 2
+            });
+            pmp.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "C1",
+                prop = new string[] { Pikun.paragraphBold }                
+            });
+            pmp.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "C2",
+                prop = new string[] { Pikun.paragraphBold }
+            });
+            pmp.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "MERGE",
+                prop = new string[] { Pikun.paragraphBold },
+                grid_span = 2
+            });           
             t.Add(new PikunTableGrid
             {
                 rId = 12,
-                grid_column = "3882",
-                table_cell_width = "1700",
+                grid_column = "3740",
+                table_cell_width = "500",
                 table_cell_properties = pmp
+            });
+
+            pmp = new List<PikunTableCellProperties>();
+            pmp.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                vertical_merge_child = true,
+                grid_span = 2
+            });
+            pmp.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "R3",
+            });
+            pmp.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "R4",
+            });
+            pmp.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "R5",
+            });
+            pmp.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "R6",
             });
             t.Add(new PikunTableGrid
             {
@@ -191,6 +229,47 @@ namespace Pikunword.Test
                 table_cell_width = "500",
                 table_cell_properties = pmp
             });
+
+            pmp = new List<PikunTableCellProperties>();
+            pmp.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "S!",
+            });
+            pmp.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "S@",
+            });
+            pmp.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "S#",
+            });
+            pmp.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "S$",
+            });
+            pmp.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "S^",
+            });
+            pmp.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "S&",
+                fill = Pikun.Red_Dirt
+            });
+            t.Add(new PikunTableGrid
+            {
+                rId = 12,
+                grid_column = "1882",
+                table_cell_width = "500",
+                table_cell_properties = pmp
+            });
+
             pk.word.Models.Add(new pikunword_model
             {
                 execut_type = pikun_execut_function.newTable,

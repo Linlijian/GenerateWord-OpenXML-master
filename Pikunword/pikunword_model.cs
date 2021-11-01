@@ -131,8 +131,10 @@ namespace Pikunword
         public string left_margin { get; set; }
         public string bottom_margin { get; set; }
 
-        public string fill { get; set; }
-
+        public string fill { get; set; } //สี
+        public int grid_span { get; set; } //จำนวนช่องในการ merge
+        public bool vertical_merge { get; set; } //merge แนวตั้ง
+        public bool vertical_merge_child { get; set; } //merge แนวตั้ง
     }
 
     public class PackageProperties
