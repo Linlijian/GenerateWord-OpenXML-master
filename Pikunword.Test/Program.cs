@@ -487,7 +487,7 @@ namespace Pikunword.Test
             t.Add(new PikunTableGrid
             {
                 rId = 12,
-                table_cell_properties = c1
+                table_cell_properties = c1,
             });
             t.Add(new PikunTableGrid
             {
@@ -538,13 +538,173 @@ namespace Pikunword.Test
                     table_cell_width_auto = true,
                     table_style = "TableGrid",
                     have_table_cell_margin = false,
+                    grid_column_size = 5,
+                    grid_column = new string[] {"0", "0", "0", "0", "0" }, //เป็น 0 เพราะต้องการ defualt 1870
                     table_grid = t
                 }
             });
             //=============================================================================================
+            pk.word.Models.Add(new pikunword_model
+            {
+                execut_type = pikun_execut_function.newLineNormal,
+                paragraph = new PikunParagraph
+                {
+                    rId = 2,
+                    font_size = 14,
+                    text = "                * คะแนนระดับ 5 หมายถึง บริษัทมีระดับความเสี่ยงสูงมากเมื่อเปรียบเทียบกับบริษัทอื่นในอุตสาหกรรม ซึ่งคะแนนที่ได้จะคำนวณมาจากระบบ SIIRA โดยแต่ละรายการจะมีองค์ประกอบย่อย เช่น อัตราส่วนหรือตัวชี้วัดต่าง ๆ เป็นต้น ระบบจะนำค่าขององค์ประกอบย่อยแต่ละรายการไปเปรียบเทียบกับค่าเฉลี่ยอุตสาหกรรม เพื่อคำนวณออกมาเป็นคะแนน ซึ่งคณะทำงานของสายวิเคราะห์ธุรกิจประกันภัยเป็นผู้กำหนดระดับคะแนนในแต่ละช่วง"
+                }
+            });
             //=============================================================================================
+            models = new List<PikunParagraphManyProp>();
+            models.Add(new PikunParagraphManyProp
+            {
+                text = "การประเมินเชิงคุณภาพ",
+                font_size = 14,
+                prop = new string[] { Pikun.paragraphBold, Pikun.paragraphUnderline }
+            });
+            models.Add(new PikunParagraphManyProp
+            {
+                text = " มีการพิจารณาคุณภาพด้านการบริหารจัดการและกระบวนการควบคุม",
+                font_size = 14,
+                prop = new string[] { Pikun.paragraphNormal }
+            });
+            models.Add(new PikunParagraphManyProp
+            {
+                text = "ของบริษัท 4 มุมมอง ตามตารางด้านล่างโดยให้น้ำหนักในแต่ละมุมมองสำหรับการประเมินบริษัทประกันวินาศภัย",
+                font_size = 14,
+                prop = new string[] { Pikun.paragraphNormal }
+            });
+            models.Add(new PikunParagraphManyProp
+            {
+                text = "และบริษัทประกันชีวิตเหมือนกัน",
+                font_size = 14,
+                prop = new string[] { Pikun.paragraphNormal }
+            });
+            pk.word.Models.Add(new pikunword_model
+            {
+                execut_type = pikun_execut_function.newLineNumberingProp,
+                paragraph = new PikunParagraph
+                {
+                    rId = 7,
+                    many_prop = models,
+                    font_size = 14,
+                    numbering_id = 1,
+                    numbering_level_reference = 1
+                }
+            });
             //=============================================================================================
+            c1 = new List<PikunTableCellProperties>();
+            c2 = new List<PikunTableCellProperties>();
+            c3 = new List<PikunTableCellProperties>();
+            c4 = new List<PikunTableCellProperties>();
+            c5 = new List<PikunTableCellProperties>();
+            c6 = new List<PikunTableCellProperties>();
+            c7 = new List<PikunTableCellProperties>();
+            c8 = new List<PikunTableCellProperties>();
+            c9 = new List<PikunTableCellProperties>();
+            t = new List<PikunTableGrid>();
+
+            #region cell
+            c1.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "รายการ",
+                font_size = 14,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            c1.Add(new PikunTableCellProperties
+            {
+                rId = 14,
+                text = "ค่าน้ำหนัก",
+                font_size = 14,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            c1.Add(new PikunTableCellProperties
+            {
+                rId = 15,
+                multi_line = true,
+                texts = new string[] { "คะแนน", "(เต็ม 5 คะแนน) *" },
+                font_size = 10,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter,
+                spacing_between_lines = true
+            });
+            c1.Add(new PikunTableCellProperties
+            {
+                rId = 16,
+                multi_line = true,
+                texts = new string[] { "คะแนน", "(คะแนน x น้ำหนัก)" },
+                font_size = 10,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter,
+                spacing_between_lines = true
+            });
+
+            c2.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "1. ความเพียงพอของการบริหารจัดการองค์กร (Adequacy of corporate management)",
+                font_size = 14
+            });
+            c2.Add(new PikunTableCellProperties
+            {
+                rId = 14,
+                text = "25%",
+                font_size = 14,
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            c2.Add(new PikunTableCellProperties
+            {
+                rId = 15,
+                text = "x.xx",
+                font_size = 14,
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            c2.Add(new PikunTableCellProperties
+            {
+                rId = 16,
+                text = "x.xx",
+                font_size = 14,
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            #endregion
+
+            t.Add(new PikunTableGrid
+            {
+                rId = 12,
+                table_cell_properties = c1,
+            });
+            t.Add(new PikunTableGrid
+            {
+                rId = 12,
+                table_cell_properties = c2,
+            });
+            pk.word.Models.Add(new pikunword_model
+            {
+                execut_type = pikun_execut_function.newTable,
+                table = new PikunTable
+                {
+                    rId = 8,
+                    table_style = "TableGrid",
+                    have_table_cell_margin = false,
+                    table_cell_width_auto = false,
+                    table_grid = t,
+                    grid_column_size = 4,
+                    grid_column = new string[] { "5800", "900", "1300", "1380" },
+                }
+            });
             //=============================================================================================
+
+            
             //=============================================================================================
             //=============================================================================================
             //=============================================================================================

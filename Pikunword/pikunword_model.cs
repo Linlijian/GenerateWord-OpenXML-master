@@ -91,14 +91,15 @@ namespace Pikunword
         public string table_width { get; set; } //defualt = 0
         public bool have_table_cell_margin { get; set; } //tableCellMarginDefault
         public bool table_cell_width_auto { get; set; } //tableCellMarginDefault
+        public string[] grid_column { get; set; } //table_cell_width
+        public int grid_column_size { get; set; }
         public List<PikunTableGrid> table_grid { get; set; }
     }
 
     public class PikunTableGrid
     {
-        public int rId { get; set; }
-        public string grid_column { get; set; }
-        public string table_cell_width { get; set; }
+        public int rId { get; set; }        
+        public string table_cell_width { get; set; } //del
         public List<PikunTableCellProperties> table_cell_properties { get; set; }
     }
 
@@ -136,6 +137,10 @@ namespace Pikunword
         public bool vertical_merge { get; set; } //merge แนวตั้ง ด้านบน
         public bool vertical_merge_child { get; set; } //merge แนวตั้ง ด้านล่าง
         public string table_cell_vertical_alignment { get; set; }
+
+        public bool spacing_between_lines { get; set; } //ลบช่องว่างระหว่างบรรทัด     
+        public bool multi_line { get; set; } //ถ้าเป็น true จะเอา texts ไปใช้
+        public string[] texts { get; set; }
     }
     
     public class PackageProperties
