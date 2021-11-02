@@ -576,7 +576,7 @@ namespace Pikunword.Test
             });
             models.Add(new PikunParagraphManyProp
             {
-                text = "และบริษัทประกันชีวิตเหมือนกัน",
+                text = " และบริษัทประกันชีวิตเหมือนกัน",
                 font_size = 14,
                 prop = new string[] { Pikun.paragraphNormal }
             });

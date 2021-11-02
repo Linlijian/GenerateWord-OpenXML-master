@@ -99,7 +99,6 @@ namespace Pikunword
     public class PikunTableGrid
     {
         public int rId { get; set; }        
-        public string table_cell_width { get; set; } //del
         public List<PikunTableCellProperties> table_cell_properties { get; set; }
     }
 
