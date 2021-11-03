@@ -676,6 +676,159 @@ namespace Pikunword.Test
                 justification = Pikun.justificationCenter,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
             });
+
+            c3.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "2. ความเพียงพอของระบบการควบคุมภายในและการตรวจสอบภายใน (Adequacy of Internal control system andInternal Audit Activities)",
+                font_size = 14
+            });
+            c3.Add(new PikunTableCellProperties
+            {
+                rId = 14,
+                text = "25%",
+                font_size = 14,
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            c3.Add(new PikunTableCellProperties
+            {
+                rId = 15,
+                text = "x.xx",
+                font_size = 14,
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            c3.Add(new PikunTableCellProperties
+            {
+                rId = 16,
+                text = "x.xx",
+                font_size = 14,
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+
+            c4.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "3. ความเพียงพอของระบบการบริหารความเสี่ยง (Adequacy of risk management system)",
+                font_size = 14
+            });
+            c4.Add(new PikunTableCellProperties
+            {
+                rId = 14,
+                text = "25%",
+                font_size = 14,
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            c4.Add(new PikunTableCellProperties
+            {
+                rId = 15,
+                text = "x.xx",
+                font_size = 14,
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            c4.Add(new PikunTableCellProperties
+            {
+                rId = 16,
+                text = "x.xx",
+                font_size = 14,
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+
+            c5.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "4. External audit and Actuary risks",
+                font_size = 14
+            });
+            c5.Add(new PikunTableCellProperties
+            {
+                rId = 14,
+                text = "25%",
+                font_size = 14,
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            c5.Add(new PikunTableCellProperties
+            {
+                rId = 15,
+                text = "x.xx",
+                font_size = 14,
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            c5.Add(new PikunTableCellProperties
+            {
+                rId = 16,
+                text = "x.xx",
+                font_size = 14,
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+
+            c6.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "รวม",
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter,
+                font_size = 14,
+                spacing_between_lines = true
+            });
+            c6.Add(new PikunTableCellProperties
+            {
+                rId = 14,
+                text = "100%",
+                font_size = 14,
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter,
+                spacing_between_lines = true
+            });
+            c6.Add(new PikunTableCellProperties
+            {
+                rId = 15,
+                text = "",
+                font_size = 14,
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter,
+                spacing_between_lines = true
+            });
+            c6.Add(new PikunTableCellProperties
+            {
+                rId = 16,
+                text = "x.xx",
+                font_size = 14,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter,
+                spacing_between_lines = true
+            });
+            c7.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "คะแนนหลังคิดค่าน้ำหนักการประเมินเชิงคุณภาพ (ร้อยละ 20)",
+                font_size = 12,
+                grid_span = 3,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter,
+                spacing_between_lines = true
+            });
+            c7.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                font_size = 12,
+                text = "x.xx (.20)",
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter,
+                spacing_between_lines = true
+            });
             #endregion
 
             t.Add(new PikunTableGrid
@@ -687,6 +840,31 @@ namespace Pikunword.Test
             {
                 rId = 12,
                 table_cell_properties = c2,
+            });
+            t.Add(new PikunTableGrid
+            {
+                rId = 12,
+                table_cell_properties = c3,
+            });
+            t.Add(new PikunTableGrid
+            {
+                rId = 12,
+                table_cell_properties = c4,
+            });
+            t.Add(new PikunTableGrid
+            {
+                rId = 12,
+                table_cell_properties = c5,
+            });
+            t.Add(new PikunTableGrid
+            {
+                rId = 12,
+                table_cell_properties = c6,
+            });
+            t.Add(new PikunTableGrid
+            {
+                rId = 12,
+                table_cell_properties = c7,
             });
             pk.word.Models.Add(new pikunword_model
             {
@@ -703,14 +881,388 @@ namespace Pikunword.Test
                 }
             });
             //=============================================================================================
+            pk.word.Models.Add(new pikunword_model
+            {
+                execut_type = pikun_execut_function.newLineNormal,
+                paragraph = new PikunParagraph
+                {
+                    rId = 22,
+                    font_size = 14,
+                    text = "                * คะแนนระดับ 5 หมายถึง บริษัทมีระดับความเสี่ยงสูงมากเมื่อเปรียบเทียบกับเกณฑ์พื้นฐานที่คณะทำงาน ของสายวิเคราะห์ธุรกิจประกันภัยกำหนดไว้เป็น Checklists ให้ผู้วิเคราะห์ทำการประเมินโดยพิจารณาจากข้อมูลใน รายงานที่บริษัทนำส่ง เช่น รายงานการบริหารความเสี่ยงแบบองค์รวม (ORSA) รวมถึงข้อมูลที่ได้รับจากสายตรวจสอบ ที่ทำการเข้าตรวจ ณ ที่ทำการบริษัท เป็นต้น"
+                }
+            });
+            //=============================================================================================
+            pk.word.Models.Add(new pikunword_model
+            {
+                execut_type = pikun_execut_function.newLine,
+                paragraph = new PikunParagraph
+                {
+                    rId = 22
+                }
+            });
 
-            
+            models = new List<PikunParagraphManyProp>();
+            models.Add(new PikunParagraphManyProp
+            {
+                text = "คะแนนการประเมินรวม",
+                font_size = 16,
+                prop = new string[] { Pikun.paragraphBold, Pikun.paragraphUnderline }
+            });
+            pk.word.Models.Add(new pikunword_model
+            {
+                execut_type = pikun_execut_function.newLineManyprop,
+                paragraph = new PikunParagraph
+                {
+                    rId = 22,
+                    many_prop = models,
+                }
+            });
+            //=============================================================================================
+            c1 = new List<PikunTableCellProperties>();
+            c2 = new List<PikunTableCellProperties>();
+            c3 = new List<PikunTableCellProperties>();
+            t = new List<PikunTableGrid>();
+
+            c1.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "การประเมินเชิงปริมาณ (80%)",
+                font_size = 14,
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter,
+                spacing_between_lines = true
+            });
+            c1.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "x.xx",
+                font_size = 14,
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter,
+                spacing_between_lines = true
+            });
+
+            c2.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "การประเมินเชิงคุณภาพ (20%)",
+                font_size = 14,
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter,
+                spacing_between_lines = true
+            });
+            c2.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "x.xx",
+                font_size = 14,
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter,
+                spacing_between_lines = true
+            });
+
+            c3.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "คะแนนรวม",
+                font_size = 14,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter,
+                spacing_between_lines = true
+            });
+            c3.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "x.xx",
+                font_size = 14,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter,
+                spacing_between_lines = true
+            });
+
+            t.Add(new PikunTableGrid
+            {
+                rId = 12,
+                table_cell_properties = c1,
+            });
+            t.Add(new PikunTableGrid
+            {
+                rId = 12,
+                table_cell_properties = c2,
+            });
+            t.Add(new PikunTableGrid
+            {
+                rId = 12,
+                table_cell_properties = c3,
+            });
+
+            pk.word.Models.Add(new pikunword_model
+            {
+                execut_type = pikun_execut_function.newTable,
+                table = new PikunTable
+                {
+                    rId = 8,
+                    table_style = "TableGrid",
+                    have_table_cell_margin = false,
+                    table_cell_width_auto = false,
+                    table_grid = t,
+                    grid_column_size = 2,
+                    grid_column = new string[] { "7000", "2600" },
+                }
+            });
+            //=============================================================================================
+            pk.word.Models.Add(new pikunword_model
+            {
+                execut_type = pikun_execut_function.newLine,
+                paragraph = new PikunParagraph
+                {
+                    rId = 22
+                }
+            });
+            pk.word.Models.Add(new pikunword_model
+            {
+                execut_type = pikun_execut_function.newLineNumbering,
+                paragraph = new PikunParagraph
+                {
+                    text = "สรุปผลการประเมินความเสี่ยง",
+                    rId = 5,
+                    font_size = 14,
+                    numbering_id = 1,
+                    numbering_level_reference = 0
+                }
+            });
+            //=============================================================================================
+            pk.word.Models.Add(new pikunword_model
+            {
+                execut_type = pikun_execut_function.newLineNormal,
+                paragraph = new PikunParagraph
+                {
+                    rId = 22,
+                    text = "สรุปผลการประเมินความเสี่ยง",
+                    prop = Pikun.paragraphUnderline,
+                    font_size = 14,
+                    font = "TH SarabunPSK"
+                }
+            });
+            //=============================================================================================
+            string path = AppDomain.CurrentDomain.BaseDirectory + "image1.png";
+            string imagePart2Data = Pikun.BitmapToBase64String(path);
+            pk.word.Pictures.Add(new PikunPicture
+            {
+                rId = 7,
+                base64image = imagePart2Data
+            });
+            pk.word.Models.Add(new pikunword_model
+            {
+                execut_type = pikun_execut_function.newLineImageNoFormat,
+                picture = new PikunPicture
+                {
+                    rId = 7, // << ต้องเหมือนกันกับ setting
+                    base64image = imagePart2Data
+                    //layout_option = Help.wrapSquare,
+                    //horizontal_position = 14,
+                    //vertical_position = 0,
+                    //sizeX = 0,
+                    //sizeY = 0
+                }
+            });
+            //=============================================================================================
+            pk.word.Models.Add(new pikunword_model
+            {
+                execut_type = pikun_execut_function.newLineNormal,
+                paragraph = new PikunParagraph
+                {                    
+                    rId = 22,
+                    font_size = 14,
+                    font = "TH SarabunPSK",
+                    text = "           นำคะแนนการประเมินรวมจากผลการประเมินเชิงปริมาณและเชิงคุณภาพข้างต้น มาสรุปเป็นผลการประเมินความเสี่ยง และวิเคราะห์องค์ประกอบของการประเมินเชิงปริมาณและเชิงคุณภาพในแต่ละรายการ ที่มีผลต่อการประเมินความเสี่ยงของบริษัท ดังนี้"
+                }
+            });
+            //=============================================================================================
+            pk.word.Models.Add(new pikunword_model
+            {
+                execut_type = pikun_execut_function.newLineNumbering,
+                paragraph = new PikunParagraph
+                {
+                    text = "ความเสี่ยงที่วัดจากตัวชี้วัดเชิงปริมาณ",
+                    rId = 5,
+                    font_size = 14,
+                    numbering_id = 1,
+                    font = "TH SarabunPSK",
+                    numbering_level_reference = 1
+                }
+            });
+            //=============================================================================================
+            var row = new List<PikunTableCellProperties>();
+            t = new List<PikunTableGrid>();
+
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "องค์ประกอบหลัก",
+                font_size = 14,
+                font = "TH SarabunPSK",
+                vertical_merge = true,
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "รายละเอียดการวิเคราะห์",
+                font = "TH SarabunPSK",
+                font_size = 14,
+                vertical_merge = true,
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "องค์ประกอบย่อย",
+                font = "TH SarabunPSK",
+                font_size = 14,
+                grid_span = 2,
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            t.Add(new PikunTableGrid
+            {
+                rId = 12,
+                table_cell_properties = row
+            });
+
+            row = new List<PikunTableCellProperties>();
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                font_size = 14,
+                vertical_merge_child = true
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                font_size = 14,
+                vertical_merge_child = true
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "บริษัทประกันวินาศภัย",
+                font = "TH SarabunPSK",
+                font_size = 14,
+                prop = new string[] { Pikun.paragraphBold },
+                spacing_between_lines = true,
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "บริษัทประกันชีวิต",
+                font = "TH SarabunPSK",
+                font_size = 14,
+                prop = new string[] { Pikun.paragraphBold },
+                spacing_between_lines = true,
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            t.Add(new PikunTableGrid
+            {
+                rId = 12,
+                table_cell_properties = row
+            });
+
+            row = new List<PikunTableCellProperties>();
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "1. Profitability",
+                font = "TH SarabunPSK",
+                font_size = 14,
+                spacing_between_lines = true,
+                justification = Pikun.justificationLeft,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentTop
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "การวิเคราะห์พอร์ตการรับประกันภัยและผลการดำเนินงาน(เบี้ยประกันภัย ค่าสินไหมทดแทนและค่าใช้จ่ายของบริษัท) รวมถึงัจจัยความเสี่ยงที่เกี่ยวข้องกับการรับประกันภัย อาทิ ช่องทางการขาย และการติดตามเบี้ยประกันภัยค้างรับ เป็นต้น",
+                font = "TH SarabunPSK",
+                font_size = 14,
+                spacing_between_lines = true,
+                justification = Pikun.justificationLeft,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentTop
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                multi_line = true,
+                texts = new string[] { "- Loss ratio",  "- Expense ratio", "- Premium receivable before impairment" , "- Return on equity (ROE)" },
+                font = "TH SarabunPSK",
+                font_size = 14,
+                spacing_between_lines = true,
+                justification = Pikun.justificationLeft,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentTop
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                multi_line = true,
+                texts = new string[] { "- Expense ratio", "- Change in net written premium", "- Change in single premium", "- Return on equity (ROE)" },
+                font = "TH SarabunPSK",
+                font_size = 14,
+                spacing_between_lines = true,
+                justification = Pikun.justificationLeft,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentTop
+            });
+            t.Add(new PikunTableGrid
+            {
+                rId = 12,
+                table_cell_properties = row
+            });
+
+            pk.word.Models.Add(new pikunword_model
+            {
+                execut_type = pikun_execut_function.newTable,
+                table = new PikunTable
+                {
+                    rId = 18,
+                    table_cell_width_auto = true,
+                    table_style = "TableGrid",
+                    have_table_cell_margin = false,
+                    grid_column_size =4,
+                    grid_column = new string[] { "0", "0", "0", "0" }, //เป็น 0 เพราะต้องการ defualt 1870
+                    table_grid = t
+                }
+            });
+            //=============================================================================================
+            //=============================================================================================
+            //=============================================================================================
+            //=============================================================================================
+            //=============================================================================================
+            //=============================================================================================
+            //=============================================================================================
+            //=============================================================================================
+            //=============================================================================================
+            //=============================================================================================
+            //=============================================================================================
+            //=============================================================================================
+            //=============================================================================================
+            //=============================================================================================
             //=============================================================================================
             //=============================================================================================
             //=============================================================================================
             pk.word.Model.execut_type = pikun_execut_type.create_packet;
             pk.word.Model.path = AppDomain.CurrentDomain.BaseDirectory + "pikun_test.docx";
-
             pk.Generate(pk.word);
             //=============================================================================================
 

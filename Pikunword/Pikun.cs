@@ -671,18 +671,26 @@ namespace Pikunword
         }
         public static string BitmapToBase64String(this string path)
         {
-            using (Image image = Image.FromFile(path))
+            try
             {
-                using (MemoryStream m = new MemoryStream())
+                using (Image image = Image.FromFile(path))
                 {
-                    image.Save(m, image.RawFormat);
-                    byte[] imageBytes = m.ToArray();
+                    using (MemoryStream m = new MemoryStream())
+                    {
+                        image.Save(m, image.RawFormat);
+                        byte[] imageBytes = m.ToArray();
 
-                    // Convert byte[] to Base64 String
-                    string base64String = Convert.ToBase64String(imageBytes);
-                    return base64String;
+                        // Convert byte[] to Base64 String
+                        string base64String = Convert.ToBase64String(imageBytes);
+                        return base64String;
+                    }
                 }
             }
+            catch (Exception e)
+            {
+                return "";
+            }
+            
         }
         public static UInt32Value AsUInt32Value(this int i)
         {
