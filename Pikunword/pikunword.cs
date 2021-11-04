@@ -7,6 +7,7 @@ using A = DocumentFormat.OpenXml.Drawing;
 using Pic = DocumentFormat.OpenXml.Drawing.Pictures;
 using A14 = DocumentFormat.OpenXml.Office2010.Drawing;
 using Wp14 = DocumentFormat.OpenXml.Office2010.Word.Drawing;
+using W14 = DocumentFormat.OpenXml.Office2010.Word;
 using M = DocumentFormat.OpenXml.Math;
 using Ovml = DocumentFormat.OpenXml.Vml.Office;
 using V = DocumentFormat.OpenXml.Vml;
@@ -31,7 +32,7 @@ namespace Pikunword
         private const string ThemePart_rId = "rId4";
         private const string FontTablePart_rId = "rId5";
         private const string NumberingDefinitionsPart_rId = "rId6";
-
+        private const string DocumentSettingsPart_rId = "rId7";
 
         public pikunword()
         {
@@ -123,6 +124,9 @@ namespace Pikunword
 
             WebSettingsPart webSettingsPart = mainDocumentPart.AddNewPart<WebSettingsPart>(WebSettingsPart_rId);
             GenerateWebSettingsPartContent(webSettingsPart);
+
+            DocumentSettingsPart documentSettingsPart = mainDocumentPart.AddNewPart<DocumentSettingsPart>(DocumentSettingsPart_rId);
+            GenerateDocumentSettingsPartContent(documentSettingsPart);
 
             StyleDefinitionsPart styleDefinitionsPart = mainDocumentPart.AddNewPart<StyleDefinitionsPart>(StyleDefinitionsPart_rId);
             GenerateStyleDefinitionsPartContent(styleDefinitionsPart);
@@ -278,7 +282,7 @@ namespace Pikunword
 
             SectionProperties sectionProperties = new SectionProperties() { RsidR = "003F2413" };
             PageSize pageSize = new PageSize() { Width = (UInt32Value)12240U, Height = (UInt32Value)15840U };
-            PageMargin pageMargin = new PageMargin() { Top = 1440, Right = (UInt32Value)1440U, Bottom = 1440, Left = (UInt32Value)1440U, Header = (UInt32Value)720U, Footer = (UInt32Value)720U, Gutter = (UInt32Value)0U };
+            PageMargin pageMargin = newPageMargin(_dto.Model.page_margin, _dto.Model.page_left, _dto.Model.page_right, _dto.Model.page_top, _dto.Model.page_bottom, _dto.Model.page_header, _dto.Model.page_footer, _dto.Model.page_gutter);
             Columns columns = new Columns() { Space = "720" };
             DocGrid docGrid = new DocGrid() { LinePitch = 360 };
 
@@ -322,6 +326,130 @@ namespace Pikunword
             webSettings.Append(allowPNG);
 
             webSettingsPart.WebSettings = webSettings;
+        }
+        private void GenerateDocumentSettingsPartContent(DocumentSettingsPart documentSettingsPart)
+        {
+            Settings settings = new Settings() { MCAttributes = new MarkupCompatibilityAttributes() { Ignorable = "w14 w15 w16se w16cid w16 w16cex w16sdtdh" } };
+            settings.AddNamespaceDeclaration("mc", "http://schemas.openxmlformats.org/markup-compatibility/2006");
+            settings.AddNamespaceDeclaration("o", "urn:schemas-microsoft-com:office:office");
+            settings.AddNamespaceDeclaration("r", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
+            settings.AddNamespaceDeclaration("m", "http://schemas.openxmlformats.org/officeDocument/2006/math");
+            settings.AddNamespaceDeclaration("v", "urn:schemas-microsoft-com:vml");
+            settings.AddNamespaceDeclaration("w10", "urn:schemas-microsoft-com:office:word");
+            settings.AddNamespaceDeclaration("w", "http://schemas.openxmlformats.org/wordprocessingml/2006/main");
+            settings.AddNamespaceDeclaration("w14", "http://schemas.microsoft.com/office/word/2010/wordml");
+            settings.AddNamespaceDeclaration("w15", "http://schemas.microsoft.com/office/word/2012/wordml");
+            settings.AddNamespaceDeclaration("w16cex", "http://schemas.microsoft.com/office/word/2018/wordml/cex");
+            settings.AddNamespaceDeclaration("w16cid", "http://schemas.microsoft.com/office/word/2016/wordml/cid");
+            settings.AddNamespaceDeclaration("w16", "http://schemas.microsoft.com/office/word/2018/wordml");
+            settings.AddNamespaceDeclaration("w16sdtdh", "http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash");
+            settings.AddNamespaceDeclaration("w16se", "http://schemas.microsoft.com/office/word/2015/wordml/symex");
+            settings.AddNamespaceDeclaration("sl", "http://schemas.openxmlformats.org/schemaLibrary/2006/main");
+            Zoom zoom1 = new Zoom() { Percent = "140" };
+            ProofState proofState1 = new ProofState() { Spelling = ProofingStateValues.Clean, Grammar = ProofingStateValues.Clean };
+            DefaultTabStop defaultTabStop1 = new DefaultTabStop() { Val = 720 };
+            CharacterSpacingControl characterSpacingControl1 = new CharacterSpacingControl() { Val = CharacterSpacingValues.DoNotCompress };
+
+            Compatibility compatibility1 = new Compatibility();
+            ApplyBreakingRules applyBreakingRules1 = new ApplyBreakingRules();
+            UseFarEastLayout useFarEastLayout1 = new UseFarEastLayout();
+            CompatibilitySetting compatibilitySetting1 = new CompatibilitySetting() { Name = CompatSettingNameValues.CompatibilityMode, Uri = "http://schemas.microsoft.com/office/word", Val = "15" };
+            CompatibilitySetting compatibilitySetting2 = new CompatibilitySetting() { Name = CompatSettingNameValues.OverrideTableStyleFontSizeAndJustification, Uri = "http://schemas.microsoft.com/office/word", Val = "1" };
+            CompatibilitySetting compatibilitySetting3 = new CompatibilitySetting() { Name = CompatSettingNameValues.EnableOpenTypeFeatures, Uri = "http://schemas.microsoft.com/office/word", Val = "1" };
+            CompatibilitySetting compatibilitySetting4 = new CompatibilitySetting() { Name = CompatSettingNameValues.DoNotFlipMirrorIndents, Uri = "http://schemas.microsoft.com/office/word", Val = "1" };
+            CompatibilitySetting compatibilitySetting5 = new CompatibilitySetting() { Name = CompatSettingNameValues.DifferentiateMultirowTableHeaders, Uri = "http://schemas.microsoft.com/office/word", Val = "1" };
+            CompatibilitySetting compatibilitySetting6 = new CompatibilitySetting() { Name = new EnumValue<CompatSettingNameValues>() { InnerText = "useWord2013TrackBottomHyphenation" }, Uri = "http://schemas.microsoft.com/office/word", Val = "0" };
+
+            compatibility1.Append(applyBreakingRules1);
+            compatibility1.Append(useFarEastLayout1);
+            compatibility1.Append(compatibilitySetting1);
+            compatibility1.Append(compatibilitySetting2);
+            compatibility1.Append(compatibilitySetting3);
+            compatibility1.Append(compatibilitySetting4);
+            compatibility1.Append(compatibilitySetting5);
+            compatibility1.Append(compatibilitySetting6);
+
+            Rsids rsids1 = new Rsids();
+            RsidRoot rsidRoot1 = new RsidRoot() { Val = "00745E8C" };
+            Rsid rsid1 = new Rsid() { Val = "003C4E3D" };
+            Rsid rsid2 = new Rsid() { Val = "003E1962" };
+            Rsid rsid3 = new Rsid() { Val = "003F2413" };
+            Rsid rsid4 = new Rsid() { Val = "0047664C" };
+            Rsid rsid5 = new Rsid() { Val = "00671749" };
+            Rsid rsid6 = new Rsid() { Val = "00745E8C" };
+            Rsid rsid7 = new Rsid() { Val = "00AD54DD" };
+            Rsid rsid8 = new Rsid() { Val = "00F56D5B" };
+
+            rsids1.Append(rsidRoot1);
+            rsids1.Append(rsid1);
+            rsids1.Append(rsid2);
+            rsids1.Append(rsid3);
+            rsids1.Append(rsid4);
+            rsids1.Append(rsid5);
+            rsids1.Append(rsid6);
+            rsids1.Append(rsid7);
+            rsids1.Append(rsid8);
+
+            M.MathProperties mathProperties1 = new M.MathProperties();
+            M.MathFont mathFont1 = new M.MathFont() { Val = "Cambria Math" };
+            M.BreakBinary breakBinary1 = new M.BreakBinary() { Val = M.BreakBinaryOperatorValues.Before };
+            M.BreakBinarySubtraction breakBinarySubtraction1 = new M.BreakBinarySubtraction() { Val = M.BreakBinarySubtractionValues.MinusMinus };
+            M.SmallFraction smallFraction1 = new M.SmallFraction() { Val = M.BooleanValues.Zero };
+            M.DisplayDefaults displayDefaults1 = new M.DisplayDefaults();
+            M.LeftMargin leftMargin1 = new M.LeftMargin() { Val = (UInt32Value)0U };
+            M.RightMargin rightMargin1 = new M.RightMargin() { Val = (UInt32Value)0U };
+            M.DefaultJustification defaultJustification1 = new M.DefaultJustification() { Val = M.JustificationValues.CenterGroup };
+            M.WrapIndent wrapIndent1 = new M.WrapIndent() { Val = (UInt32Value)1440U };
+            M.IntegralLimitLocation integralLimitLocation1 = new M.IntegralLimitLocation() { Val = M.LimitLocationValues.SubscriptSuperscript };
+            M.NaryLimitLocation naryLimitLocation1 = new M.NaryLimitLocation() { Val = M.LimitLocationValues.UnderOver };
+
+            mathProperties1.Append(mathFont1);
+            mathProperties1.Append(breakBinary1);
+            mathProperties1.Append(breakBinarySubtraction1);
+            mathProperties1.Append(smallFraction1);
+            mathProperties1.Append(displayDefaults1);
+            mathProperties1.Append(leftMargin1);
+            mathProperties1.Append(rightMargin1);
+            mathProperties1.Append(defaultJustification1);
+            mathProperties1.Append(wrapIndent1);
+            mathProperties1.Append(integralLimitLocation1);
+            mathProperties1.Append(naryLimitLocation1);
+            ThemeFontLanguages themeFontLanguages1 = new ThemeFontLanguages() { Val = "en-US", EastAsia = "ja-JP", Bidi = "th-TH" };
+            ColorSchemeMapping colorSchemeMapping1 = new ColorSchemeMapping() { Background1 = ColorSchemeIndexValues.Light1, Text1 = ColorSchemeIndexValues.Dark1, Background2 = ColorSchemeIndexValues.Light2, Text2 = ColorSchemeIndexValues.Dark2, Accent1 = ColorSchemeIndexValues.Accent1, Accent2 = ColorSchemeIndexValues.Accent2, Accent3 = ColorSchemeIndexValues.Accent3, Accent4 = ColorSchemeIndexValues.Accent4, Accent5 = ColorSchemeIndexValues.Accent5, Accent6 = ColorSchemeIndexValues.Accent6, Hyperlink = ColorSchemeIndexValues.Hyperlink, FollowedHyperlink = ColorSchemeIndexValues.FollowedHyperlink };
+
+            ShapeDefaults shapeDefaults1 = new ShapeDefaults();
+            Ovml.ShapeDefaults shapeDefaults2 = new Ovml.ShapeDefaults() { Extension = V.ExtensionHandlingBehaviorValues.Edit, MaxShapeId = 1026 };
+
+            Ovml.ShapeLayout shapeLayout1 = new Ovml.ShapeLayout() { Extension = V.ExtensionHandlingBehaviorValues.Edit };
+            Ovml.ShapeIdMap shapeIdMap1 = new Ovml.ShapeIdMap() { Extension = V.ExtensionHandlingBehaviorValues.Edit, Data = "1" };
+
+            shapeLayout1.Append(shapeIdMap1);
+
+            shapeDefaults1.Append(shapeDefaults2);
+            shapeDefaults1.Append(shapeLayout1);
+            DecimalSymbol decimalSymbol1 = new DecimalSymbol() { Val = "." };
+            ListSeparator listSeparator1 = new ListSeparator() { Val = "," };
+            W14.DocumentId documentId1 = new W14.DocumentId() { Val = "7E8CB2E9" };
+            W15.ChartTrackingRefBased chartTrackingRefBased1 = new W15.ChartTrackingRefBased();
+            W15.PersistentDocumentId persistentDocumentId1 = new W15.PersistentDocumentId() { Val = "{D3BA8806-B836-4991-B6CF-F04671E03FA6}" };
+
+            settings.Append(zoom1);
+            settings.Append(proofState1);
+            settings.Append(defaultTabStop1);
+            settings.Append(characterSpacingControl1);
+            settings.Append(compatibility1);
+            settings.Append(rsids1);
+            settings.Append(mathProperties1);
+            settings.Append(themeFontLanguages1);
+            settings.Append(colorSchemeMapping1);
+            settings.Append(shapeDefaults1);
+            settings.Append(decimalSymbol1);
+            settings.Append(listSeparator1);
+            settings.Append(documentId1);
+            settings.Append(chartTrackingRefBased1);
+            settings.Append(persistentDocumentId1);
+
+            documentSettingsPart.Settings = settings;
         }
         private void GenerateStyleDefinitionsPartContent(StyleDefinitionsPart styleDefinitionsPart)
         {
@@ -4518,6 +4646,29 @@ namespace Pikunword
         private SpacingBetweenLines newSpacingBetweenLines(string _spacing_between_lines)
         {
             return new SpacingBetweenLines() { After = _spacing_between_lines };
+        }
+        private PageMargin newPageMargin(string _page_margin, int _page_margin_left, int _page_margin_right,int _page_margin_top, int _page_margin_bottom, int _page_margin_header, int _page_margin_footer, int _page_margin_gutter)
+        {
+            if (_page_margin == Pikun.pageMarginNarrow)
+            {
+                return new PageMargin() { Top = 720, Right = 720U, Bottom = 720, Left = (UInt32Value)720U, Header = (UInt32Value)720U, Footer = (UInt32Value)720U, Gutter = (UInt32Value)0U };
+            }
+            else if (_page_margin == Pikun.pageMarginModerate)
+            {
+                return new PageMargin() { Top = 1440, Right = (UInt32Value)1080U, Bottom = 1440, Left = (UInt32Value)1080U, Header = (UInt32Value)720U, Footer = (UInt32Value)720U, Gutter = (UInt32Value)0U };
+            }
+            else if (_page_margin == Pikun.pageMarginNormal)
+            {
+                return new PageMargin() { Top = 1440, Right = (UInt32Value)1440U, Bottom = 1440, Left = (UInt32Value)1440U, Header = (UInt32Value)720U, Footer = (UInt32Value)720U, Gutter = (UInt32Value)0U };
+            }
+            else if (_page_margin == Pikun.pageMarginCustom)
+            {
+                return new PageMargin() { Top = _page_margin_top, Right = _page_margin_right.AsUInt32Value(), Bottom = _page_margin_bottom, Left = _page_margin_left.AsUInt32Value(), Header = _page_margin_header.AsUInt32Value(), Footer = _page_margin_footer.AsUInt32Value(), Gutter = _page_margin_gutter.AsUInt32Value() };
+            }
+            else
+            {
+                return new PageMargin() { Top = 1440, Right = (UInt32Value)1440U, Bottom = 1440, Left = (UInt32Value)1440U, Header = (UInt32Value)720U, Footer = (UInt32Value)720U, Gutter = (UInt32Value)0U };
+            }
         }
         #endregion
     }

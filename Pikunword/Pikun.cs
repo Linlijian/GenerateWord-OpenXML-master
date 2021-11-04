@@ -55,6 +55,11 @@ namespace Pikunword
         public static string tableCellVerticalAlignmentCenter = "Center";
         public static string tableCellVerticalAlignmentBottom = "Bottom";
 
+        public static string pageMarginModerate = "Moderate";
+        public static string pageMarginNormal = "Normal";
+        public static string pageMarginNarrow = "Narrow";
+        public static string pageMarginCustom = "Custom";
+
 
         #region color
         public static string Black_W3C = "000000";
