@@ -51,6 +51,9 @@ namespace Pikunword
         public int numbering_level_reference { get; set; } //ย่อหน้า
         public int numbering_id { get; set; } // 1 numbering | 2 bullet
         public List<PikunParagraphManyProp> many_prop { get; set; }
+
+        //มี 2 แบบคือ Spell และ Grammar อาจจะมีในกรณีตรวจสอบคำศัพท์อาจมีผลกับการขึ้นบรรทัดให่เองของ word
+        //public string proof_error { get; set; }
     }
 
     public class PikunNumberingDefinitions
@@ -112,6 +115,8 @@ namespace Pikunword
         public string color { get; set; }
         public string highlight { get; set; }
         public string[] prop { get; set; }
+        //มี 2 แบบคือ Spell และ Grammar อาจจะมีในกรณีตรวจสอบคำศัพท์อาจมีผลกับการขึ้นบรรทัดให่เองของ word
+        //public string proof_error { get; set; }
 
         public string top_border_color { get; set; }
         public int top_border_size { get; set; }
@@ -140,6 +145,7 @@ namespace Pikunword
         public bool spacing_between_lines { get; set; } //ลบช่องว่างระหว่างบรรทัด     
         public bool multi_line { get; set; } //ถ้าเป็น true จะเอา texts ไปใช้
         public string[] texts { get; set; }
+        public bool one_text_mamy_paragrap { get; set; } //ถ้าเป็น true จะสร้าง paragrap เรื่องต่อกันเรื่องๆ โดยยึดช่องไฟ " " เป็นรอยต่อ
     }
     
     public class PackageProperties

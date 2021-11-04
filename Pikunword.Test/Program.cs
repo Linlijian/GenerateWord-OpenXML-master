@@ -1195,9 +1195,10 @@ namespace Pikunword.Test
             row.Add(new PikunTableCellProperties
             {
                 rId = 13,
-                text = "การวิเคราะห์พอร์ตการรับประกันภัยและผลการดำเนินงาน(เบี้ยประกันภัย ค่าสินไหมทดแทนและค่าใช้จ่ายของบริษัท) รวมถึงัจจัยความเสี่ยงที่เกี่ยวข้องกับการรับประกันภัย อาทิ ช่องทางการขาย และการติดตามเบี้ยประกันภัยค้างรับ เป็นต้น",
+                text = "การวิเคราะห์พอร์ตการรับประกันภัยและผลการดำเนินงาน (เบี้ยประกันภัยค่าสินไหมทดแทนและค่าใช้จ่ายของบริษัท) รวมถึงปัจจัยความเสี่ยงที่เกี่ยวข้องกับการรับประกันภัย อาทิ ช่องทางการขายและการติดตามเบี้ยประกันภัยค้างรับ เป็นต้น",
                 font = "TH SarabunPSK",
                 font_size = 14,
+                one_text_mamy_paragrap = true,
                 spacing_between_lines = true,
                 justification = Pikun.justificationLeft,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentTop
@@ -1206,7 +1207,7 @@ namespace Pikunword.Test
             {
                 rId = 13,
                 multi_line = true,
-                texts = new string[] { "- Loss ratio",  "- Expense ratio", "- Premium receivable before impairment" , "- Return on equity (ROE)" },
+                texts = new string[] { "- Loss ratio", "- Expense ratio", "- Premium receivable before impairment", "- Return on equity (ROE)" },
                 font = "TH SarabunPSK",
                 font_size = 14,
                 spacing_between_lines = true,
@@ -1235,15 +1236,16 @@ namespace Pikunword.Test
                 execut_type = pikun_execut_function.newTable,
                 table = new PikunTable
                 {
-                    rId = 18,
-                    table_cell_width_auto = true,
+                    rId = 28,
                     table_style = "TableGrid",
                     have_table_cell_margin = false,
-                    grid_column_size =4,
-                    grid_column = new string[] { "0", "0", "0", "0" }, //เป็น 0 เพราะต้องการ defualt 1870
-                    table_grid = t
+                    table_cell_width_auto = false,
+                    table_grid = t,
+                    grid_column_size = 4,
+                    grid_column = new string[] { "1488", "4320", "1890", "1758" },
                 }
             });
+
             //=============================================================================================
             //=============================================================================================
             //=============================================================================================

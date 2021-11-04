@@ -3971,100 +3971,221 @@ namespace Pikunword
                     }
                     else
                     {
-                        #region multi_line = false
                         Paragraph paragraph = p.rId.ToString().IsNullOrEmpty() ? newLineError("99", "ยัง ยังไม่ใส่ rId อีกเว้ย! щ(゜ロ゜щ)") : newLine(p.rId.ToString());
-
-                        runProperties = new RunProperties();
-                        paragraphProperties = new ParagraphProperties();
-                        paragraphMarkRunProperties = new ParagraphMarkRunProperties();
-
-                        #region txt prop
-                        if (!p.prop.IsNullOrEmpty())
+                        if (p.one_text_mamy_paragrap)
                         {
-                            for (int tp = 0; tp < p.prop.Length; tp++)
+                            #region one_text_mamy_paragrap = true
+
+                            Regex pattern = new Regex(@"\ ");
+                            var m = p.text.Split(' ');
+
+                            int sp_index = 0;
+                            foreach (var txt_sp in m)
                             {
-                                if (p.prop[tp] == Pikun.paragraphBold)
-                                {
-                                    paragraphMarkRunProperties.Append(newBold());
-                                    paragraphMarkRunProperties.Append(newBoldComplexScript());
+                                string str_sub = string.Empty;
 
-                                    runProperties.Append(newBold());
-                                    runProperties.Append(newBoldComplexScript());
-                                }
-                                else if (p.prop[tp] == Pikun.paragraphItalic)
-                                {
-                                    paragraphMarkRunProperties.Append(newItalic());
-                                    paragraphMarkRunProperties.Append(newItalicComplexScript());
+                                runProperties = new RunProperties();
+                                paragraphProperties = new ParagraphProperties();
+                                paragraphMarkRunProperties = new ParagraphMarkRunProperties();
 
-                                    runProperties.Append(newItalic());
-                                    runProperties.Append(newItalicComplexScript());
-                                }
-                                else if (p.prop[tp] == Pikun.paragraphUnderline)
+                                #region txt prop
+                                if (!p.prop.IsNullOrEmpty())
                                 {
-                                    paragraphMarkRunProperties.Append(newUnderline());
-                                    runProperties.Append(newUnderline());
+                                    for (int tp = 0; tp < p.prop.Length; tp++)
+                                    {
+                                        if (p.prop[tp] == Pikun.paragraphBold)
+                                        {
+                                            paragraphMarkRunProperties.Append(newBold());
+                                            paragraphMarkRunProperties.Append(newBoldComplexScript());
+
+                                            runProperties.Append(newBold());
+                                            runProperties.Append(newBoldComplexScript());
+                                        }
+                                        else if (p.prop[tp] == Pikun.paragraphItalic)
+                                        {
+                                            paragraphMarkRunProperties.Append(newItalic());
+                                            paragraphMarkRunProperties.Append(newItalicComplexScript());
+
+                                            runProperties.Append(newItalic());
+                                            runProperties.Append(newItalicComplexScript());
+                                        }
+                                        else if (p.prop[tp] == Pikun.paragraphUnderline)
+                                        {
+                                            paragraphMarkRunProperties.Append(newUnderline());
+                                            runProperties.Append(newUnderline());
+                                        }
+                                    }
+                                }
+
+
+                                if (!p.font.IsNullOrEmpty())
+                                {
+                                    paragraphMarkRunProperties.Append(newRunFonts(p.font));
+                                    runProperties.Append(newRunFonts(p.font));
+                                }
+
+                                if (p.font_size != 0)
+                                {
+                                    paragraphMarkRunProperties.Append(newFontSize(p.font_size));
+                                    paragraphMarkRunProperties.Append(newFontSizeComplexScript(p.font_size));
+
+                                    runProperties.Append(newFontSize(p.font_size));
+                                    runProperties.Append(newFontSizeComplexScript(p.font_size));
+                                }
+
+                                if (!p.color.IsNullOrEmpty())
+                                {
+                                    paragraphMarkRunProperties.Append(newColor(p.color));
+                                    runProperties.Append(newColor(p.color));
+                                }
+
+                                if (!p.justification.IsNullOrEmpty())
+                                {
+                                    paragraphProperties.Append(newJustification(p.justification));
+                                }
+
+                                if (!p.highlight.IsNullOrEmpty())
+                                {
+                                    runProperties.Append(newHighlight(p.highlight));
+                                }
+
+                                if (p.spacing_between_lines)
+                                {
+                                    paragraphProperties.Append(newSpacingBetweenLines("0"));
+                                }
+
+                                //Append all prop
+                                paragraphProperties.Append(paragraphMarkRunProperties);
+                                #endregion
+
+                                Run run_str_sub = new Run();
+
+                                Text text_sub = new Text() { Space = SpaceProcessingModeValues.Preserve };
+                                text_sub.Text = txt_sp;
+
+                                run_str_sub.Append(runProperties);
+                                run_str_sub.Append(text_sub);
+
+                                if (sp_index == 0)
+                                {
+                                    paragraph.Append(paragraphProperties);
+                                }
+
+                                if (txt_sp != m[m.Length - 1])
+                                {
+                                    Run run_space = new Run();
+
+                                    Text text_space = new Text() { Space = SpaceProcessingModeValues.Preserve };
+                                    text_space.Text = " ";
+
+                                    run_space.Append(text_space);
+
+                                    paragraph.Append(run_str_sub);
+                                    paragraph.Append(run_space);
+                                }
+                                else
+                                {
+                                    paragraph.Append(run_str_sub);
+                                }
+
+                                sp_index++;
+                            }
+                            #endregion
+                        }
+                        else
+                        {
+                            #region multi_line = false
+                            runProperties = new RunProperties();
+                            paragraphProperties = new ParagraphProperties();
+                            paragraphMarkRunProperties = new ParagraphMarkRunProperties();
+
+                            #region txt prop
+                            if (!p.prop.IsNullOrEmpty())
+                            {
+                                for (int tp = 0; tp < p.prop.Length; tp++)
+                                {
+                                    if (p.prop[tp] == Pikun.paragraphBold)
+                                    {
+                                        paragraphMarkRunProperties.Append(newBold());
+                                        paragraphMarkRunProperties.Append(newBoldComplexScript());
+
+                                        runProperties.Append(newBold());
+                                        runProperties.Append(newBoldComplexScript());
+                                    }
+                                    else if (p.prop[tp] == Pikun.paragraphItalic)
+                                    {
+                                        paragraphMarkRunProperties.Append(newItalic());
+                                        paragraphMarkRunProperties.Append(newItalicComplexScript());
+
+                                        runProperties.Append(newItalic());
+                                        runProperties.Append(newItalicComplexScript());
+                                    }
+                                    else if (p.prop[tp] == Pikun.paragraphUnderline)
+                                    {
+                                        paragraphMarkRunProperties.Append(newUnderline());
+                                        runProperties.Append(newUnderline());
+                                    }
                                 }
                             }
+
+
+                            if (!p.font.IsNullOrEmpty())
+                            {
+                                paragraphMarkRunProperties.Append(newRunFonts(p.font));
+                                runProperties.Append(newRunFonts(p.font));
+                            }
+
+                            if (p.font_size != 0)
+                            {
+                                paragraphMarkRunProperties.Append(newFontSize(p.font_size));
+                                paragraphMarkRunProperties.Append(newFontSizeComplexScript(p.font_size));
+
+                                runProperties.Append(newFontSize(p.font_size));
+                                runProperties.Append(newFontSizeComplexScript(p.font_size));
+                            }
+
+                            if (!p.color.IsNullOrEmpty())
+                            {
+                                paragraphMarkRunProperties.Append(newColor(p.color));
+                                runProperties.Append(newColor(p.color));
+                            }
+
+                            if (!p.justification.IsNullOrEmpty())
+                            {
+                                paragraphProperties.Append(newJustification(p.justification));
+                            }
+
+                            if (!p.highlight.IsNullOrEmpty())
+                            {
+                                runProperties.Append(newHighlight(p.highlight));
+                            }
+
+                            if (p.spacing_between_lines)
+                            {
+                                paragraphProperties.Append(newSpacingBetweenLines("0"));
+                            }
+
+                            //Append all prop
+                            paragraphProperties.Append(paragraphMarkRunProperties);
+                            #endregion
+
+                            Run run = new Run();
+                            ProofError proofError1 = new ProofError() { Type = ProofingErrorValues.SpellStart };
+
+                            Text text = new Text() { Space = SpaceProcessingModeValues.Preserve };
+                            text.Text = p.text;
+
+                            run.Append(runProperties);
+                            run.Append(text);
+
+                            ProofError proofError2 = new ProofError() { Type = ProofingErrorValues.SpellEnd };
+
+                            paragraph.Append(proofError1);
+                            paragraph.Append(paragraphProperties);
+                            paragraph.Append(run);
+                            paragraph.Append(proofError2);
+                            #endregion
                         }
-
-
-                        if (!p.font.IsNullOrEmpty())
-                        {
-                            paragraphMarkRunProperties.Append(newRunFonts(p.font));
-                            runProperties.Append(newRunFonts(p.font));
-                        }
-
-                        if (p.font_size != 0)
-                        {
-                            paragraphMarkRunProperties.Append(newFontSize(p.font_size));
-                            paragraphMarkRunProperties.Append(newFontSizeComplexScript(p.font_size));
-
-                            runProperties.Append(newFontSize(p.font_size));
-                            runProperties.Append(newFontSizeComplexScript(p.font_size));
-                        }
-
-                        if (!p.color.IsNullOrEmpty())
-                        {
-                            paragraphMarkRunProperties.Append(newColor(p.color));
-                            runProperties.Append(newColor(p.color));
-                        }
-
-                        if (!p.justification.IsNullOrEmpty())
-                        {
-                            paragraphProperties.Append(newJustification(p.justification));
-                        }
-
-                        if (!p.highlight.IsNullOrEmpty())
-                        {
-                            runProperties.Append(newHighlight(p.highlight));
-                        }
-
-                        if (p.spacing_between_lines)
-                        {
-                            paragraphProperties.Append(newSpacingBetweenLines("0"));
-                        }
-
-                        //Append all prop
-                        paragraphProperties.Append(paragraphMarkRunProperties);
-                        #endregion
-
-                        Run run = new Run();
-                        ProofError proofError1 = new ProofError() { Type = ProofingErrorValues.SpellStart };
-
-                        Text text = new Text() { Space = SpaceProcessingModeValues.Preserve };
-                        text.Text = p.text;
-
-                        run.Append(runProperties);
-                        run.Append(text);
-
-                        ProofError proofError2 = new ProofError() { Type = ProofingErrorValues.SpellEnd };
-
-                        paragraph.Append(proofError1);
-                        paragraph.Append(paragraphProperties);
-                        paragraph.Append(run);
-                        paragraph.Append(proofError2);
-                        #endregion
-
                         tableCell.Append(tableCellProperties);
                         tableCell.Append(paragraph);
                     }
