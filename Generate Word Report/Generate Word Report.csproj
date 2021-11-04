@@ -86,6 +86,7 @@
     <Compile Include="NewGen\text_prop_multi.cs" />
     <Compile Include="NewGen\text__list.cs" />
     <Compile Include="NewGen\text__multi_list.cs" />
+    <Compile Include="NewGen\word_emtry.cs" />
     <Compile Include="Picture.cs" />
     <Compile Include="PicturePart2.cs" />
     <Compile Include="PikunNumberingFormat.cs" />
