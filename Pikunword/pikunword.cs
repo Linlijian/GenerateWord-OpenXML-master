@@ -77,8 +77,15 @@ namespace Pikunword
             catch (Exception ex)
             {
                 _dto.ErrorResults.error_message = ex.Message;
+
+                var st = new StackTrace(ex, true);
+                var frame = st.GetFrame(0);
+                var line = frame.GetFileLineNumber();
+
                 Debug.WriteLine("============================================================");
                 Debug.WriteLine(ex.Message);
+                Debug.WriteLine(frame);
+                Debug.WriteLine("Line: " + line);
                 Debug.WriteLine("============================================================");
 
                 return _dto;

@@ -200,6 +200,10 @@ namespace Pikunword.Test
                 text = "รายการ",
                 font = "TH SarabunPSK",
                 font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 prop = new string[] { Pikun.paragraphBold },
                 spacing_between_lines = true,
                 vertical_merge = true,
@@ -212,6 +216,10 @@ namespace Pikunword.Test
                 text = "ค่าน้ำหนักของวินาศภัย",
                 font = "TH SarabunPSK",
                 font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 prop = new string[] { Pikun.paragraphBold },
                 vertical_merge = true,
                 spacing_between_lines = true,
@@ -224,6 +232,10 @@ namespace Pikunword.Test
                 text = "ค่าน้ำหนักของชีวิต",
                 font = "TH SarabunPSK",
                 font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 prop = new string[] { Pikun.paragraphBold },
                 vertical_merge = true,
                 spacing_between_lines = true,
@@ -236,6 +248,10 @@ namespace Pikunword.Test
                 text = "ปี 2562",
                 font = "TH SarabunPSK",
                 font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 prop = new string[] { Pikun.paragraphBold },
                 vertical_merge = true,
                 grid_span = 2,
@@ -248,16 +264,28 @@ namespace Pikunword.Test
             {
                 rId = 17,
                 vertical_merge_child = true,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
             });
             c2.Add(new PikunTableCellProperties
             {
                 rId = 18,
                 vertical_merge_child = true,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
             });
             c2.Add(new PikunTableCellProperties
             {
                 rId = 19,
                 vertical_merge_child = true,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
             });
             c2.Add(new PikunTableCellProperties
             {
@@ -265,6 +293,10 @@ namespace Pikunword.Test
                 text = "คะแนน (เต็ม 5)*",
                 font = "TH SarabunPSK",
                 font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 prop = new string[] { Pikun.paragraphBold },
                 spacing_between_lines = true,
                 justification = Pikun.justificationCenter,
@@ -276,6 +308,10 @@ namespace Pikunword.Test
                 multi_line = true,
                 texts = new string[] { "ผลรวม" ,"(คะแนน x น้ำหนัก)" },
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 prop = new string[] { Pikun.paragraphBold },
                 spacing_between_lines = true,
@@ -288,6 +324,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "1. Profitability",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 spacing_between_lines = true,
                 font_size = 14
             });
@@ -296,6 +336,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "25%",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 justification = Pikun.justificationCenter,
                 spacing_between_lines = true,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
@@ -305,6 +349,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "30%",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 justification = Pikun.justificationCenter,
                 spacing_between_lines = true,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
@@ -314,6 +362,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "x.xx",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 spacing_between_lines = true,
                 justification = Pikun.justificationCenter,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
@@ -323,6 +375,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "x.xx",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 spacing_between_lines = true,
                 justification = Pikun.justificationCenter,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
@@ -333,6 +389,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "2. Capital adequacy",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 spacing_between_lines = true,
                 font_size = 14
             });
@@ -341,6 +401,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "30%",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 justification = Pikun.justificationCenter,
                 spacing_between_lines = true,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
@@ -350,6 +414,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "25%",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 justification = Pikun.justificationCenter,
                 spacing_between_lines = true,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
@@ -359,6 +427,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "x.xx",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 justification = Pikun.justificationCenter,
                 spacing_between_lines = true,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
@@ -368,6 +440,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "x.xx",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 justification = Pikun.justificationCenter,
                 spacing_between_lines = true,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
@@ -378,6 +454,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "3. Liquidity",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 spacing_between_lines = true,
                 font_size = 14
             });
@@ -386,6 +466,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "20%",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 justification = Pikun.justificationCenter,
                 spacing_between_lines = true,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
@@ -395,6 +479,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "15%",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 justification = Pikun.justificationCenter,
                 spacing_between_lines = true,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
@@ -404,6 +492,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "x.xx",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 justification = Pikun.justificationCenter,
                 spacing_between_lines = true,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
@@ -413,6 +505,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "x.xx",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 justification = Pikun.justificationCenter,
                 spacing_between_lines = true,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
@@ -423,6 +519,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "4. Reinsurance",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 spacing_between_lines = true,
                 font_size = 14
             });
@@ -431,6 +531,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "15%",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 justification = Pikun.justificationCenter,
                 spacing_between_lines = true,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
@@ -440,6 +544,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "5%",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 justification = Pikun.justificationCenter,
                 spacing_between_lines = true,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
@@ -449,6 +557,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "x.xx",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 justification = Pikun.justificationCenter,
                 spacing_between_lines = true,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
@@ -458,6 +570,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "x.xx",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 justification = Pikun.justificationCenter,
                 spacing_between_lines = true,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
@@ -468,6 +584,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "5. Investment",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 spacing_between_lines = true,
                 font_size = 14
             });
@@ -475,6 +595,10 @@ namespace Pikunword.Test
             {
                 rId = 13,
                 text = "10%",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font = "TH SarabunPSK",
                 justification = Pikun.justificationCenter,
                 spacing_between_lines = true,
@@ -485,6 +609,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "25%",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 justification = Pikun.justificationCenter,
                 spacing_between_lines = true,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
@@ -494,6 +622,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "x.xx",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 justification = Pikun.justificationCenter,
                 spacing_between_lines = true,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
@@ -503,6 +635,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "x.xx",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 justification = Pikun.justificationCenter,
                 spacing_between_lines = true,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
@@ -514,6 +650,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "รวม",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 prop = new string[] { Pikun.paragraphBold },
                 justification = Pikun.justificationCenter,
@@ -525,6 +665,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "100%",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 prop = new string[] { Pikun.paragraphBold },
                 justification = Pikun.justificationCenter,
@@ -536,6 +680,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "100%",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 prop = new string[] { Pikun.paragraphBold },
                 justification = Pikun.justificationCenter,
@@ -546,6 +694,10 @@ namespace Pikunword.Test
             {
                 rId = 13,
                 text = "",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 justification = Pikun.justificationCenter,
                 spacing_between_lines = true,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
@@ -555,6 +707,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "x.xx",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 prop = new string[] { Pikun.paragraphBold },
                 spacing_between_lines = true,
@@ -567,6 +723,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "คะแนนหลังคิดค่าน้ำหนักการประเมินเชิงปริมาณ (ร้อยละ 80)",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 grid_span = 4,
                 prop = new string[] { Pikun.paragraphBold },
@@ -580,6 +740,10 @@ namespace Pikunword.Test
                 font_size = 14,
                 text = "x.xx (.80)",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 prop = new string[] { Pikun.paragraphBold },
                 justification = Pikun.justificationCenter,
                 spacing_between_lines = true,
@@ -741,6 +905,10 @@ namespace Pikunword.Test
                 text = "รายการ",
                 font = "TH SarabunPSK",
                 font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 spacing_between_lines = true,
                 prop = new string[] { Pikun.paragraphBold },
                 justification = Pikun.justificationCenter,
@@ -752,6 +920,10 @@ namespace Pikunword.Test
                 text = "ค่าน้ำหนัก",
                 font = "TH SarabunPSK",
                 font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 spacing_between_lines = true,
                 prop = new string[] { Pikun.paragraphBold },
                 justification = Pikun.justificationCenter,
@@ -763,6 +935,10 @@ namespace Pikunword.Test
                 multi_line = true,
                 texts = new string[] { "คะแนน", "(เต็ม 5 คะแนน) *" },
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 spacing_between_lines = true,
                 prop = new string[] { Pikun.paragraphBold },
@@ -775,6 +951,10 @@ namespace Pikunword.Test
                 multi_line = true,
                 texts = new string[] { "คะแนน", "(คะแนน x น้ำหนัก)" },
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 spacing_between_lines = true,
                 prop = new string[] { Pikun.paragraphBold },
@@ -787,6 +967,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "1. ความเพียงพอของการบริหารจัดการองค์กร (Adequacy of corporate management)",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 spacing_between_lines = true,
                 font_size = 14
             });
@@ -796,6 +980,10 @@ namespace Pikunword.Test
                 text = "25%",
                 font = "TH SarabunPSK",
                 font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 spacing_between_lines = true,
                 justification = Pikun.justificationCenter,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
@@ -805,6 +993,10 @@ namespace Pikunword.Test
                 rId = 15,
                 text = "x.xx",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 spacing_between_lines = true,
                 justification = Pikun.justificationCenter,
@@ -815,6 +1007,10 @@ namespace Pikunword.Test
                 rId = 16,
                 text = "x.xx",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 spacing_between_lines = true,
                 justification = Pikun.justificationCenter,
@@ -827,6 +1023,10 @@ namespace Pikunword.Test
                 text = "2. ความเพียงพอของระบบการควบคุมภายในและการตรวจสอบภายใน (Adequacy of Internal control system andInternal Audit Activities)",
                 font = "TH SarabunPSK",
                 spacing_between_lines = true,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14
             });
             c3.Add(new PikunTableCellProperties
@@ -835,6 +1035,10 @@ namespace Pikunword.Test
                 text = "25%",
                 font = "TH SarabunPSK",
                 font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 spacing_between_lines = true,
                 justification = Pikun.justificationCenter,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
@@ -844,6 +1048,10 @@ namespace Pikunword.Test
                 rId = 15,
                 text = "x.xx",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 spacing_between_lines = true,
                 justification = Pikun.justificationCenter,
@@ -854,6 +1062,10 @@ namespace Pikunword.Test
                 rId = 16,
                 text = "x.xx",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 spacing_between_lines = true,
                 justification = Pikun.justificationCenter,
@@ -865,6 +1077,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "3. ความเพียงพอของระบบการบริหารความเสี่ยง (Adequacy of risk management system)",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 spacing_between_lines = true,
                 font_size = 14
             });
@@ -873,6 +1089,10 @@ namespace Pikunword.Test
                 rId = 14,
                 text = "25%",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 spacing_between_lines = true,
                 justification = Pikun.justificationCenter,
@@ -883,6 +1103,10 @@ namespace Pikunword.Test
                 rId = 15,
                 text = "x.xx",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 spacing_between_lines = true,
                 justification = Pikun.justificationCenter,
@@ -893,6 +1117,10 @@ namespace Pikunword.Test
                 rId = 16,
                 text = "x.xx",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 spacing_between_lines = true,
                 justification = Pikun.justificationCenter,
@@ -904,6 +1132,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "4. External audit and Actuary risks",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 spacing_between_lines = true,
                 font_size = 14
             });
@@ -913,6 +1145,10 @@ namespace Pikunword.Test
                 text = "25%",
                 font = "TH SarabunPSK",
                 font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 spacing_between_lines = true,
                 justification = Pikun.justificationCenter,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
@@ -922,6 +1158,10 @@ namespace Pikunword.Test
                 rId = 15,
                 text = "x.xx",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 spacing_between_lines = true,
                 justification = Pikun.justificationCenter,
@@ -932,6 +1172,10 @@ namespace Pikunword.Test
                 rId = 16,
                 text = "x.xx",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 spacing_between_lines = true,
                 justification = Pikun.justificationCenter,
@@ -943,6 +1187,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "รวม",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 spacing_between_lines = true,
                 prop = new string[] { Pikun.paragraphBold },
                 justification = Pikun.justificationCenter,
@@ -954,6 +1202,10 @@ namespace Pikunword.Test
                 rId = 14,
                 text = "100%",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 justification = Pikun.justificationCenter,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter,
@@ -964,6 +1216,10 @@ namespace Pikunword.Test
                 rId = 15,
                 text = "",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 justification = Pikun.justificationCenter,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter,
@@ -974,6 +1230,10 @@ namespace Pikunword.Test
                 rId = 16,
                 text = "x.xx",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 prop = new string[] { Pikun.paragraphBold },
                 justification = Pikun.justificationCenter,
@@ -985,6 +1245,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "คะแนนหลังคิดค่าน้ำหนักการประเมินเชิงคุณภาพ (ร้อยละ 20)",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 grid_span = 3,
                 prop = new string[] { Pikun.paragraphBold },
@@ -998,6 +1262,10 @@ namespace Pikunword.Test
                 font_size = 14,
                 text = "x.xx (.20)",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 prop = new string[] { Pikun.paragraphBold },
                 justification = Pikun.justificationCenter,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter,
@@ -1116,6 +1384,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "การประเมินเชิงปริมาณ (80%)",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 justification = Pikun.justificationCenter,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter,
@@ -1126,6 +1398,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "x.xx",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 justification = Pikun.justificationCenter,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter,
@@ -1137,6 +1413,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "การประเมินเชิงคุณภาพ (20%)",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 justification = Pikun.justificationCenter,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter,
@@ -1147,6 +1427,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "x.xx",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 justification = Pikun.justificationCenter,
                 table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter,
@@ -1158,6 +1442,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "คะแนนรวม",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 prop = new string[] { Pikun.paragraphBold },
                 justification = Pikun.justificationCenter,
@@ -1169,6 +1457,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "x.xx",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 prop = new string[] { Pikun.paragraphBold },
                 justification = Pikun.justificationCenter,
@@ -1336,6 +1628,10 @@ namespace Pikunword.Test
                 text = "องค์ประกอบหลัก",
                 font_size = 14,
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 vertical_merge = true,
                 spacing_between_lines = true,
                 prop = new string[] { Pikun.paragraphBold },
@@ -1347,6 +1643,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "รายละเอียดการวิเคราะห์",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 vertical_merge = true,
                 spacing_between_lines = true,
@@ -1359,6 +1659,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "องค์ประกอบย่อย",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 grid_span = 2,
                 spacing_between_lines = true,
@@ -1379,12 +1683,20 @@ namespace Pikunword.Test
             {
                 rId = 13,
                 font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 vertical_merge_child = true
             });
             row.Add(new PikunTableCellProperties
             {
                 rId = 13,
                 font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 vertical_merge_child = true
             });
             row.Add(new PikunTableCellProperties
@@ -1392,6 +1704,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "บริษัทประกันวินาศภัย",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 prop = new string[] { Pikun.paragraphBold },
                 spacing_between_lines = true,
@@ -1403,6 +1719,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "บริษัทประกันชีวิต",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 prop = new string[] { Pikun.paragraphBold },
                 spacing_between_lines = true,
@@ -1422,6 +1742,10 @@ namespace Pikunword.Test
             {
                 rId = 13,
                 text = "1. Profitability",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font = "TH SarabunPSK",
                 font_size = 14,
                 spacing_between_lines = true,
@@ -1436,6 +1760,10 @@ namespace Pikunword.Test
                     "ปัจจัยความเสี่ยงที่เกี่ยวข้องกับการรับประกันภัย อาทิ ช่องทาง",
                     "การขายและการติดตามเบี้ยประกันภัยค้างรับ เป็นต้น"},
                 multi_line = true,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font = "TH SarabunPSK",
                 font_size = 14,
                 spacing_between_lines = true,
@@ -1448,6 +1776,10 @@ namespace Pikunword.Test
                 multi_line = true,
                 texts = new string[] { "- Loss ratio", "- Expense ratio", "- Premium receivable before impairment", "- Return on equity (ROE)" },
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 spacing_between_lines = true,
                 justification = Pikun.justificationLeft,
@@ -1459,6 +1791,10 @@ namespace Pikunword.Test
                 multi_line = true,
                 texts = new string[] { "- Expense ratio", "- Change in net written premium", "- Change in single premium", "- Return on equity (ROE)" },
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 spacing_between_lines = true,
                 justification = Pikun.justificationLeft,
@@ -1478,6 +1814,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "2. Capital adequacy",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 spacing_between_lines = true,
                 justification = Pikun.justificationLeft,
@@ -1489,6 +1829,10 @@ namespace Pikunword.Test
                 texts = new string[] { "การวิเคราะห์องค์ประกอบของเงินกองทุนที่สามารถนำมาใช้ได้ทั้งหมด ",
                     "(TCA) และเงินกองทุนที่ต้องดำรงทั้งหมด (TCR) ซึ่งต้องสามารถ",
                     "แสดงให้เห็นถึงปัจจัยเสี่ยงที่กระทบต่อระดับเงินกองทุนของบริษัท"},
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 multi_line = true,
                 font = "TH SarabunPSK",
                 font_size = 14,
@@ -1502,6 +1846,10 @@ namespace Pikunword.Test
                 multi_line = true,
                 texts = new string[] { "- Capital adequacy ratio (CAR)", "- Change in TCA", "- Net written premium per TCA", "- Commission income per TCA" },
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 spacing_between_lines = true,
                 justification = Pikun.justificationLeft,
@@ -1513,6 +1861,10 @@ namespace Pikunword.Test
                 multi_line = true,
                 texts = new string[] { "- Capital adequacy ratio (CAR)", "- Change in TCA" },
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 spacing_between_lines = true,
                 justification = Pikun.justificationLeft,
@@ -1532,6 +1884,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "3. Liquidity",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 spacing_between_lines = true,
                 justification = Pikun.justificationLeft,
@@ -1544,6 +1900,10 @@ namespace Pikunword.Test
                     "ของกิจการในการเปลี่ยนทรัพย์สินที่มีอยู่ไปเป็นเงินสดเพื่อแสดง",
                     "ถึงความสามารถในการชำระภาระผูกพัน (หนี้) ระยะสั้นของกิจการ",
                     "ในอนาคต"},
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 multi_line = true,
                 font = "TH SarabunPSK",
                 font_size = 14,
@@ -1557,6 +1917,10 @@ namespace Pikunword.Test
                 multi_line = true,
                 texts = new string[] { "- Liquidity ratio", "- Change in TCA", "- Investment asset per policyholder liability", "- Bad debt per total income" },
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 spacing_between_lines = true,
                 justification = Pikun.justificationLeft,
@@ -1568,6 +1932,10 @@ namespace Pikunword.Test
                 multi_line = true,
                 texts = new string[] { "- Investment asset per reserve", "- Surrender ratio" },
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 spacing_between_lines = true,
                 justification = Pikun.justificationLeft,
@@ -1588,6 +1956,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "4. Reinsurance",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 spacing_between_lines = true,
                 justification = Pikun.justificationLeft,
@@ -1599,6 +1971,10 @@ namespace Pikunword.Test
                 texts = new string[] { "การวิเคราะห์สัดส่วนการประกันภัยต่อและการกระจุกตัวของบริษัท",
                     "ประกันภัยต่อรวมถึงความสามารถในเร่งรัดจัดเก็บเงินค้างรับจาก",
                     "การประกันภัยต่อ"},
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 multi_line = true,
                 font = "TH SarabunPSK",
                 font_size = 14,
@@ -1612,6 +1988,10 @@ namespace Pikunword.Test
                 multi_line = true,
                 texts = new string[] { "- Reinsurance premium receivable ratio", "- Reinsurance income ratio", "- Change in loss ratio after reinsurance" },
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 spacing_between_lines = true,
                 justification = Pikun.justificationLeft,
@@ -1623,6 +2003,10 @@ namespace Pikunword.Test
                 multi_line = true,
                 texts = new string[] { "- Retention ratio", "- Change in loss ratio after reinsurance" },
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 spacing_between_lines = true,
                 justification = Pikun.justificationLeft,
@@ -1642,6 +2026,10 @@ namespace Pikunword.Test
                 rId = 13,
                 text = "5. Investment",
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 spacing_between_lines = true,
                 justification = Pikun.justificationLeft,
@@ -1656,6 +2044,10 @@ namespace Pikunword.Test
                     "ในสินทรัพย์ลงทุน เป็นต้น"},
                 multi_line = true,
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 spacing_between_lines = true,
                 justification = Pikun.justificationLeft,
@@ -1667,6 +2059,10 @@ namespace Pikunword.Test
                 multi_line = true,
                 texts = new string[] { "- Return on investment (ROI)", "- Return and profit on investment" },
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 spacing_between_lines = true,
                 justification = Pikun.justificationLeft,
@@ -1678,6 +2074,10 @@ namespace Pikunword.Test
                 multi_line = true,
                 texts = new string[] { "- Duration gap", "- Return on investment (ROI)", "- Return and profit on" },
                 font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
                 font_size = 14,
                 spacing_between_lines = true,
                 justification = Pikun.justificationLeft,
@@ -1707,24 +2107,1094 @@ namespace Pikunword.Test
             //=============================================================================================
             #endregion
 
+            #region paragrap 6
+            //=============================================================================================
+            pk.word.Models.Add(new pikunword_model
+            {
+                execut_type = pikun_execut_function.newLine,
+                paragraph = new PikunParagraph
+                {
+                    rId = 22,
+                }
+            });
+            pk.word.Models.Add(new pikunword_model
+            {
+                execut_type = pikun_execut_function.newLineNumbering,
+                paragraph = new PikunParagraph
+                {
+                    text = "ความเสี่ยงที่วัดจากตัวชี้วัดในเชิงคุณภาพ",
+                    rId = 5,
+                    font_size = 14,
+                    numbering_id = 1,
+                    font = "TH SarabunPSK",
+                    numbering_level_reference = 1
+                }
+            });
+            //=============================================================================================
+            #endregion
 
-            //=============================================================================================
-            //=============================================================================================
-            //=============================================================================================
-            //=============================================================================================
-            //=============================================================================================
-            //=============================================================================================
-            //=============================================================================================
-            //=============================================================================================
-            //=============================================================================================
-            //=============================================================================================
-            //=============================================================================================
-            //=============================================================================================
-            //=============================================================================================
-            //=============================================================================================
-            //=============================================================================================
-            //=============================================================================================
-            //=============================================================================================
+            #region table 5
+            row = new List<PikunTableCellProperties>();
+            t = new List<PikunTableGrid>();
+
+            #region r1
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "มุมมอง",
+                font_size = 14,
+                font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "รายละเอียดการวิเคราะห์",
+                font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font_size = 14,
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            t.Add(new PikunTableGrid
+            {
+                rId = 12,
+                table_cell_properties = row
+            });
+            #endregion
+
+            #region r2
+            row = new List<PikunTableCellProperties>();
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "1) ความเพียงพอของการบริหารจัดการองค์กร (Adequacy of corporate management)",
+                font_size = 14,
+                font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                spacing_between_lines = true,
+                justification = Pikun.justificationLeft,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentTop 
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "พิจารณาโครงสร้างและองค์ประกอบต่างๆ ของบริษัท แผนธุรกิจ และช่องทางการขาย เป็นต้น",
+                font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font_size = 14,
+                spacing_between_lines = true,
+                justification = Pikun.justificationLeft,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentTop
+            });
+            t.Add(new PikunTableGrid
+            {
+                rId = 12,
+                table_cell_properties = row
+            });
+            #endregion
+
+            #region r3
+            row = new List<PikunTableCellProperties>();
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                multi_line = true,
+                texts = new string[] { "2) ความเพียงพอของระบบการควบคุมภายในและการตรวจสอบ",
+                    "ภายใน(Adequacy of Internalcontrol system and Internal Audit Activities)" },
+                font_size = 14,
+                font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                spacing_between_lines = true,
+                justification = Pikun.justificationLeft,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentTop
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "พิจารณาองค์ประกอบคณะกรรมการตรวจสอบ และคุณภาพของการนำส่งรายงานทางการเงิน",
+                font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font_size = 14,
+                spacing_between_lines = true,
+                justification = Pikun.justificationLeft,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentTop
+            });
+            t.Add(new PikunTableGrid
+            {
+                rId = 12,
+                table_cell_properties = row
+            });
+            #endregion
+
+            #region r4
+            row = new List<PikunTableCellProperties>();
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "3) ความเพียงพอของระบบการบริหารความเสี่ยง (Adequacy of risk management system)",
+                font_size = 14,
+                font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                spacing_between_lines = true,
+                justification = Pikun.justificationLeft,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentTop
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "พิจารณาจากผลการตรวจสอบของบริษัท นโยบายบริหารความเสี่ยง และผลทดสอบสภาวะวิกฤต(Stress Test) เป็นต้น",
+                font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font_size = 14,
+                spacing_between_lines = true,
+                justification = Pikun.justificationLeft,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentTop
+            });
+            t.Add(new PikunTableGrid
+            {
+                rId = 12,
+                table_cell_properties = row
+            });
+            #endregion
+
+            #region r5
+            row = new List<PikunTableCellProperties>();
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "4) External audit and Actuary risks",
+                font_size = 14,
+                font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                spacing_between_lines = true,
+                justification = Pikun.justificationLeft,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentTop
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "วิเคราะห์คุณภาพและแสดงความเห็นของผู้สอบบัญชี คุณภาพนักคณิตศาสตร์ประกันภัย เป็นต้น",
+                font = "TH SarabunPSK",
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                spacing_between_lines = true,
+                justification = Pikun.justificationLeft,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentTop
+            });
+            t.Add(new PikunTableGrid
+            {
+                rId = 12,
+                table_cell_properties = row
+            });
+            #endregion
+
+            pk.word.Models.Add(new pikunword_model
+            {
+                execut_type = pikun_execut_function.newTable,
+                table = new PikunTable
+                {
+                    rId = 28,
+                    table_style = "TableGrid",
+                    have_table_cell_margin = false,
+                    table_cell_width_auto = false,
+                    table_grid = t,
+                    grid_column_size = 2,
+                    grid_column = new string[] { "5000", "5000" },
+                }
+            });
+
+            #endregion
+
+            #region paragrap 7
+            pk.word.Models.Add(new pikunword_model
+            {
+                execut_type = pikun_execut_function.newLineNormal,
+                paragraph = new PikunParagraph
+                {
+                    rId = 22,
+                    font_size = 14,
+                    font = "TH SarabunPSK",
+                    text = "           ทั้งนี้ รายละเอียดการวิเคราะห์องค์ประกอบของการประเมินเชิงปริมาณและเชิงคุณภาพในแต่ละรายการจะขึ้นอยู่กับดุลยพินิจ ของผู้วิเคราะห์แต่ละคนในการพิจารณาเลือกประเด็นวิเคราะห์ที่เห็นว่าสำคัญและมีความเสี่ยง"
+                }
+            });
+
+            var space = new pikunword_model
+            {
+                execut_type = pikun_execut_function.newLine,
+                paragraph = new PikunParagraph
+                {
+                    rId = 22,
+                }
+            };
+            pk.word.Models.Add(space);
+
+            pk.word.Models.Add(new pikunword_model
+            {
+                execut_type = pikun_execut_function.newLineNumbering,
+                paragraph = new PikunParagraph
+                {
+                    text = "ตารางความเสี่ยงของบริษัทที่กระทบต่ออุตสาหกรรม",
+                    rId = 5,
+                    font_size = 14,
+                    numbering_id = 1,
+                    font = "TH SarabunPSK",
+                    numbering_level_reference = 0
+                }
+            });
+            pk.word.Models.Add(new pikunword_model
+            {
+                execut_type = pikun_execut_function.newLineNormal,
+                paragraph = new PikunParagraph
+                {
+                    rId = 22,
+                    font_size = 14,
+                    font = "TH SarabunPSK",
+                    text = "           จากสรุปผลคะแนนความเสี่ยง นำมาทำ Risk Matrix เปรียบเทียบ Rating ของบริษัทกับผลกระทบในระดับอุตสาหกรรม"
+                }
+            });
+
+            pk.word.Models.Add(space);
+
+            models = new List<PikunParagraphManyProp>();
+            models.Add(new PikunParagraphManyProp
+            {
+                text = "ตารางความเสี่ยงของบริษัทที่กระทบต่ออุตสาหกรรม : Risk Mapping",
+                font = "TH SarabunPSK",
+                font_size = 16,
+                prop = new string[] { Pikun.paragraphBold, Pikun.paragraphUnderline }
+            });
+            pk.word.Models.Add(new pikunword_model
+            {
+                execut_type = pikun_execut_function.newLineManyprop,
+                paragraph = new PikunParagraph
+                {
+                    rId = 22,
+                    many_prop = models,
+                }
+            });
+            #endregion
+
+            #region table 6
+            row = new List<PikunTableCellProperties>();
+            t = new List<PikunTableGrid>();
+
+            #region r1
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Size",
+                font_size = 14,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationLeft,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Probability/Effect",
+                font_size = 14,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationLeft,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                multi_line = true,
+                texts = new string[] {"Not important","(1)" },
+                font_size = 14,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                multi_line = true,
+                texts = new string[] { "Slightly important", "(2)" },
+                font_size = 14,
+                font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                multi_line = true,
+                texts = new string[] { "Important", "(3)" },
+                font_size = 14,
+                font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                multi_line = true,
+                texts = new string[] { "Serious", "(4)" },
+                font_size = 14,
+                font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                multi_line = true,
+                texts = new string[] { "Critical", "(5)" },
+                font_size = 14,
+                font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            t.Add(new PikunTableGrid
+            {
+                rId = 12,
+                table_cell_properties = row
+            });
+            #endregion
+
+            #region r2
+            row = new List<PikunTableCellProperties>();
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "L",
+                font_size = 14,
+                font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationLeft,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Very High",
+                font_size = 14,
+                font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationLeft,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Low med",
+                fill = Pikun.Green_Thumb,
+                font_size = 14,
+                font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Medium",
+                fill = Pikun.Yellow_W3C,
+                font_size = 14,
+                font = "TH SarabunPSK",
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Med Hi",
+                fill = Pikun.Orange_W3C,
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "High",
+                fill = Pikun.Red_W3C,
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "High",
+                fill = Pikun.Red_W3C,
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            t.Add(new PikunTableGrid
+            {
+                rId = 12,
+                table_cell_properties = row
+            });
+            #endregion
+
+            #region r3
+            row = new List<PikunTableCellProperties>();
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "M++",
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationLeft,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "High",
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationLeft,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Low",
+                fill = Pikun.Green_W3C,
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Low med",
+                fill = Pikun.Green_Thumb,
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Medium",
+                fill = Pikun.Yellow_W3C,
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Med Hi",
+                fill = Pikun.Orange_W3C,
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "High",
+                fill = Pikun.Red_W3C,
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            t.Add(new PikunTableGrid
+            {
+                rId = 12,
+                table_cell_properties = row
+            });
+            #endregion
+
+            #region r4
+            row = new List<PikunTableCellProperties>();
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "M",
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationLeft,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Possible",
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationLeft,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Low",
+                fill = Pikun.Green_W3C,
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Low med",
+                fill = Pikun.Green_Thumb,
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Medium",
+                fill = Pikun.Yellow_W3C,
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Med Hi",
+                fill = Pikun.Orange_W3C,
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Med Hi",
+                fill = Pikun.Orange_W3C,
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            t.Add(new PikunTableGrid
+            {
+                rId = 12,
+                table_cell_properties = row
+            });
+            #endregion
+
+            #region r5
+            row = new List<PikunTableCellProperties>();
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "S++",
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationLeft,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Low Possibility",
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationLeft,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Low",
+                fill = Pikun.Green_W3C,
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Low med",
+                fill = Pikun.Green_Thumb,
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Low med",
+                fill = Pikun.Green_Thumb,
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Medium",
+                fill = Pikun.Yellow_W3C,
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Med Hi",
+                fill = Pikun.Orange_W3C,
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            t.Add(new PikunTableGrid
+            {
+                rId = 12,
+                table_cell_properties = row
+            });
+            #endregion
+
+            #region r6
+            row = new List<PikunTableCellProperties>();
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "S",
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationLeft,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Very Low",
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationLeft,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Low",
+                fill = Pikun.Green_W3C,
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Low",
+                fill = Pikun.Green_W3C,
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Low med",
+                fill = Pikun.Green_Thumb,
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });            
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Medium",
+                fill = Pikun.Yellow_W3C,
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "Medium",
+                fill = Pikun.Yellow_W3C,
+                font_size = 14,
+                top_border_size = 6,
+                bottom_border_size = 6,
+                left_border_size = 6,
+                right_border_size = 6,
+                font = "TH SarabunPSK",
+                spacing_between_lines = true,
+                prop = new string[] { Pikun.paragraphBold },
+                justification = Pikun.justificationCenter,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentCenter
+            });
+            t.Add(new PikunTableGrid
+            {
+                rId = 12,
+                table_cell_properties = row
+            });
+            #endregion
+
+            pk.word.Models.Add(new pikunword_model
+            {
+                execut_type = pikun_execut_function.newTable,
+                table = new PikunTable
+                {
+                    rId = 28,
+                    table_style = "TableGrid",
+                    have_table_cell_margin = false,
+                    table_cell_width_auto = false,
+                    table_grid = t,
+                    grid_column_size = 7,
+                    grid_column = new string[] { "900", "1800", "1600", "1800", "1300", "1300", "1300" },
+                }
+            });
+            #endregion
+
+            #region paragrap 8
+            pk.word.Models.Add(space);
+            pk.word.Models.Add(new pikunword_model
+            {
+                execut_type = pikun_execut_function.newLineNumbering,
+                paragraph = new PikunParagraph
+                {
+                    text = "แนวทางกำกับและติดตาม",
+                    rId = 5,
+                    font_size = 14,
+                    numbering_id = 1,
+                    font = "TH SarabunPSK",
+                    numbering_level_reference = 0
+                }
+            });
+            pk.word.Models.Add(new pikunword_model
+            {
+                execut_type = pikun_execut_function.newLineNormal,
+                paragraph = new PikunParagraph
+                {
+                    rId = 22,
+                    font_size = 14,
+                    font = "TH SarabunPSK",
+                    text = "           นำเสนอแนวทางในการกำกับและติดตาม ในประเด็นที่พบจากการวิเคราะห์แต่ละตัวชี้วัด"
+                }
+            });
+            pk.word.Models.Add(new pikunword_model
+            {
+                execut_type = pikun_execut_function.newLineNumbering,
+                paragraph = new PikunParagraph
+                {
+                    text = "ข้อคิดเห็นและข้อเสนอแนะ",
+                    rId = 5,
+                    font_size = 14,
+                    numbering_id = 1,
+                    font = "TH SarabunPSK",
+                    numbering_level_reference = 0
+                }
+            });
+            pk.word.Models.Add(new pikunword_model
+            {
+                execut_type = pikun_execut_function.newLineNormal,
+                paragraph = new PikunParagraph
+                {
+                    rId = 22,
+                    font_size = 14,
+                    font = "TH SarabunPSK",
+                    text = "           เสนอความคิดเห็นและข้อเสนอแนะอื่นๆ นอกจากนี้ จะมีFact sheet ของบริษัทที่ข้อมูลในภาพรวม โดยสร้างขึ้นมาอัตโนมัติ จากระบบ CRR แนบเป็นเอกสารประกอบ"
+                }
+            });
+            #endregion
             pk.word.Model.execut_type = pikun_execut_type.create_packet;
             pk.word.Model.page_margin = Pikun.pageMarginModerate;
             pk.word.Model.path = AppDomain.CurrentDomain.BaseDirectory + "pikun_test.docx";
