@@ -2225,7 +2225,11 @@ namespace Pikunword
             return paragraph;
         }
 
-
+        /// <summary>
+        /// สร้างข้อความหลายบรรทัดในหนึ่ง paragraph แก้ปัญหาการตัดของ word ที่มั่ว
+        /// </summary>
+        /// <param name="_paragraph">paragraph obj</param>
+        /// <returns></returns>
         private Paragraph newLineManyParagrap(PikunParagraph _paragraph)
         {
             Paragraph paragraph = newLine(_paragraph.rId.ToString());
@@ -4105,7 +4109,7 @@ namespace Pikunword
             foreach (var grid in _table.table_grid)
             {
                 TableRow tableRow = newTableRow(grid.rId.ToString().IsNullOrEmpty() ? (_table.table_grid.Count + rId + i).ToString() : grid.rId.ToString());
-
+                
                 int c = 0;
                 foreach (var p in grid.table_cell_properties)
                 {
@@ -4187,7 +4191,6 @@ namespace Pikunword
                         VerticalMerge verticalMerge = new VerticalMerge();
                         tableCellProperties.Append(verticalMerge);
                     }
-
 
                     tableCellProperties.Append(tableCellWidth);
                     tableCellProperties.Append(tableCellBorders);
@@ -4528,8 +4531,23 @@ namespace Pikunword
                     }
                     #endregion
 
-                    tableRow.Append(tableCell);
+                    // ===============================================================================================================================
+                    // Description...: FIX
+                    // Author........: Linlijian
+                    // Notes.........: ในการสร้างตารางครั้งแรก (i == 0) ให้ทำการตั้งคา repeat_header_rows เพื่อขึ้นหน้าใหม่แล้วมีหัวคอล์ลัมติดไปด้วย
+                    // Modified.......: Linlijian
+                    // ===============================================================================================================================
+                    if (i == 0)
+                    {
+                        TableRowProperties tableRowProperties = new TableRowProperties();
+                        TableHeader tableHeader = new TableHeader();
 
+                        tableRowProperties.Append(tableHeader);
+                        tableRow.Append(tableRowProperties);
+                    }
+                    // ===============================================================================================================================
+
+                    tableRow.Append(tableCell);
                     c++;
                 }
                 table.Append(tableRow);

@@ -1596,8 +1596,9 @@ namespace Pikunword.Test
             row.Add(new PikunTableCellProperties
             {
                 rId = 13,
-                texts = new string[] { "การวิเคราะห์สัดส่วนการประกันภัยต่อและการกระจุกตัวของบริษัทประกันภัยต่อ",
-                    "รวมถึงความสามารถในเร่งรัดจัดเก็บเงินค้างรับจากการประกันภัยต่อ"},
+                texts = new string[] { "การวิเคราะห์สัดส่วนการประกันภัยต่อและการกระจุกตัวของบริษัท",
+                    "ประกันภัยต่อรวมถึงความสามารถในเร่งรัดจัดเก็บเงินค้างรับจาก",
+                    "การประกันภัยต่อ"},
                 multi_line = true,
                 font = "TH SarabunPSK",
                 font_size = 14,
@@ -1634,56 +1635,60 @@ namespace Pikunword.Test
             });
             #endregion
 
-            //#region r7
-            //row = new List<PikunTableCellProperties>();
-            //row.Add(new PikunTableCellProperties
-            //{
-            //    rId = 13,
-            //    text = "5. Investment",
-            //    font = "TH SarabunPSK",
-            //    font_size = 14,
-            //    spacing_between_lines = true,
-            //    justification = Pikun.justificationLeft,
-            //    table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentTop
-            //});
-            //row.Add(new PikunTableCellProperties
-            //{
-            //    rId = 13,
-            //    text = "การวิเคราะห์พอร์ตการลงทุนและผลตอบแทนที่ได้จากการลงทุนรวมถึงความเสี่ยงจากการลงทุนของบริษัท อาทิ ความผันผวนของสินทรัพย์ลงทุน สินทรัพย์ลงทุนที่มีระดับความน่าเชื่อค่อนข้างต่ำและการกระจุกตัวในสินทรัพย์ลงทุน เป็นต้น",
-            //    font = "TH SarabunPSK",
-            //    font_size = 14,
-            //    spacing_between_lines = true,
-            //    justification = Pikun.justificationLeft,
-            //    table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentTop
-            //});
-            //row.Add(new PikunTableCellProperties
-            //{
-            //    rId = 13,
-            //    multi_line = true,
-            //    texts = new string[] { "- Return on investment (ROI)", "- Return and profit on investment" },
-            //    font = "TH SarabunPSK",
-            //    font_size = 14,
-            //    spacing_between_lines = true,
-            //    justification = Pikun.justificationLeft,
-            //    table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentTop
-            //});
-            //row.Add(new PikunTableCellProperties
-            //{
-            //    rId = 13,
-            //    multi_line = true,
-            //    texts = new string[] { "- Duration gap", "- Return on investment (ROI)", "- Return and profit on" },
-            //    font = "TH SarabunPSK",
-            //    font_size = 14,
-            //    spacing_between_lines = true,
-            //    justification = Pikun.justificationLeft,
-            //    table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentTop
-            //});
-            //t.Add(new PikunTableGrid
-            //{
-            //    rId = 12,
-            //    table_cell_properties = row
-            //});
-            //#endregion
+            #region r7
+            row = new List<PikunTableCellProperties>();
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                text = "5. Investment",
+                font = "TH SarabunPSK",
+                font_size = 14,
+                spacing_between_lines = true,
+                justification = Pikun.justificationLeft,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentTop
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                texts = new string[] { "การวิเคราะห์พอร์ตการลงทุนและผลตอบแทนที่ได้จากการลงทุนรวมถึง",
+                    "ความเสี่ยงจากการลงทุนของบริษัท อาทิ ความผันผวนของสินทรัพย์",
+                    "ลงทุนสินทรัพย์ลงทุนที่มีระดับความน่าเชื่อค่อนข้างต่ำและการกระจุกตัว",
+                    "ในสินทรัพย์ลงทุน เป็นต้น"},
+                multi_line = true,
+                font = "TH SarabunPSK",
+                font_size = 14,
+                spacing_between_lines = true,
+                justification = Pikun.justificationLeft,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentTop
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                multi_line = true,
+                texts = new string[] { "- Return on investment (ROI)", "- Return and profit on investment" },
+                font = "TH SarabunPSK",
+                font_size = 14,
+                spacing_between_lines = true,
+                justification = Pikun.justificationLeft,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentTop
+            });
+            row.Add(new PikunTableCellProperties
+            {
+                rId = 13,
+                multi_line = true,
+                texts = new string[] { "- Duration gap", "- Return on investment (ROI)", "- Return and profit on" },
+                font = "TH SarabunPSK",
+                font_size = 14,
+                spacing_between_lines = true,
+                justification = Pikun.justificationLeft,
+                table_cell_vertical_alignment = Pikun.tableCellVerticalAlignmentTop
+            });
+            t.Add(new PikunTableGrid
+            {
+                rId = 12,
+                table_cell_properties = row
+            });
+            #endregion
 
             pk.word.Models.Add(new pikunword_model
             {
