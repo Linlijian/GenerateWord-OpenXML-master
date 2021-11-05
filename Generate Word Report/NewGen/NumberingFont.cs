@@ -60,7 +60,7 @@ namespace Generate_Word_Report.NewGen
             Ap.Template template1 = new Ap.Template();
             template1.Text = "Normal";
             Ap.TotalTime totalTime1 = new Ap.TotalTime();
-            totalTime1.Text = "0";
+            totalTime1.Text = "1";
             Ap.Pages pages1 = new Ap.Pages();
             pages1.Text = "1";
             Ap.Words words1 = new Ap.Words();
@@ -154,7 +154,7 @@ namespace Generate_Word_Report.NewGen
             ParagraphProperties paragraphProperties1 = new ParagraphProperties();
 
             ParagraphMarkRunProperties paragraphMarkRunProperties1 = new ParagraphMarkRunProperties();
-            RunFonts runFonts1 = new RunFonts() { Hint = FontTypeHintValues.EastAsia, Ascii = "TH SarabunPSK", HighAnsi = "TH SarabunPSK", ComplexScript = "TH SarabunPSK" };
+            RunFonts runFonts1 = new RunFonts() { Ascii = "TH SarabunPSK", HighAnsi = "TH SarabunPSK", ComplexScript = "TH SarabunPSK" };
             Bold bold1 = new Bold();
             BoldComplexScript boldComplexScript1 = new BoldComplexScript();
             FontSize fontSize1 = new FontSize() { Val = "28" };
@@ -200,7 +200,7 @@ namespace Generate_Word_Report.NewGen
             ParagraphProperties paragraphProperties2 = new ParagraphProperties();
 
             ParagraphMarkRunProperties paragraphMarkRunProperties2 = new ParagraphMarkRunProperties();
-            RunFonts runFonts3 = new RunFonts() { Hint = FontTypeHintValues.EastAsia, Ascii = "TH SarabunPSK", HighAnsi = "TH SarabunPSK", ComplexScript = "TH SarabunPSK" };
+            RunFonts runFonts3 = new RunFonts() { Ascii = "TH SarabunPSK", HighAnsi = "TH SarabunPSK", ComplexScript = "TH SarabunPSK" };
             Bold bold3 = new Bold();
             BoldComplexScript boldComplexScript3 = new BoldComplexScript();
             FontSize fontSize3 = new FontSize() { Val = "28" };
@@ -394,7 +394,7 @@ namespace Generate_Word_Report.NewGen
             numberingProperties1.Append(numberingId1);
 
             ParagraphMarkRunProperties paragraphMarkRunProperties3 = new ParagraphMarkRunProperties();
-            RunFonts runFonts12 = new RunFonts() { Hint = FontTypeHintValues.EastAsia, Ascii = "TH SarabunPSK", HighAnsi = "TH SarabunPSK", ComplexScript = "TH SarabunPSK" };
+            RunFonts runFonts12 = new RunFonts() { Ascii = "TH SarabunPSK", HighAnsi = "TH SarabunPSK", ComplexScript = "TH SarabunPSK" };
             FontSize fontSize12 = new FontSize() { Val = "28" };
 
             paragraphMarkRunProperties3.Append(runFonts12);
@@ -451,7 +451,7 @@ namespace Generate_Word_Report.NewGen
             numberingProperties2.Append(numberingId2);
 
             ParagraphMarkRunProperties paragraphMarkRunProperties4 = new ParagraphMarkRunProperties();
-            RunFonts runFonts15 = new RunFonts() { Hint = FontTypeHintValues.EastAsia, Ascii = "TH SarabunPSK", HighAnsi = "TH SarabunPSK", ComplexScript = "TH SarabunPSK" };
+            RunFonts runFonts15 = new RunFonts() { Ascii = "TH SarabunPSK", HighAnsi = "TH SarabunPSK", ComplexScript = "TH SarabunPSK" };
             FontSize fontSize15 = new FontSize() { Val = "28" };
 
             paragraphMarkRunProperties4.Append(runFonts15);
@@ -576,7 +576,7 @@ namespace Generate_Word_Report.NewGen
             numberingProperties3.Append(numberingId3);
 
             ParagraphMarkRunProperties paragraphMarkRunProperties5 = new ParagraphMarkRunProperties();
-            RunFonts runFonts22 = new RunFonts() { Hint = FontTypeHintValues.EastAsia, Ascii = "TH SarabunPSK", HighAnsi = "TH SarabunPSK", ComplexScript = "TH SarabunPSK" };
+            RunFonts runFonts22 = new RunFonts() { Ascii = "TH SarabunPSK", HighAnsi = "TH SarabunPSK", ComplexScript = "TH SarabunPSK" };
             FontSize fontSize22 = new FontSize() { Val = "28" };
 
             paragraphMarkRunProperties5.Append(runFonts22);
@@ -903,8 +903,9 @@ namespace Generate_Word_Report.NewGen
             Rsid rsid7 = new Rsid() { Val = "00745E8C" };
             Rsid rsid8 = new Rsid() { Val = "00916EBE" };
             Rsid rsid9 = new Rsid() { Val = "00AD54DD" };
-            Rsid rsid10 = new Rsid() { Val = "00C23069" };
-            Rsid rsid11 = new Rsid() { Val = "00F56D5B" };
+            Rsid rsid10 = new Rsid() { Val = "00BF23CA" };
+            Rsid rsid11 = new Rsid() { Val = "00C23069" };
+            Rsid rsid12 = new Rsid() { Val = "00F56D5B" };
 
             rsids1.Append(rsidRoot1);
             rsids1.Append(rsid1);
@@ -918,6 +919,7 @@ namespace Generate_Word_Report.NewGen
             rsids1.Append(rsid9);
             rsids1.Append(rsid10);
             rsids1.Append(rsid11);
+            rsids1.Append(rsid12);
 
             M.MathProperties mathProperties1 = new M.MathProperties();
             M.MathFont mathFont1 = new M.MathFont() { Val = "Cambria Math" };
@@ -1889,7 +1891,7 @@ namespace Generate_Word_Report.NewGen
             abstractNum1.SetAttribute(new OpenXmlAttribute("w15", "restartNumberingAfterBreak", "http://schemas.microsoft.com/office/word/2012/wordml", "0"));
             Nsid nsid1 = new Nsid() { Val = "5CCD5ED0" };
             MultiLevelType multiLevelType1 = new MultiLevelType() { Val = MultiLevelValues.Multilevel };
-            TemplateCode templateCode1 = new TemplateCode() { Val = "916C62CC" };
+            TemplateCode templateCode1 = new TemplateCode() { Val = "45D2ED0A" };
 
             Level level1 = new Level() { LevelIndex = 0 };
             StartNumberingValue startNumberingValue1 = new StartNumberingValue() { Val = 1 };
@@ -1903,9 +1905,13 @@ namespace Generate_Word_Report.NewGen
             previousParagraphProperties1.Append(indentation1);
 
             NumberingSymbolRunProperties numberingSymbolRunProperties1 = new NumberingSymbolRunProperties();
-            RunFonts runFonts37 = new RunFonts() { Hint = FontTypeHintValues.Default };
+            RunFonts runFonts37 = new RunFonts() { Hint = FontTypeHintValues.Default, Ascii = "TH SarabunPSK", HighAnsi = "TH SarabunPSK", ComplexScript = "TH SarabunPSK" };
+            FontSize fontSize37 = new FontSize() { Val = "28" };
+            FontSizeComplexScript fontSizeComplexScript2 = new FontSizeComplexScript() { Val = "28" };
 
             numberingSymbolRunProperties1.Append(runFonts37);
+            numberingSymbolRunProperties1.Append(fontSize37);
+            numberingSymbolRunProperties1.Append(fontSizeComplexScript2);
 
             level1.Append(startNumberingValue1);
             level1.Append(numberingFormat1);
@@ -2729,12 +2735,12 @@ namespace Generate_Word_Report.NewGen
             fonts1.AddNamespaceDeclaration("w16sdtdh", "http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash");
             fonts1.AddNamespaceDeclaration("w16se", "http://schemas.microsoft.com/office/word/2015/wordml/symex");
 
-            Font font1 = new Font() { Name = "Times New Roman" };
-            Panose1Number panose1Number1 = new Panose1Number() { Val = "02020603050405020304" };
+            Font font1 = new Font() { Name = "TH SarabunPSK" };
+            Panose1Number panose1Number1 = new Panose1Number() { Val = "020B0500040200020003" };
             FontCharSet fontCharSet1 = new FontCharSet() { Val = "00" };
-            FontFamily fontFamily1 = new FontFamily() { Val = FontFamilyValues.Roman };
+            FontFamily fontFamily1 = new FontFamily() { Val = FontFamilyValues.Swiss };
             Pitch pitch1 = new Pitch() { Val = FontPitchValues.Variable };
-            FontSignature fontSignature1 = new FontSignature() { UnicodeSignature0 = "E0002EFF", UnicodeSignature1 = "C000785B", UnicodeSignature2 = "00000009", UnicodeSignature3 = "00000000", CodePageSignature0 = "000001FF", CodePageSignature1 = "00000000" };
+            FontSignature fontSignature1 = new FontSignature() { UnicodeSignature0 = "A100006F", UnicodeSignature1 = "5000205A", UnicodeSignature2 = "00000000", UnicodeSignature3 = "00000000", CodePageSignature0 = "00010183", CodePageSignature1 = "00000000" };
 
             font1.Append(panose1Number1);
             font1.Append(fontCharSet1);
@@ -2742,12 +2748,12 @@ namespace Generate_Word_Report.NewGen
             font1.Append(pitch1);
             font1.Append(fontSignature1);
 
-            Font font2 = new Font() { Name = "Calibri" };
-            Panose1Number panose1Number2 = new Panose1Number() { Val = "020F0502020204030204" };
+            Font font2 = new Font() { Name = "Times New Roman" };
+            Panose1Number panose1Number2 = new Panose1Number() { Val = "02020603050405020304" };
             FontCharSet fontCharSet2 = new FontCharSet() { Val = "00" };
-            FontFamily fontFamily2 = new FontFamily() { Val = FontFamilyValues.Swiss };
+            FontFamily fontFamily2 = new FontFamily() { Val = FontFamilyValues.Roman };
             Pitch pitch2 = new Pitch() { Val = FontPitchValues.Variable };
-            FontSignature fontSignature2 = new FontSignature() { UnicodeSignature0 = "E4002EFF", UnicodeSignature1 = "C000247B", UnicodeSignature2 = "00000009", UnicodeSignature3 = "00000000", CodePageSignature0 = "000001FF", CodePageSignature1 = "00000000" };
+            FontSignature fontSignature2 = new FontSignature() { UnicodeSignature0 = "E0002EFF", UnicodeSignature1 = "C000785B", UnicodeSignature2 = "00000009", UnicodeSignature3 = "00000000", CodePageSignature0 = "000001FF", CodePageSignature1 = "00000000" };
 
             font2.Append(panose1Number2);
             font2.Append(fontCharSet2);
@@ -2755,40 +2761,40 @@ namespace Generate_Word_Report.NewGen
             font2.Append(pitch2);
             font2.Append(fontSignature2);
 
-            Font font3 = new Font() { Name = "Yu Mincho" };
-            AltName altName1 = new AltName() { Val = "游明朝" };
-            Panose1Number panose1Number3 = new Panose1Number() { Val = "02020400000000000000" };
-            FontCharSet fontCharSet3 = new FontCharSet() { Val = "80" };
-            FontFamily fontFamily3 = new FontFamily() { Val = FontFamilyValues.Roman };
+            Font font3 = new Font() { Name = "Calibri" };
+            Panose1Number panose1Number3 = new Panose1Number() { Val = "020F0502020204030204" };
+            FontCharSet fontCharSet3 = new FontCharSet() { Val = "00" };
+            FontFamily fontFamily3 = new FontFamily() { Val = FontFamilyValues.Swiss };
             Pitch pitch3 = new Pitch() { Val = FontPitchValues.Variable };
-            FontSignature fontSignature3 = new FontSignature() { UnicodeSignature0 = "800002E7", UnicodeSignature1 = "2AC7FCFF", UnicodeSignature2 = "00000012", UnicodeSignature3 = "00000000", CodePageSignature0 = "0002009F", CodePageSignature1 = "00000000" };
+            FontSignature fontSignature3 = new FontSignature() { UnicodeSignature0 = "E4002EFF", UnicodeSignature1 = "C000247B", UnicodeSignature2 = "00000009", UnicodeSignature3 = "00000000", CodePageSignature0 = "000001FF", CodePageSignature1 = "00000000" };
 
-            font3.Append(altName1);
             font3.Append(panose1Number3);
             font3.Append(fontCharSet3);
             font3.Append(fontFamily3);
             font3.Append(pitch3);
             font3.Append(fontSignature3);
 
-            Font font4 = new Font() { Name = "Cordia New" };
-            Panose1Number panose1Number4 = new Panose1Number() { Val = "020B0304020202020204" };
-            FontCharSet fontCharSet4 = new FontCharSet() { Val = "00" };
-            FontFamily fontFamily4 = new FontFamily() { Val = FontFamilyValues.Swiss };
+            Font font4 = new Font() { Name = "Yu Mincho" };
+            AltName altName1 = new AltName() { Val = "游明朝" };
+            Panose1Number panose1Number4 = new Panose1Number() { Val = "02020400000000000000" };
+            FontCharSet fontCharSet4 = new FontCharSet() { Val = "80" };
+            FontFamily fontFamily4 = new FontFamily() { Val = FontFamilyValues.Roman };
             Pitch pitch4 = new Pitch() { Val = FontPitchValues.Variable };
-            FontSignature fontSignature4 = new FontSignature() { UnicodeSignature0 = "81000003", UnicodeSignature1 = "00000000", UnicodeSignature2 = "00000000", UnicodeSignature3 = "00000000", CodePageSignature0 = "00010001", CodePageSignature1 = "00000000" };
+            FontSignature fontSignature4 = new FontSignature() { UnicodeSignature0 = "800002E7", UnicodeSignature1 = "2AC7FCFF", UnicodeSignature2 = "00000012", UnicodeSignature3 = "00000000", CodePageSignature0 = "0002009F", CodePageSignature1 = "00000000" };
 
+            font4.Append(altName1);
             font4.Append(panose1Number4);
             font4.Append(fontCharSet4);
             font4.Append(fontFamily4);
             font4.Append(pitch4);
             font4.Append(fontSignature4);
 
-            Font font5 = new Font() { Name = "TH SarabunPSK" };
-            Panose1Number panose1Number5 = new Panose1Number() { Val = "020B0500040200020003" };
+            Font font5 = new Font() { Name = "Cordia New" };
+            Panose1Number panose1Number5 = new Panose1Number() { Val = "020B0304020202020204" };
             FontCharSet fontCharSet5 = new FontCharSet() { Val = "00" };
             FontFamily fontFamily5 = new FontFamily() { Val = FontFamilyValues.Swiss };
             Pitch pitch5 = new Pitch() { Val = FontPitchValues.Variable };
-            FontSignature fontSignature5 = new FontSignature() { UnicodeSignature0 = "A100006F", UnicodeSignature1 = "5000205A", UnicodeSignature2 = "00000000", UnicodeSignature3 = "00000000", CodePageSignature0 = "00010183", CodePageSignature1 = "00000000" };
+            FontSignature fontSignature5 = new FontSignature() { UnicodeSignature0 = "81000003", UnicodeSignature1 = "00000000", UnicodeSignature2 = "00000000", UnicodeSignature3 = "00000000", CodePageSignature0 = "00010001", CodePageSignature1 = "00000000" };
 
             font5.Append(panose1Number5);
             font5.Append(fontCharSet5);
@@ -2871,6 +2877,8 @@ namespace Generate_Word_Report.NewGen
 
             webSettingsPart1.WebSettings = webSettings1;
         }
+
+
 
 
     }

@@ -50,6 +50,7 @@ namespace Pikunword
     {
         public int rId { get; set; }
         public string text { get; set; }
+        public string[] texts { get; set; }
         public string txt_justification { get; set; } //ข้อความบางส่วน align
         public string font { get; set; }
         public int font_size { get; set; }
@@ -59,6 +60,7 @@ namespace Pikunword
         public string prop { get; set; }
         public int numbering_level_reference { get; set; } //ย่อหน้า
         public int numbering_id { get; set; } // 1 numbering | 2 bullet
+        public bool one_text_mamy_paragrap { get; set; } //ถ้าเป็น true จะสร้าง paragrap เรื่องต่อกันเรื่องๆ โดยยึดช่องไฟ " " เป็นรอยต่อ โดยใช้ texts
         public List<PikunParagraphManyProp> many_prop { get; set; }
 
         //มี 2 แบบคือ Spell และ Grammar อาจจะมีในกรณีตรวจสอบคำศัพท์อาจมีผลกับการขึ้นบรรทัดให่เองของ word
@@ -70,6 +72,7 @@ namespace Pikunword
         public string number_format_values { get; set; } //numberFormatValuesDecimalABC | numberFormatValuesDecimal
         public string[] numbering_type { get; set; } // "-", ".", "ü", "o", etc.. ไม่เกิน  9 ตัว
         public string font { get; set; }
+        public int font_size { get; set; }
     }
 
     public class PikunParagraphManyProp

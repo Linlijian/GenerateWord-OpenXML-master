@@ -2079,7 +2079,7 @@ namespace Pikunword
 
                 word.numbering_type = defaultNumberingType(word.numbering_type, word.number_format_values);
 
-                AbstractNum abstractNum = newNumbering(pikun_number_format, startIndentation, hangingIndentation, word.numbering_type, abstractNumberId, word.font);
+                AbstractNum abstractNum = newNumbering(pikun_number_format, startIndentation, hangingIndentation, word.numbering_type, abstractNumberId, word.font, word.font_size );
                 abstractNums.Add(abstractNum);
 
                 NumberingInstance numberingInstance = new NumberingInstance() { NumberID = abstractNumberId + 1 };
@@ -2137,6 +2137,11 @@ namespace Pikunword
             if (_paragraph.rId == 0)
             {
                 return newLineError(_paragraph.rId.ToString());
+            }
+
+            if (_paragraph.one_text_mamy_paragrap)
+            {
+                return newLineManyParagrap(_paragraph);
             }
 
             Paragraph paragraph = newLine(_paragraph.rId.ToString());
@@ -2216,6 +2221,102 @@ namespace Pikunword
             paragraph.Append(proofError1);
             paragraph.Append(run);
             paragraph.Append(proofError2);
+
+            return paragraph;
+        }
+
+
+        private Paragraph newLineManyParagrap(PikunParagraph _paragraph)
+        {
+            Paragraph paragraph = newLine(_paragraph.rId.ToString());
+
+            RunProperties runProperties;
+            ParagraphProperties paragraphProperties;
+            ParagraphMarkRunProperties paragraphMarkRunProperties;
+
+            int sp_index = 0;
+            foreach (var txt_sp in _paragraph.texts)
+            {
+                string str_sub = string.Empty;
+
+                runProperties = new RunProperties();
+                paragraphProperties = new ParagraphProperties();
+                paragraphMarkRunProperties = new ParagraphMarkRunProperties();
+
+                #region txt prop
+                if (_paragraph.prop == Pikun.paragraphBold)
+                {
+                    paragraphMarkRunProperties.Append(newBold());
+                    paragraphMarkRunProperties.Append(newBoldComplexScript());
+
+                    runProperties.Append(newBold());
+                    runProperties.Append(newBoldComplexScript());
+                }
+                else if (_paragraph.prop == Pikun.paragraphItalic)
+                {
+                    paragraphMarkRunProperties.Append(newItalic());
+                    paragraphMarkRunProperties.Append(newItalicComplexScript());
+
+                    runProperties.Append(newItalic());
+                    runProperties.Append(newItalicComplexScript());
+                }
+                else if (_paragraph.prop == Pikun.paragraphUnderline)
+                {
+                    paragraphMarkRunProperties.Append(newUnderline());
+                    runProperties.Append(newUnderline());
+                }
+
+                if (!_paragraph.font.IsNullOrEmpty())
+                {
+                    paragraphMarkRunProperties.Append(newRunFonts(_paragraph.font));
+                    runProperties.Append(newRunFonts(_paragraph.font));
+                }
+
+                if (_paragraph.font_size != 0)
+                {
+                    paragraphMarkRunProperties.Append(newFontSize(_paragraph.font_size));
+                    paragraphMarkRunProperties.Append(newFontSizeComplexScript(_paragraph.font_size));
+
+                    runProperties.Append(newFontSize(_paragraph.font_size));
+                    runProperties.Append(newFontSize(_paragraph.font_size));
+                }
+
+                if (!_paragraph.color.IsNullOrEmpty())
+                {
+                    paragraphMarkRunProperties.Append(newColor(_paragraph.color));
+                    runProperties.Append(newColor(_paragraph.color));
+                }
+
+                if (!_paragraph.justification.IsNullOrEmpty())
+                {
+                    paragraphProperties.Append(newJustification(_paragraph.justification));
+                }
+
+                if (!_paragraph.highlight.IsNullOrEmpty())
+                {
+                    runProperties.Append(newHighlight(_paragraph.highlight));
+                }
+
+                //Append all prop
+                paragraphProperties.Append(paragraphMarkRunProperties);
+                #endregion
+
+                Run run_str_sub = new Run();
+
+                Text text_sub = new Text() { Space = SpaceProcessingModeValues.Preserve };
+                text_sub.Text = txt_sp;
+
+                run_str_sub.Append(runProperties);
+                run_str_sub.Append(text_sub);
+
+                if (sp_index == 0)
+                {
+                    paragraph.Append(paragraphProperties);
+                }
+
+                paragraph.Append(run_str_sub);               
+                sp_index++;
+            }
 
             return paragraph;
         }
@@ -2767,7 +2868,7 @@ namespace Pikunword
         /// <param name="_abstractNumberId">ลำดับ AbstractNum</param>
         /// <param name="_font">ฟอร์นของหัวข้อ</param>
         /// <returns>AbstractNum</returns>
-        private AbstractNum newNumbering(PikunNumberingFormat[] _pikun_number_format, string[] _startIndentation, string[] _hangingIndentation, string[] _numbering_type, int _abstractNumberId, string _font)
+        private AbstractNum newNumbering(PikunNumberingFormat[] _pikun_number_format, string[] _startIndentation, string[] _hangingIndentation, string[] _numbering_type, int _abstractNumberId, string _font, int _font_size)
         {
             AbstractNum abstractNum = new AbstractNum() { AbstractNumberId = _abstractNumberId };
             abstractNum.SetAttribute(new OpenXmlAttribute("w15", "restartNumberingAfterBreak", "http://schemas.microsoft.com/office/word/2012/wordml", "0"));
@@ -2790,8 +2891,19 @@ namespace Pikunword
 
             NumberingSymbolRunProperties numberingSymbolRunProperties2 = new NumberingSymbolRunProperties();
             RunFonts runFonts3 = new RunFonts() { Hint = FontTypeHintValues.Default, Ascii = _font, HighAnsi = _font, ComplexScript = _font };
-
             numberingSymbolRunProperties2.Append(runFonts3);
+
+            // ===============================================================================================================================
+            // Description...: FIX
+            // Author........: Linlijian
+            // Notes.........: แก้ปัญหา numbering เวลาใช้ many_prop แล้วหัวข้อใหญ่มันไม่เป็นฟอร์นที่ต้องการ
+            // Modified.......: Linlijian
+            // ===============================================================================================================================
+            FontSize fontSize = newFontSize(_font_size);
+            FontSizeComplexScript fontSizeComplexScript = newFontSizeComplexScript(_font_size);
+            numberingSymbolRunProperties2.Append(fontSize);
+            numberingSymbolRunProperties2.Append(fontSizeComplexScript);
+            // ===============================================================================================================================
 
             level10.Append(startNumberingValue10);
             level10.Append(numberingFormat10);
@@ -2816,6 +2928,18 @@ namespace Pikunword
 
             numberingSymbolRunProperties3.Append(runFonts4);
 
+            // ===============================================================================================================================
+            // Description...: FIX
+            // Author........: Linlijian
+            // Notes.........: แก้ปัญหา numbering เวลาใช้ many_prop แล้วหัวข้อใหญ่มันไม่เป็นฟอร์นที่ต้องการ
+            // Modified.......: Linlijian
+            // ===============================================================================================================================
+            fontSize = newFontSize(_font_size);
+            fontSizeComplexScript = newFontSizeComplexScript(_font_size);
+            numberingSymbolRunProperties3.Append(fontSize);
+            numberingSymbolRunProperties3.Append(fontSizeComplexScript);
+            // ===============================================================================================================================
+
             level11.Append(startNumberingValue11);
             level11.Append(numberingFormat11);
             level11.Append(levelText11);
@@ -2838,6 +2962,19 @@ namespace Pikunword
             RunFonts runFonts5 = new RunFonts() { Hint = FontTypeHintValues.Default, Ascii = _font, HighAnsi = _font, ComplexScript = _font };
 
             numberingSymbolRunProperties4.Append(runFonts5);
+
+            // ===============================================================================================================================
+            // Description...: FIX
+            // Author........: Linlijian
+            // Notes.........: แก้ปัญหา numbering เวลาใช้ many_prop แล้วหัวข้อใหญ่มันไม่เป็นฟอร์นที่ต้องการ
+            // Modified.......: Linlijian
+            // ===============================================================================================================================
+            fontSize = newFontSize(_font_size);
+            fontSizeComplexScript = newFontSizeComplexScript(_font_size);
+            numberingSymbolRunProperties4.Append(fontSize);
+            numberingSymbolRunProperties4.Append(fontSizeComplexScript);
+            // ===============================================================================================================================
+
 
             level12.Append(startNumberingValue12);
             level12.Append(numberingFormat12);
@@ -2862,6 +2999,18 @@ namespace Pikunword
 
             numberingSymbolRunProperties5.Append(runFonts6);
 
+            // ===============================================================================================================================
+            // Description...: FIX
+            // Author........: Linlijian
+            // Notes.........: แก้ปัญหา numbering เวลาใช้ many_prop แล้วหัวข้อใหญ่มันไม่เป็นฟอร์นที่ต้องการ
+            // Modified.......: Linlijian
+            // ===============================================================================================================================
+            fontSize = newFontSize(_font_size);
+            fontSizeComplexScript = newFontSizeComplexScript(_font_size);
+            numberingSymbolRunProperties5.Append(fontSize);
+            numberingSymbolRunProperties5.Append(fontSizeComplexScript);
+            // ===============================================================================================================================
+
             level13.Append(startNumberingValue13);
             level13.Append(numberingFormat13);
             level13.Append(levelText13);
@@ -2885,6 +3034,18 @@ namespace Pikunword
 
             numberingSymbolRunProperties6.Append(runFonts7);
 
+            // ===============================================================================================================================
+            // Description...: FIX
+            // Author........: Linlijian
+            // Notes.........: แก้ปัญหา numbering เวลาใช้ many_prop แล้วหัวข้อใหญ่มันไม่เป็นฟอร์นที่ต้องการ
+            // Modified.......: Linlijian
+            // ===============================================================================================================================
+            fontSize = newFontSize(_font_size);
+            fontSizeComplexScript = newFontSizeComplexScript(_font_size);
+            numberingSymbolRunProperties6.Append(fontSize);
+            numberingSymbolRunProperties6.Append(fontSizeComplexScript);
+            // ===============================================================================================================================
+            
             level14.Append(startNumberingValue14);
             level14.Append(numberingFormat14);
             level14.Append(levelText14);
@@ -2907,6 +3068,18 @@ namespace Pikunword
             RunFonts runFonts8 = new RunFonts() { Hint = FontTypeHintValues.Default, Ascii = _font, HighAnsi = _font, ComplexScript = _font };
 
             numberingSymbolRunProperties7.Append(runFonts8);
+
+            // ===============================================================================================================================
+            // Description...: FIX
+            // Author........: Linlijian
+            // Notes.........: แก้ปัญหา numbering เวลาใช้ many_prop แล้วหัวข้อใหญ่มันไม่เป็นฟอร์นที่ต้องการ
+            // Modified.......: Linlijian
+            // ===============================================================================================================================
+            fontSize = newFontSize(_font_size);
+            fontSizeComplexScript = newFontSizeComplexScript(_font_size);
+            numberingSymbolRunProperties7.Append(fontSize);
+            numberingSymbolRunProperties7.Append(fontSizeComplexScript);
+            // ===============================================================================================================================
 
             level15.Append(startNumberingValue15);
             level15.Append(numberingFormat15);
@@ -2931,6 +3104,18 @@ namespace Pikunword
 
             numberingSymbolRunProperties8.Append(runFonts9);
 
+            // ===============================================================================================================================
+            // Description...: FIX
+            // Author........: Linlijian
+            // Notes.........: แก้ปัญหา numbering เวลาใช้ many_prop แล้วหัวข้อใหญ่มันไม่เป็นฟอร์นที่ต้องการ
+            // Modified.......: Linlijian
+            // ===============================================================================================================================
+            fontSize = newFontSize(_font_size);
+            fontSizeComplexScript = newFontSizeComplexScript(_font_size);
+            numberingSymbolRunProperties8.Append(fontSize);
+            numberingSymbolRunProperties8.Append(fontSizeComplexScript);
+            // ===============================================================================================================================
+
             level16.Append(startNumberingValue16);
             level16.Append(numberingFormat16);
             level16.Append(levelText16);
@@ -2954,6 +3139,18 @@ namespace Pikunword
 
             numberingSymbolRunProperties9.Append(runFonts10);
 
+            // ===============================================================================================================================
+            // Description...: FIX
+            // Author........: Linlijian
+            // Notes.........: แก้ปัญหา numbering เวลาใช้ many_prop แล้วหัวข้อใหญ่มันไม่เป็นฟอร์นที่ต้องการ
+            // Modified.......: Linlijian
+            // ===============================================================================================================================
+            fontSize = newFontSize(_font_size);
+            fontSizeComplexScript = newFontSizeComplexScript(_font_size);
+            numberingSymbolRunProperties9.Append(fontSize);
+            numberingSymbolRunProperties9.Append(fontSizeComplexScript);
+            // ===============================================================================================================================
+
             level17.Append(startNumberingValue17);
             level17.Append(numberingFormat17);
             level17.Append(levelText17);
@@ -2976,6 +3173,18 @@ namespace Pikunword
             RunFonts runFonts11 = new RunFonts() { Hint = FontTypeHintValues.Default, Ascii = _font, HighAnsi = _font, ComplexScript = _font };
 
             numberingSymbolRunProperties10.Append(runFonts11);
+
+            // ===============================================================================================================================
+            // Description...: FIX
+            // Author........: Linlijian
+            // Notes.........: แก้ปัญหา numbering เวลาใช้ many_prop แล้วหัวข้อใหญ่มันไม่เป็นฟอร์นที่ต้องการ
+            // Modified.......: Linlijian
+            // ===============================================================================================================================
+            fontSize = newFontSize(_font_size);
+            fontSizeComplexScript = newFontSizeComplexScript(_font_size);
+            numberingSymbolRunProperties10.Append(fontSize);
+            numberingSymbolRunProperties10.Append(fontSizeComplexScript);
+            // ===============================================================================================================================
 
             level18.Append(startNumberingValue18);
             level18.Append(numberingFormat18);
