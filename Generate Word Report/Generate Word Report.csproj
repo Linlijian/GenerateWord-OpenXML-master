@@ -73,6 +73,7 @@
     <Compile Include="Help.cs" />
     <Compile Include="NewGen\custom_one_pic.cs" />
     <Compile Include="NewGen\new_line.cs" />
+    <Compile Include="NewGen\NumberingFont.cs" />
     <Compile Include="NewGen\one_pic_format.cs" />
     <Compile Include="NewGen\one_pic_format_position.cs" />
     <Compile Include="NewGen\one_pic_format_size.cs" />
