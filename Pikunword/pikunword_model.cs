@@ -9,6 +9,8 @@ namespace Pikunword
         //public int rId { get; set; }
         public string execut_type { get; set; }
         public string path { get; set; }
+
+        //page setting
         public string page_margin { get; set; } //ขนาดของขอบตรวจสอบได้ที่ Alt+P+M+A
         public int page_left { get; set; }
         public int page_right { get; set; }
