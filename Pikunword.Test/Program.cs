@@ -1545,7 +1545,7 @@ namespace Pikunword.Test
 
             #region image 1
             //=============================================================================================
-            string path = AppDomain.CurrentDomain.BaseDirectory + "image1.png";
+            string path = AppDomain.CurrentDomain.BaseDirectory + "line.png";
             string imagePart2Data = Pikun.BitmapToBase64String(path);
             pk.word.Pictures.Add(new PikunPicture
             {
@@ -1554,11 +1554,12 @@ namespace Pikunword.Test
             });
             pk.word.Models.Add(new pikunword_model
             {
-                execut_type = pikun_execut_function.newLineImageNoFormat,
+                execut_type = pikun_execut_function.newLineImage,
                 picture = new PikunPicture
                 {
                     rId = 7, // << ต้องเหมือนกันกับ setting
-                    base64image = imagePart2Data
+                    base64image = imagePart2Data,
+                    horizontal_alignment = Pikun.horizontalAlignmentCenter
                     //layout_option = Help.wrapSquare,
                     //horizontal_position = 14,
                     //vertical_position = 0,
